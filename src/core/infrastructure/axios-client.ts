@@ -5,18 +5,16 @@ import {
 } from "@/core/interfaces/api.interface";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ApiErrorHandler } from "../helpers/error-handler";
+import { toast } from "sonner";
 interface AxiosConfig {
   baseURL: string;
   timeout?: number;
   headers?: Record<string, string>;
 }
 
-import { toast } from "sonner";
-
 const DEFAULT_CONFIG: AxiosConfig = {
   baseURL:
-    process.env.EXPO_PUBLIC_BACKEND_API_URL ||
-    "https://disaza-api.onrender.com/api/v1",
+    process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
