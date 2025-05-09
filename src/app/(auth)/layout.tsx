@@ -26,7 +26,7 @@ export default async function AuthLayout({ children }: React.PropsWithChildren) 
           <span className="text-xl">Municipio de Píllaro</span>
         </Link>
         <div className="absolute bottom-6 left-8 z-20 max-w-md">
-          <h2 className="text-2xl font-bold mb-2">Bienvenido al Sistema Municipal de Cementerios</h2>
+          <h2 className="text-2xl font-bold mb-2">Bienvenido al Sistema de Catastros</h2>
           <p className="text-muted-foreground">
             Acceda a los servicios digitales del Gobierno Autónomo Descentralizado Municipal de Píllaro
           </p>

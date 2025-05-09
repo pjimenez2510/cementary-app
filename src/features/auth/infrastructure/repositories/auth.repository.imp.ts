@@ -1,0 +1,29 @@
+import {
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from "../../interfaces/user-auth.interface";
+import { AuthRepository } from "../../domain/repositories/auth.repository";
+import { LoginRequest } from "../../interfaces/user-auth.interface";
+import AxiosClient from "@/core/infrastructure/axios-client";
+import { API_ROUTES } from "@/core/constants/api-routes";
+
+export class AuthRepositoryImp implements AuthRepository {
+  private httpClient: AxiosClient;
+
+  constructor() {
+    this.httpClient = AxiosClient.getInstance();
+  }
+
+  static getInstance(): AuthRepositoryImp {
+    return new AuthRepositoryImp();
+  }
+
+  async signIn(request: LoginRequest): Promise<LoginResponse> {
+    return this.httpClient.post(API_ROUTES.AUTH.SIGNIN, request);
+  }
+
+  async signUp(request: RegisterRequest): Promise<RegisterResponse> {
+    return this.httpClient.post(API_ROUTES.AUTH.SIGNUP, request);
+  }
+}

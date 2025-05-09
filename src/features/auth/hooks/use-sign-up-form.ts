@@ -7,7 +7,10 @@ import { register } from "@/features/auth/presentation/services/actions/sign-up"
 
 const schema = z.object({
   ci: z.string().min(1, "La cédula es requerida"),
-  email: z.string().min(1, "El email es requerido").email("El email no es válido"),
+  email: z
+    .string()
+    .min(1, "El email es requerido")
+    .email("El email no es válido"),
   firstName: z.string().min(1, "El nombre es requerido"),
   lastName: z.string().min(1, "El apellido es requerido"),
   password: z
@@ -17,7 +20,7 @@ const schema = z.object({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/,
       "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo especial"
     ),
-  role: z.string().optional()
+  role: z.string().optional(),
 });
 
 type FormFields = z.infer<typeof schema>;

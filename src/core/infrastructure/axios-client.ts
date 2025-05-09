@@ -6,7 +6,6 @@ import {
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ApiErrorHandler } from "../helpers/error-handler";
 import { toast } from "sonner";
-import { getToken } from "@/features/auth/infrastructure/auth-store";
 
 interface AxiosConfig {
   baseURL: string;
@@ -45,10 +44,9 @@ class AxiosClient {
       async (config: CustomInternalAxiosRequestConfig) => {
         if (config?.skipAuth) return config;
 
-        const token = getToken();
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
+        // if (token) {
+        //   config.headers.Authorization = `Bearer ${token}`;
+        // }
 
         return config;
       }
