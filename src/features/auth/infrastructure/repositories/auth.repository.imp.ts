@@ -20,7 +20,12 @@ export class AuthRepositoryImp implements AuthRepository {
   }
 
   async signIn(request: LoginRequest): Promise<LoginResponse> {
-    return this.httpClient.post(API_ROUTES.AUTH.SIGNIN, request);
+    const { data } = await this.httpClient.post<LoginResponse>(
+      API_ROUTES.AUTH.SIGNIN,
+      request
+    );
+
+    return data;
   }
 
   async signUp(request: RegisterRequest): Promise<RegisterResponse> {

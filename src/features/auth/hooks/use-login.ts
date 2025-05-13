@@ -19,7 +19,7 @@ export function useLogin() {
     onSuccess: (data) => {
       setToken(data.accessToken);
       toast.success("Inicio de sesión exitoso");
-      router.replace("/");
+      router.replace("/main");
     },
     onError: (error) => {
       console.log(error);

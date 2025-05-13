@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { AuthRepositoryImp } from "@/features/auth/infrastructure/repositories/auth.repository.imp";
 import { jwtDecode } from "jwt-decode";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 type JwtPayload = {
   username: string;
@@ -10,78 +11,64 @@ type JwtPayload = {
   exp: number;
 };
 
-export const authOptions = {
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        cedula: { label: "Cédula", type: "text" },
+        cedula: { label: "Cedula", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.cedula || !credentials?.password) {
-          throw new Error("Cedula and password are required.");
+        try {
+          const repo = AuthRepositoryImp.getInstance();
+          const res = await repo.signIn({
+            cedula: credentials!.cedula,
+            password: credentials!.password,
+          });
+
+          if (!res.access_token) return null;
+
+          const decoded = jwtDecode<JwtPayload>(res.access_token);
+          console.log("decoded", decoded);
+
+          return {
+            id: decoded.sub,
+            username: decoded.username,
+            role: decoded.rol,
+            accessToken: res.access_token,
+          };
+        } catch (error) {
+          throw new Error("Cedula o contraseña inválidos");
         }
-
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              cedula: credentials.cedula,
-              password: credentials.password,
-            }),
-          }
-        );
-
-        if (!res.ok) return null;
-
-        const data = await res.json();
-
-        if (!data.access_token) return null;
-
-        const decoded = jwtDecode<JwtPayload>(data.access_token);
-
-        return {
-          id: decoded.sub,
-          username: decoded.username,
-          role: decoded.rol,
-          accessToken: data.access_token,
-        };
       },
     }),
   ],
-  session: {
-    strategy: "jwt" as const,
-  },
-  pages: {
-    signIn: "/sign-in",
-  },
   callbacks: {
-    async jwt({ token, user }: { token: any; user: any }) {
+    async jwt({ token, user }) {
+      console.log("user", user);
       if (user) {
+        token.accessToken = user.accessToken;
         token.id = user.id;
         token.username = user.username;
         token.role = user.role;
-        token.accessToken = user.accessToken;
       }
       return token;
     },
-    async session({ session, token }: { session: any; token: any }) {
-      if (token) {
-        session.user = {
-          id: token.id,
-          username: token.username,
-          role: token.role,
-        };
-        session.accessToken = token.accessToken;
-      }
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken;
+      session.user.id = token.id;
+      session.user.username = token.username;
+      session.user.role = token.role;
       return session;
     },
   },
-  secret: process.env.JWT_SECRET || "your_secret_key",
-};
+  pages: {
+    signIn: "/login",
+  },
+});
 
-const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+export const { auth } = handler;
+
+export const authOptions = handler;
