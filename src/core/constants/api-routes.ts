@@ -3,5 +3,8 @@ const AR_KEYS = {
 };
 
 export const API_ROUTES = {
-  AUTH: { LOGIN: `${AR_KEYS.AUTH}/login` },
+  AUTH: {
+    SIGNIN: `${AR_KEYS.AUTH}/login`,
+    SIGNUP: `${AR_KEYS.AUTH}/register`,
+  },
 };
