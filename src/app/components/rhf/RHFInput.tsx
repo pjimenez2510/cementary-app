@@ -10,10 +10,9 @@ type RHFInputProps = {
 };
 
 function RHFInput({ name, label, type = "text", placeholder }: RHFInputProps) {
-  const { control } = useFormContext();
+  const { control, formState } = useFormContext();
 
   const getErrorMessage = (name: string) => {
-    const { formState } = useFormContext();
     return formState.errors[name]?.message as string | undefined;
   };
 

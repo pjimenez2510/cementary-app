@@ -39,6 +39,7 @@ const handler = NextAuth({
             accessToken: res.access_token,
           };
         } catch (error) {
+          console.error(error)
           throw new Error("Cedula o contraseña inválidos");
         }
       },
@@ -69,6 +70,3 @@ const handler = NextAuth({
 });
 
 export { handler as GET, handler as POST };
-export const { auth } = handler;
-
-export const authOptions = handler;

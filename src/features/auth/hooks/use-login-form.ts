@@ -14,7 +14,7 @@ export function useLoginForm() {
     defaultValues: getDefaultValues(),
   });
 
-  const { login, isPending } = useLogin();
+  const { login } = useLogin();
 
   const onSubmit: SubmitHandler<LoginSchema> = async (data) => {
     await signIn("credentials", {
