@@ -1,7 +1,6 @@
 import {
   CustomInternalAxiosRequestConfig,
   RequestConfig,
-  ResponseAPI,
 } from "@/core/interfaces/api.interface";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ApiErrorHandler } from "../helpers/error-handler";
@@ -124,7 +123,7 @@ class AxiosClient {
     return this.axiosInstance.put(url, data, config);
   }
 
-  patch<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
+  patch<T, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -132,7 +131,7 @@ class AxiosClient {
     return this.axiosInstance.patch(url, data, config);
   }
 
-  postForm<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
+  postForm<T, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -140,7 +139,7 @@ class AxiosClient {
     return this.axiosInstance.postForm(url, data, config);
   }
 
-  putForm<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
+  putForm<T, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -148,7 +147,7 @@ class AxiosClient {
     return this.axiosInstance.putForm(url, data, config);
   }
 
-  patchForm<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
+  patchForm<T, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>

@@ -17,7 +17,7 @@ export function useLogin() {
       return await authRepository.signIn(data);
     },
     onSuccess: (data) => {
-      setToken(data.accessToken);
+      setToken(data.access_token);
       toast.success("Inicio de sesión exitoso");
       router.replace("/main");
     },

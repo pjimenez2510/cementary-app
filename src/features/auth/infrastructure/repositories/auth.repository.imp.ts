@@ -1,8 +1,4 @@
-import {
-  LoginResponse,
-  RegisterRequest,
-  RegisterResponse,
-} from "../../interfaces/user-auth.interface";
+import { LoginResponse } from "../../interfaces/user-auth.interface";
 import { AuthRepository } from "../../domain/repositories/auth.repository";
 import { LoginRequest } from "../../interfaces/user-auth.interface";
 import AxiosClient from "@/core/infrastructure/axios-client";
@@ -26,9 +22,5 @@ export class AuthRepositoryImp implements AuthRepository {
     );
 
     return data;
-  }
-
-  async signUp(request: RegisterRequest): Promise<RegisterResponse> {
-    return this.httpClient.post(API_ROUTES.AUTH.SIGNUP, request);
   }
 }
