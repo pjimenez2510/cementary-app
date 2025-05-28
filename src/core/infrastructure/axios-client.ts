@@ -1,10 +1,12 @@
 import {
   CustomInternalAxiosRequestConfig,
   RequestConfig,
+  ResponseAPI,
 } from "@/core/interfaces/api.interface";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ApiErrorHandler } from "../helpers/error-handler";
 import { toast } from "sonner";
+import { useAuthStore } from "@/features/auth/presentation/context/auth.store";
 
 interface AxiosConfig {
   baseURL: string;
@@ -43,9 +45,10 @@ class AxiosClient {
       async (config: CustomInternalAxiosRequestConfig) => {
         if (config?.skipAuth) return config;
 
-        // if (token) {
-        //   config.headers.Authorization = `Bearer ${token}`;
-        // }
+        const token = useAuthStore.getState().token;
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
 
         return config;
       }
@@ -73,41 +76,41 @@ class AxiosClient {
     return this.axiosInstance.getUri(config);
   }
 
-  request<T, R = AxiosResponse<T>, D = unknown>(
+  request<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     config: RequestConfig<D>
   ): Promise<R> {
     return this.axiosInstance.request(config);
   }
 
-  get<T, R = AxiosResponse<T>, D = unknown>(
+  get<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     config?: RequestConfig<D>
   ): Promise<R> {
     return this.axiosInstance.get(url, config);
   }
 
-  delete<T, R = AxiosResponse<T>, D = unknown>(
+  delete<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     config?: RequestConfig<D>
   ): Promise<R> {
     return this.axiosInstance.delete(url, config);
   }
 
-  head<T, R = AxiosResponse<T>, D = unknown>(
+  head<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     config?: RequestConfig<D>
   ): Promise<R> {
     return this.axiosInstance.head(url, config);
   }
 
-  options<T, R = AxiosResponse<T>, D = unknown>(
+  options<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     config?: RequestConfig<D>
   ): Promise<R> {
     return this.axiosInstance.options(url, config);
   }
 
-  post<T, R = AxiosResponse<T>, D = unknown>(
+  post<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -115,7 +118,7 @@ class AxiosClient {
     return this.axiosInstance.post(url, data, config);
   }
 
-  put<T, R = AxiosResponse<T>, D = unknown>(
+  put<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -123,7 +126,7 @@ class AxiosClient {
     return this.axiosInstance.put(url, data, config);
   }
 
-  patch<T, R = AxiosResponse<T>, D = unknown>(
+  patch<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -131,7 +134,7 @@ class AxiosClient {
     return this.axiosInstance.patch(url, data, config);
   }
 
-  postForm<T, R = AxiosResponse<T>, D = unknown>(
+  postForm<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -139,7 +142,7 @@ class AxiosClient {
     return this.axiosInstance.postForm(url, data, config);
   }
 
-  putForm<T, R = AxiosResponse<T>, D = unknown>(
+  putForm<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>
@@ -147,7 +150,7 @@ class AxiosClient {
     return this.axiosInstance.putForm(url, data, config);
   }
 
-  patchForm<T, R = AxiosResponse<T>, D = unknown>(
+  patchForm<T, R = AxiosResponse<ResponseAPI<T>>, D = unknown>(
     url: string,
     data?: D,
     config?: RequestConfig<D>

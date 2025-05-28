@@ -17,37 +17,37 @@ export class CementeryRepositoryImpl implements CementeryRepository {
     }
 
     async findAll(): Promise<CementeryEntity[]> {
-        const response = await this.httpClient.get<CementeryModel[]>(API_ROUTES.CEMENTERIO.LIST);
-        return response.data.map(CementeryMapper.toEntity);
+        const {data} = await this.httpClient.get<CementeryModel[]>(API_ROUTES.CEMENTERIO.LIST);
+        return data.data.map(CementeryMapper.toEntity);
     }
 
     async findById(id: string): Promise<CementeryEntity> {
-        const response = await this.httpClient.get<CementeryModel>(API_ROUTES.CEMENTERIO.GET_BY_ID(id));
-        return CementeryMapper.toEntity(response.data);
+        const {data} = await this.httpClient.get<CementeryModel>(API_ROUTES.CEMENTERIO.GET_BY_ID(id));
+        return CementeryMapper.toEntity(data.data);
     }
 
     async findByName(nombre: string): Promise<CementeryEntity> {
-        const response = await this.httpClient.get<CementeryModel>(API_ROUTES.CEMENTERIO.GET_BY_NAME(nombre));
-        return CementeryMapper.toEntity(response.data);
+        const {data} = await this.httpClient.get<CementeryModel>(API_ROUTES.CEMENTERIO.GET_BY_NAME(nombre));
+        return CementeryMapper.toEntity(data.data);
     }
 
     async create(cementery: CementeryCreateEntity): Promise<CementeryEntity> {
         const model = CementeryMapper.toModel(cementery);
-        const response = await this.httpClient.post<CementeryModel>(API_ROUTES.CEMENTERIO.CREATE, model);
-        return CementeryMapper.toEntity(response.data);
+        const {data} = await this.httpClient.post<CementeryModel>(API_ROUTES.CEMENTERIO.CREATE, model);
+        return CementeryMapper.toEntity(data.data);
     }
 
     async update(cementery: CementeryUpdateEntity): Promise<CementeryEntity> {
         const model = CementeryMapper.toUpdateModel(cementery);
-        const response = await this.httpClient.patch<CementeryModel>(
+        const {data} = await this.httpClient.patch<CementeryModel>(
             API_ROUTES.CEMENTERIO.UPDATE(model.id_cementerio),
             model
         );
-        return CementeryMapper.toEntity(response.data);
+        return CementeryMapper.toEntity(data.data);
     }
 
     async delete(id: string): Promise<CementeryEntity> {
-        const response = await this.httpClient.delete<CementeryModel>(API_ROUTES.CEMENTERIO.DELETE(id));
-        return CementeryMapper.toEntity(response.data);
+        const {data} = await this.httpClient.delete<CementeryModel>(API_ROUTES.CEMENTERIO.DELETE(id));
+        return CementeryMapper.toEntity(data.data);
     }
 } 
