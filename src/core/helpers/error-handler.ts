@@ -68,7 +68,7 @@ export class ApiErrorHandler {
       handler.handle?.();
 
       apiError.message = error.response.data?.message || handler.message;
-      apiError.errors = error.response.data?.errors;
+      apiError.errors = [];
     } else if (error.request) {
       apiError.message = this.handleRequestError(error);
     }
