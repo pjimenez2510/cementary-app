@@ -20,7 +20,7 @@ export interface HuecoModel {
 
 export interface CreateHuecoModel {
   id_nicho: string;
-  num_hueco: number;
+  numero_hueco: number;
   estado: string;
   id_fallecido?: string;
 }
@@ -29,4 +29,4 @@ export interface UpdateHuecoModel {
   id_detalle_hueco: string;
   estado: string;
   id_fallecido?: string;
-} 
+}

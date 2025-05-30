@@ -34,7 +34,6 @@ import {
   AlertDialogTrigger,
 } from "@/shared/components/ui/alert-dialog";
 import clsx from "clsx";
-import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
 import { StatusChip } from "../utils/nichos-status-chip";
 
 export function NichoListTable() {
@@ -125,9 +124,7 @@ export function NichoListTable() {
             {nichos?.map((nicho) => (
               <TableRow key={nicho.idNicho}>
                 <TableCell>{nicho.idNicho}</TableCell>
-                <TableCell>
-                  {(nicho.idCementerio as CementeryEntity).nombre}
-                </TableCell>
+                <TableCell>{nicho.idCementerio?.nombre || ""}</TableCell>
                 <TableCell>{nicho.sector}</TableCell>
                 <TableCell>{nicho.fila}</TableCell>
                 <TableCell>{nicho.numero}</TableCell>

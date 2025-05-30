@@ -16,10 +16,9 @@ export class NichoMapper {
   static toEntity(model: NichoModel): NichoEntity {
     return {
       idNicho: model.id_nicho,
-      idCementerio:
-        typeof model.id_cementerio != "string"
-          ? CementeryMapper.toEntity(model.id_cementerio)
-          : model.id_cementerio,
+      idCementerio: model.id_cementerio
+        ? CementeryMapper.toEntity(model.id_cementerio)
+        : undefined,
       sector: model.sector,
       fila: model.fila,
       numero: model.numero,

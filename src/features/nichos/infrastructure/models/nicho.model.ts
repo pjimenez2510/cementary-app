@@ -4,8 +4,8 @@ import { HuecoModel } from "@/features/huecos/infrastructure/models/hueco.model"
 import { PropietarioNichoModel } from "@/features/propietarios-nichos/infrastructure/models/propietario-nicho.model";
 
 export interface NichoModel {
-  id_nicho: string;
-  id_cementerio: CementeryModel | string;
+  id_nicho?: string;
+  id_cementerio?: CementeryModel;
   sector: string;
   fila: string;
   numero: string;
