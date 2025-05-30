@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArrowUpCircleIcon, LayoutDashboardIcon, ListIcon, Building2Icon, BoxIcon } from "lucide-react";
+import { ArrowUpCircleIcon, LayoutDashboardIcon, ListIcon, Building2Icon, BoxIcon, FileText } from "lucide-react";
 
 import {
   Sidebar,
@@ -47,6 +47,12 @@ const data = {
       icon: ListIcon,
       isActive: (pathname: string) => pathname === "/map",
     },
+    {
+      title: "Inhumaciones",
+      url: "/inhumaciones",
+      icon: FileText,
+      isActive: (pathname: string) => pathname.startsWith("/inhumaciones"),
+    }
   ],
 };
 

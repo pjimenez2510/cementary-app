@@ -3,6 +3,7 @@ const AR_KEYS = {
   CEMENTERIO: "cementerio",
   NICHOS: "nichos",
   PROPIETARIOS_NICHOS: "propietarios-nichos",
+  INHUMACIONES: "inhumaciones",
 };
 
 export const API_ROUTES = {
@@ -30,4 +31,11 @@ export const API_ROUTES = {
     GET_BY_ID: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
     CREATE: AR_KEYS.PROPIETARIOS_NICHOS,
   },
+  INHUMACIONES:{
+    LIST: AR_KEYS.INHUMACIONES,
+    GET_BY_ID: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+    CREATE: AR_KEYS.INHUMACIONES,
+    UPDATE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+    DELETE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+  }
 };
