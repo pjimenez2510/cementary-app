@@ -47,6 +47,12 @@ const data = {
       icon: ListIcon,
       isActive: (pathname: string) => pathname === "/map",
     },
+    {
+      title: "Personas",
+      url: "/persons",
+      icon: ListIcon,
+      isActive: (pathname: string) => pathname === "/persons",
+    },
   ],
 };
 
