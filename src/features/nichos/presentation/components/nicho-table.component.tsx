@@ -53,7 +53,7 @@ export function NichoListTable() {
             {error && (
               <TableRow>
                 <TableCell colSpan={8} className="text-red-500">
-                  {error instanceof Error ? error.message : "Error desconocido"}
+                  {error instanceof Error ? error.stack : "Error desconocido"}
                 </TableCell>
               </TableRow>
             )}
@@ -70,7 +70,7 @@ export function NichoListTable() {
             {nichos?.map((nicho) => (
               <TableRow key={nicho.idNicho}>
                 <TableCell>{nicho.idNicho}</TableCell>
-                <TableCell>{nicho.idCementerio?.nombre}</TableCell>
+                <TableCell>{nicho.idCementerio?.nombre || ''}</TableCell>
                 <TableCell>{nicho.sector}</TableCell>
                 <TableCell>{nicho.fila}</TableCell>
                 <TableCell>{nicho.numero}</TableCell>
@@ -99,7 +99,7 @@ export function NichoListTable() {
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancelar</AlertDialogCancel>
                           <AlertDialogAction
-                            onClick={() => deleteNicho(nicho.idNicho)}
+                            onClick={() => deleteNicho(nicho.idNicho!)}
                             disabled={isPending}
                             className={clsx(
                               "px-8 bg-red-500 hover:bg-red-600",

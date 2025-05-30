@@ -1,18 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CementeryModel } from "@/features/cementery/infrastructure/models/cementery.model";
+import { HuecoModel } from "@/features/huecos/infrastructure/models/hueco.model";
+import { PropietarioNichoModel } from "@/features/propietarios-nichos/infrastructure/models/propietario-nicho.model";
 
 export interface NichoModel {
-  id_nicho: string;
-  id_cementerio: CementeryModel;
+  id_nicho?: string;
+  id_cementerio?: CementeryModel;
   sector: string;
   fila: string;
   numero: string;
   tipo: string;
   estado: string;
+  num_huecos: number;
   fecha_construccion: string;
   observaciones?: string;
-  numero_pisos: number;
   fecha_creacion: string;
   fecha_actualizacion: string | null;
+  propietarios_nicho?: PropietarioNichoModel[];
+  huecos?: HuecoModel[];
+  inhumaciones?: any[]; // TODO: Definir el tipo correcto cuando se implemente
 }
 
 export interface CreateNichoModel {
@@ -23,7 +29,7 @@ export interface CreateNichoModel {
   tipo: string;
   fecha_construccion: string;
   observaciones?: string;
-  numero_pisos: number;
+  num_huecos: number;
 }
 
 export interface UpdateNichoModel {
@@ -34,5 +40,5 @@ export interface UpdateNichoModel {
   tipo?: string;
   fecha_construccion?: string;
   observaciones?: string;
-  numero_pisos?: number;
+  num_huecos?: number;
 } 
