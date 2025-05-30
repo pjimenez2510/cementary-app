@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArrowUpCircleIcon, LayoutDashboardIcon, ListIcon, Building2Icon, BoxIcon } from "lucide-react";
+import { ArrowUpCircleIcon, LayoutDashboardIcon, ListIcon, Building2Icon, BoxIcon, UsersRound } from "lucide-react";
 
 import {
   Sidebar,
@@ -50,7 +50,7 @@ const data = {
     {
       title: "Personas",
       url: "/persons",
-      icon: ListIcon,
+      icon: UsersRound,
       isActive: (pathname: string) => pathname === "/persons",
     },
   ],
