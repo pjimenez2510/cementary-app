@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/core/layout/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/shared/components/ui/sidebar";
+import ProtectedRoute from "@/core/providers/protected-route-provider";
 
 export default async function Layout({
   children,
@@ -7,9 +8,11 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
-      <AppSidebar variant="inset" />
-      <SidebarInset>{children}</SidebarInset>
-    </SidebarProvider>
+    <ProtectedRoute>
+      <SidebarProvider>
+        <AppSidebar variant="inset" />
+        <SidebarInset>{children}</SidebarInset>
+      </SidebarProvider>
+    </ProtectedRoute>
   );
 }
