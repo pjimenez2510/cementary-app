@@ -1,18 +1,24 @@
 import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
+import { HuecoEntity } from "@/features/huecos/domain/entities/hueco.entity";
+import { PropietarioNichoEntity } from "@/features/propietarios-nichos/domain/entities/propietario-nicho.entity";
 
 export interface NichoEntity {
-  idNicho: string;
-  idCementerio: CementeryEntity;
+  idNicho?: string;
+  idCementerio?: CementeryEntity;
   sector: string;
   fila: string;
   numero: string;
   tipo: string;
   estado: string;
+  numHuecos: number;
   fechaConstruccion: string;
   observaciones?: string;
-  numeroPisos: number;
   fechaCreacion: string;
   fechaActualizacion: string | null;
+  propietarios?: PropietarioNichoEntity[];
+  huecos?: HuecoEntity[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  inhumaciones?: any[]; // TODO: Definir el tipo correcto cuando se implemente
 }
 
 export interface CreateNichoEntity {
@@ -23,7 +29,7 @@ export interface CreateNichoEntity {
   tipo: string;
   fechaConstruccion: string;
   observaciones?: string;
-  numeroPisos: number;
+  numHuecos: number;
 }
 
 export interface UpdateNichoEntity {
@@ -34,5 +40,5 @@ export interface UpdateNichoEntity {
   tipo?: string;
   fechaConstruccion?: string;
   observaciones?: string;
-  numeroPisos?: number;
+  numHuecos?: number;
 } 
