@@ -29,7 +29,7 @@ export class HuecoMapper {
   static toModel(entity: CreateHuecoEntity): CreateHuecoModel {
     return {
       id_nicho: entity.idNicho,
-      numero_hueco: entity.numeroHueco,
+      num_hueco: entity.numeroHueco,
       estado: entity.estado,
       id_fallecido: entity.idFallecido,
     };

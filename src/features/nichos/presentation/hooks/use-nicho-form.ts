@@ -35,8 +35,8 @@ export function useNichoForm(nicho?: NichoEntity) {
       });
     } else {
       create(data, {
-        onSuccess: () => {
-          router.push("/nichos");
+        onSuccess: (response) => {
+          router.push(`/nichos/${response.idNicho}`);
         },
       });
     }

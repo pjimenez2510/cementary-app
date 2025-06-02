@@ -1,5 +1,12 @@
 import PersonEditView from "@/features/person/presentation/views/person-edit.view";
 
-export default function PersonEditPage({ params }: { params: { id: string } }) {
-  return <PersonEditView personId={params.id} />;
+interface PersonEditPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function PersonEditPage({ params }: PersonEditPageProps) {
+  const { id } = await params;
+  return <PersonEditView personId={id} />;
 } 

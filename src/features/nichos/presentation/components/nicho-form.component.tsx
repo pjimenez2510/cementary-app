@@ -2,9 +2,9 @@
 import { FormProvider } from "react-hook-form";
 import { NichoEntity } from "../../domain/entities/nicho.entity";
 import { Button } from "@/shared/components/ui/button";
-import RHFInput from "@/shared/components/form/rhf/RHFInput";
-import RHFSelect from "@/shared/components/form/rhf/RHFSelect";
-import RHFCementerySelect from "@/shared/components/form/rhf/RHFCementerySelect";
+import RHFInput from "@/shared/components/form/rhf/rhf-input";
+import RHFSelect from "@/shared/components/form/rhf/rhf-select";
+import RHFCementerySelect from "@/shared/components/form/rhf/rhf-cementery-select";
 import { useNichoForm } from "../hooks/use-nicho-form";
 import clsx from "clsx";
 import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
