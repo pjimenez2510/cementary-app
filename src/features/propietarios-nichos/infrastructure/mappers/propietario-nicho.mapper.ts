@@ -15,8 +15,8 @@ export class PropietarioNichoMapper {
   static toEntity(model: PropietarioNichoModel): PropietarioNichoEntity {
     return {
       idPropietarioNicho: model.id_propietario_nicho,
-      idPersona: PersonMapper.toEntity(model.id_persona),
-      idNicho: NichoMapper.toEntity(model.id_nicho),
+      idPersona: model.id_persona ? PersonMapper.toEntity(model.id_persona) : undefined,
+      idNicho: model.id_nicho ? NichoMapper.toEntity(model.id_nicho) : undefined,
       fechaAdquisicion: model.fecha_adquisicion,
       tipoDocumento: model.tipo_documento,
       numeroDocumento: model.numero_documento,

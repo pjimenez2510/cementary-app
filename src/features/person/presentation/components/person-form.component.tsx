@@ -5,8 +5,8 @@ import { usePersonForm } from "../hooks/use-person-form";
 import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
 import { Button } from "@/shared/components/ui/button";
 import clsx from "clsx";
-import RHFInput from "@/shared/components/form/rhf/rhf-input";
 import RHFSelect from "@/shared/components/form/rhf/rhf-select";
+import RHFInput from "@/shared/components/form/rhf/rhf-input";
 
 interface PersonFormProps {
   person?: PersonEntity;
