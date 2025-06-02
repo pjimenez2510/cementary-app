@@ -6,8 +6,8 @@ export type EstadoPropietario = "Activo" | "Inactivo" | "En proceso" | "Vendido"
 
 export interface PropietarioNichoEntity {
   idPropietarioNicho: string;
-  idPersona: PersonEntity;
-  idNicho: NichoEntity;
+  idPersona?: PersonEntity;
+  idNicho?: NichoEntity;
   fechaAdquisicion: string;
   tipoDocumento: TipoDocumento;
   numeroDocumento: string;

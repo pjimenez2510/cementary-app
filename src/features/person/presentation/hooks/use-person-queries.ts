@@ -18,3 +18,10 @@ export const useFindPersonByIdQuery = (id: string) => {
     enabled: !!id,
   });
 };
+
+export const useSearchPersonsQuery = (query?: string) => {
+  return useQuery<PersonEntity[]>({
+    queryKey: PERSON_QUERY_KEYS.search(query),
+    queryFn: () => PersonRepositoryImpl.getInstance().search(query),
+  });
+};

@@ -8,7 +8,7 @@ import { PropietarioNichoMapper } from "@/features/propietarios-nichos/infrastru
 export class NichoMapper {
   static toEntity(model: NichoModel): NichoEntity {
     return {
-      idNicho: model.id_nicho,
+      idNicho: model.id_nicho ? model.id_nicho : undefined,
       idCementerio: model.id_cementerio ? CementeryMapper.toEntity(model.id_cementerio) : undefined,
       sector: model.sector,
       fila: model.fila,

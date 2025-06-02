@@ -1,5 +1,5 @@
 import { useFindAllCementeriesQuery } from "@/features/cementery/presentation/hooks/use-cementery-queries";
-import RHFSelect from "@/shared/components/form/rhf/RHFSelect";
+import RHFSelect from "@/shared/components/form/rhf/rhf-select";
 
 interface RHFCementerySelectProps {
   name: string;

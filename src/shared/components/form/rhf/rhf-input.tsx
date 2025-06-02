@@ -26,7 +26,7 @@ function RHFInput({ name, label, type = "text", placeholder }: RHFInputProps) {
         name={name}
         control={control}
         render={({ field }) => (
-          <Input type={type} placeholder={placeholder} {...field} />
+          <Input type={type} placeholder={placeholder} {...field} value={field.value ?? ''} />
         )}
       />
       <p className="text-sm text-destructive mt-1">{getErrorMessage(name)}</p>
