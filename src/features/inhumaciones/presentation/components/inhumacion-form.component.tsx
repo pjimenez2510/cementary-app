@@ -11,10 +11,10 @@ import clsx from "clsx";
 import RHFTextarea from "@/shared/components/form/rhf/RHFTextArea";
 
 const estadoOptions = [
-  { value: "PENDIENTE", label: "Pendiente" },
-  { value: "PROGRAMADA", label: "Programada" },
-  { value: "REALIZADA", label: "Realizada" },
-  { value: "CANCELADA", label: "Cancelada" },
+  { value: "Pendiente", label: "Pendiente" },
+  { value: "Programada", label: "Programada" },
+  { value: "Realizada", label: "Realizada" },
+  { value: "Cancelada", label: "Cancelada" },
 ];
 
 interface InhumacionFormProps {

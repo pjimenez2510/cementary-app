@@ -2,7 +2,7 @@ import { CementeryModel } from "@/features/cementery/infrastructure/models/cemen
 
 export interface NichoModel {
   id_nicho: string;
-  id_cementerio: CementeryModel;
+  id_cementerio: CementeryModel | string; 
   sector: string;
   fila: string;
   numero: string;

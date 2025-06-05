@@ -4,13 +4,14 @@ import { CreateNichoSchema, CreateNichoDTO } from "../../domain/schemas/nicho.sc
 import { NichoEntity } from "../../domain/entities/nicho.entity";
 import { useCreateNichoMutation, useUpdateNichoMutation } from "./use-nicho-mutations";
 import { useRouter } from "next/navigation";
+import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
 
 export function useNichoForm(nicho?: NichoEntity) {
   const router = useRouter();
   const methods = useForm<CreateNichoDTO>({
     resolver: zodResolver(CreateNichoSchema),
     defaultValues: nicho ? {
-      idCementerio: nicho.idCementerio.idCementerio,
+      idCementerio: (nicho.idCementerio as CementeryEntity).idCementerio,
       sector: nicho.sector,
       fila: nicho.fila,
       numero: nicho.numero,

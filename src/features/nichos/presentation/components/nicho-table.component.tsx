@@ -13,6 +13,7 @@ import { Button } from "@/shared/components/ui/button";
 import { useDeleteNichoMutation } from "../hooks/use-nicho-mutations";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import clsx from "clsx";
+import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
 
 function StatusChip({ estado }: { estado: string }) {
   let color = "bg-gray-200 text-gray-700";
@@ -70,7 +71,7 @@ export function NichoListTable() {
             {nichos?.map((nicho) => (
               <TableRow key={nicho.idNicho}>
                 <TableCell>{nicho.idNicho}</TableCell>
-                <TableCell>{nicho.idCementerio?.nombre}</TableCell>
+                <TableCell>{(nicho.idCementerio as CementeryEntity).nombre}</TableCell>
                 <TableCell>{nicho.sector}</TableCell>
                 <TableCell>{nicho.fila}</TableCell>
                 <TableCell>{nicho.numero}</TableCell>

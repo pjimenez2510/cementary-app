@@ -1,9 +1,10 @@
 import { NichoEntity } from "@/features/nichos/domain/entities/nicho.entity";
+import { PersonEntity } from "@/features/person/domain/entities/person.entity";
 
 export interface InhumacionEntity {
   idInhumacion: string;
   idNicho: NichoEntity;
-  idFallecido: string;
+  idFallecido: PersonEntity;
     fechaInhumacion: string;
     horaInhumacion: string;
     solicitante: string;

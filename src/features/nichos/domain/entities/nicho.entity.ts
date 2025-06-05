@@ -2,7 +2,7 @@ import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.
 
 export interface NichoEntity {
   idNicho: string;
-  idCementerio: CementeryEntity;
+  idCementerio: CementeryEntity | string; // Assuming CementeryEntity is defined elsewhere
   sector: string;
   fila: string;
   numero: string;

@@ -121,8 +121,8 @@ export function InhumacionListTable() {
             {inhumaciones?.map((inhumacion) => (
               <TableRow key={inhumacion.idInhumacion}>
                 <TableCell>{inhumacion.codigoInhumacion}</TableCell>
-                <TableCell>{inhumacion.idFallecido}</TableCell>
-                <TableCell>{inhumacion.idNicho?.sector}</TableCell>
+                <TableCell>{inhumacion.idFallecido.nombres}</TableCell>
+                <TableCell>{inhumacion.idNicho?.sector} - Fila: {inhumacion.idNicho?.fila} - Número: {inhumacion.idNicho?.numero} - Tipo: {inhumacion.idNicho?.tipo}</TableCell>
                 <TableCell>{new Date(inhumacion.fechaInhumacion).toLocaleDateString()}</TableCell>
                 <TableCell>{inhumacion.solicitante}</TableCell>
                 <TableCell>{inhumacion.responsableInhumacion}</TableCell>

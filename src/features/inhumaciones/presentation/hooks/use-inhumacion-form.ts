@@ -8,11 +8,12 @@ import { useCreateInhumacionMutation, useUpdateInhumacionMutation } from "./use-
 
 export function useInhumacionForm(inhumacion?: InhumacionEntity) {
     const router = useRouter();
-    const methods = useForm<CreateInhumacionDTO>({
+            console.log("Initializing form with inhumacion data:", inhumacion);
+    const methods = useForm<CreateInhumacionDTO>({        
         resolver: zodResolver(CreateInhumacionSchema),
         defaultValues: inhumacion ? {
             idNicho: inhumacion.idNicho.idNicho,
-            idFallecido: inhumacion.idFallecido,
+            idFallecido: inhumacion.idFallecido.id_persona,
             fechaInhumacion: inhumacion.fechaInhumacion,
             horaInhumacion: inhumacion.horaInhumacion,
             solicitante: inhumacion.solicitante,
@@ -26,6 +27,8 @@ export function useInhumacionForm(inhumacion?: InhumacionEntity) {
     const { mutate: update, isPending: isUpdating } = useUpdateInhumacionMutation();
 
     const onSubmit = (data: CreateInhumacionDTO) => {
+
+        console.log("Submitting inhumacion data:", data);
         if (inhumacion && inhumacion.idInhumacion) {
             update({
                 idInhumacion: inhumacion.idInhumacion,

@@ -1,13 +1,14 @@
 import { CreateInhumacionModel, InhumacionModel, UpdateInhumacionModel } from "../models/inhumacion.model";
 import { CreateInhumacionEntity, InhumacionEntity, UpdateInhumacionEntity } from "../../domain/entities/inhumacion.entity";
 import { NichoMapper } from "@/features/nichos/infrastructure/mappers/nicho.mapper";
+import { PersonMapper } from "@/features/person/infraestrcture/mappers/person.mapper";
 
 
 export class InhumacionMapper {
     static toEntity(model: InhumacionModel): InhumacionEntity {
         return {
            idNicho: NichoMapper.toEntity(model.id_nicho),
-           idFallecido: model.id_fallecido,
+           idFallecido: PersonMapper.toEntity(model.id_fallecido),
            idInhumacion: model.id_inhumacion,
             fechaInhumacion: model.fecha_inhumacion,
             horaInhumacion: model.hora_inhumacion,
