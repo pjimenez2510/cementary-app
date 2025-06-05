@@ -13,8 +13,8 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { KeyRound } from "lucide-react";
-import RHFInput from "@/shared/components/form/rhf/RHFInput";
-import RHFPasswordInput from "@/shared/components/form/rhf/RHFPasswordInput";
+import RHFInput from "@/shared/components/form/rhf/rhf-input";
+import RHFPasswordInput from "@/shared/components/form/rhf/rhf-passwordInput";
 
 const LoginForm = () => {
   const { methods, onSubmit, isSubmitting } = useLoginForm();

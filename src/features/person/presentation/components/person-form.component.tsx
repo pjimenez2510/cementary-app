@@ -2,9 +2,9 @@
 import { FormProvider } from "react-hook-form";
 import { PersonEntity } from "../../domain/entities/person.entity";
 import { usePersonForm } from "../hooks/use-person-form";
-import RHFInput from "@/shared/components/form/rhf/RHFInput";
+import RHFInput from "@/shared/components/form/rhf/rhf-input";
 import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
-import RHFSelect from "@/shared/components/form/rhf/RHFSelect";
+import RHFSelect from "@/shared/components/form/rhf/rhf-select";
 import { Button } from "@/shared/components/ui/button";
 import clsx from "clsx";
 

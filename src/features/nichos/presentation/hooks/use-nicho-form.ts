@@ -11,14 +11,14 @@ export function useNichoForm(nicho?: NichoEntity) {
   const methods = useForm<CreateNichoDTO>({
     resolver: zodResolver(CreateNichoSchema),
     defaultValues: nicho ? {
-      idCementerio: (nicho.idCementerio as CementeryEntity).idCementerio,
+      idCementerio: nicho.idCementerio?.idCementerio,
       sector: nicho.sector,
       fila: nicho.fila,
       numero: nicho.numero,
       tipo: nicho.tipo as CreateNichoDTO["tipo"],
       fechaConstruccion: nicho.fechaConstruccion,
       observaciones: nicho.observaciones,
-      numeroPisos: nicho.numeroPisos,
+      numHuecos: nicho.numHuecos,
     } : {},
   });
   const { mutate: create, isPending: isCreating } = useCreateNichoMutation();
@@ -36,8 +36,8 @@ export function useNichoForm(nicho?: NichoEntity) {
       });
     } else {
       create(data, {
-        onSuccess: () => {
-          router.push("/nichos");
+        onSuccess: (response) => {
+          router.push(`/nichos/${response.idNicho}`);
         },
       });
     }

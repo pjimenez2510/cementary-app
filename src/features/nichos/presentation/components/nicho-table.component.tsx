@@ -7,22 +7,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
-import { AlertCircle, Hash, Landmark, Layers, ListOrdered, User2, BadgeCheck, Pencil, Trash2 } from "lucide-react";
+import { AlertCircle, Hash, Landmark, Layers, ListOrdered, User2, BadgeCheck, Pencil, Trash2, Eye } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import { useDeleteNichoMutation } from "../hooks/use-nicho-mutations";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import clsx from "clsx";
-import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
+import { StatusChip } from "../utils/nichos-status-chip";
 
-function StatusChip({ estado }: { estado: string }) {
-  let color = "bg-gray-200 text-gray-700";
-  if (estado.toLowerCase() === "activo") color = "bg-green-100 text-green-700";
-  if (estado.toLowerCase() === "inactivo") color = "bg-gray-300 text-gray-500";
-  return (
-    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${color}`}>{estado}</span>
-  );
-}
 
 export function NichoListTable() {
   const { data: nichos, isLoading, error } = useFindAllNichosQuery();
@@ -54,7 +46,7 @@ export function NichoListTable() {
             {error && (
               <TableRow>
                 <TableCell colSpan={8} className="text-red-500">
-                  {error instanceof Error ? error.message : "Error desconocido"}
+                  {error instanceof Error ? error.stack : "Error desconocido"}
                 </TableCell>
               </TableRow>
             )}
@@ -71,7 +63,7 @@ export function NichoListTable() {
             {nichos?.map((nicho) => (
               <TableRow key={nicho.idNicho}>
                 <TableCell>{nicho.idNicho}</TableCell>
-                <TableCell>{(nicho.idCementerio as CementeryEntity).nombre}</TableCell>
+                <TableCell>{nicho.idCementerio?.nombre || ''}</TableCell>
                 <TableCell>{nicho.sector}</TableCell>
                 <TableCell>{nicho.fila}</TableCell>
                 <TableCell>{nicho.numero}</TableCell>
@@ -79,6 +71,11 @@ export function NichoListTable() {
                 <TableCell><StatusChip estado={nicho.estado} /></TableCell>
                 <TableCell>
                   <div className="flex gap-2">
+                    <Link href={`/nichos/${nicho.idNicho}`}>
+                      <Button size="icon" variant="ghost">
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                    </Link>
                     <Link href={`/nichos/${nicho.idNicho}/editar`}>
                       <Button size="icon" variant="ghost">
                         <Pencil className="w-4 h-4" />
@@ -100,7 +97,7 @@ export function NichoListTable() {
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancelar</AlertDialogCancel>
                           <AlertDialogAction
-                            onClick={() => deleteNicho(nicho.idNicho)}
+                            onClick={() => deleteNicho(nicho.idNicho!)}
                             disabled={isPending}
                             className={clsx(
                               "px-8 bg-red-500 hover:bg-red-600",
