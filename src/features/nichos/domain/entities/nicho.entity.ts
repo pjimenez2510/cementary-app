@@ -3,8 +3,8 @@ import { HuecoEntity } from "@/features/huecos/domain/entities/hueco.entity";
 import { PropietarioNichoEntity } from "@/features/propietarios-nichos/domain/entities/propietario-nicho.entity";
 
 export interface NichoEntity {
-  idNicho?: string;
-  idCementerio?: CementeryEntity;
+  idNicho: string;
+  idCementerio: CementeryEntity | string; // Assuming CementeryEntity is defined elsewhere
   sector: string;
   fila: string;
   numero: string;
@@ -41,4 +41,4 @@ export interface UpdateNichoEntity {
   fechaConstruccion?: string;
   observaciones?: string;
   numHuecos?: number;
-} 
+}

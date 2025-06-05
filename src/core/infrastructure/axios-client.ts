@@ -16,7 +16,7 @@ interface AxiosConfig {
 
 const DEFAULT_CONFIG: AxiosConfig = {
   baseURL:
-    process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000/api/v1",
+    process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3001",
   headers: {
     "Content-Type": "application/json",
   },

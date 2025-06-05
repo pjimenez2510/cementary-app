@@ -1,9 +1,10 @@
 import { NichoModel } from "@/features/nichos/infrastructure/models/nicho.model";
+import { PersonModel } from "@/features/person/infraestrcture/models/person.model";
 
 export interface InhumacionModel {
     id_inhumacion: string;
     id_nicho: NichoModel;
-    id_fallecido: string;
+    id_fallecido: PersonModel;
     fecha_inhumacion: string;
     hora_inhumacion: string;
     observaciones: string | null;

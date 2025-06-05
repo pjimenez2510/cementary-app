@@ -23,6 +23,9 @@ export class InhumacionRepositoryImpl implements InhumacionRepository {
 
     async findById(id: string): Promise<InhumacionEntity> {
         const { data } = await this.httpClient.get<InhumacionModel>(API_ROUTES.INHUMACIONES.GET_BY_ID(id));
+
+        console.log("InhumacionRepositoryImpl.findById", data);
+
         return InhumacionMapper.toEntity(data.data);
     }
 

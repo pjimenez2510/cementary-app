@@ -1,15 +1,25 @@
-import { NichoModel, CreateNichoModel, UpdateNichoModel } from "../models/nicho.model";
-import { NichoEntity, CreateNichoEntity, UpdateNichoEntity } from "../../domain/entities/nicho.entity";
+import {
+  NichoModel,
+  CreateNichoModel,
+  UpdateNichoModel,
+} from "../models/nicho.model";
+import {
+  NichoEntity,
+  CreateNichoEntity,
+  UpdateNichoEntity,
+} from "../../domain/entities/nicho.entity";
 import { CementeryMapper } from "@/features/cementery/infrastructure/mappers/cementery.mapper";
 import { HuecoMapper } from "@/features/huecos/infrastructure/mappers/hueco.mapper";
 import { PropietarioNichoMapper } from "@/features/propietarios-nichos/infrastructure/mappers/propietario-nicho.mapper";
 
-
 export class NichoMapper {
   static toEntity(model: NichoModel): NichoEntity {
     return {
-      idNicho: model.id_nicho ? model.id_nicho : undefined,
-      idCementerio: model.id_cementerio ? CementeryMapper.toEntity(model.id_cementerio) : undefined,
+      idNicho: model.id_nicho,
+      idCementerio:
+        typeof model.id_cementerio != "string"
+          ? CementeryMapper.toEntity(model.id_cementerio)
+          : model.id_cementerio,
       sector: model.sector,
       fila: model.fila,
       numero: model.numero,
@@ -20,8 +30,12 @@ export class NichoMapper {
       numHuecos: model.num_huecos,
       fechaCreacion: model.fecha_creacion,
       fechaActualizacion: model.fecha_actualizacion,
-      huecos: model.huecos ? model.huecos?.map(HuecoMapper.toEntity) : undefined,
-      propietarios: model.propietarios_nicho ? model.propietarios_nicho?.map(PropietarioNichoMapper.toEntity) : undefined,
+      huecos: model.huecos
+        ? model.huecos?.map(HuecoMapper.toEntity)
+        : undefined,
+      propietarios: model.propietarios_nicho
+        ? model.propietarios_nicho?.map(PropietarioNichoMapper.toEntity)
+        : undefined,
       inhumaciones: model.inhumaciones ? model.inhumaciones : undefined,
     };
   }
@@ -51,4 +65,4 @@ export class NichoMapper {
       num_huecos: entity.numHuecos,
     };
   }
-} 
+}
