@@ -2,13 +2,13 @@
 import { FormProvider } from "react-hook-form";
 import { InhumacionEntity } from "../../domain/entities/inhumacion.entity";
 import { useInhumacionForm } from "../hooks/use-inhumacion-form";
-import RHFNichoSelect from "@/shared/components/form/rhf/RHFNichoSelect";
-import RHFInput from "@/shared/components/form/rhf/RHFInput";
-import RHFSelect from "@/shared/components/form/rhf/RHFSelect";
+import RHFNichoSelect from "@/shared/components/form/rhf/rhf-nicho-select";
+import RHFInput from "@/shared/components/form/rhf/rhf-input";
+import RHFSelect from "@/shared/components/form/rhf/rhf-select";
 import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
 import { Button } from "@/shared/components/ui/button";
 import clsx from "clsx";
-import RHFTextarea from "@/shared/components/form/rhf/RHFTextArea";
+import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";
 
 const estadoOptions = [
   { value: "Pendiente", label: "Pendiente" },

@@ -6,6 +6,7 @@ const AR_KEYS = {
   INHUMACIONES: "inhumaciones",
   PERSON: "personas",
   HUECOS: "huecos-nichos",
+  REQUISITOS_INHUMACION: "requisitos-inhumacion",
 };
 
 export const API_ROUTES = {
@@ -59,5 +60,12 @@ export const API_ROUTES = {
     CREATE: AR_KEYS.PROPIETARIOS_NICHOS,
     UPDATE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
+  },
+  REQUISITOS_INHUMACION: {
+    LIST: AR_KEYS.REQUISITOS_INHUMACION,
+    GET_BY_ID: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/requisito/${id}`,
+    CREATE: AR_KEYS.REQUISITOS_INHUMACION,
+    UPDATE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
+    DELETE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
   },
 };

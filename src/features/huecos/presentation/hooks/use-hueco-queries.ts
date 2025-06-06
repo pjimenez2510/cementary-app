@@ -3,6 +3,15 @@ import { HuecoRepositoryImpl } from "../../infrastructure/repositories/hueco.rep
 import { HUECO_QUERY_KEYS } from "../../domain/constants/hueco-keys";
 import { HuecoEntity } from "../../domain/entities/hueco.entity";
 
+export const useFindAllHuecosQuery = () => {
+  return useQuery<HuecoEntity[]>({
+    queryKey: HUECO_QUERY_KEYS.all(),
+    queryFn: () => HuecoRepositoryImpl.getInstance().findAll(),
+    
+  });
+}
+
+
 export const useFindHuecosByNichoQuery = (nichoId: string) => {
   return useQuery<HuecoEntity[]>({
     queryKey: HUECO_QUERY_KEYS.byNicho(nichoId),

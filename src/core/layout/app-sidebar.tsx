@@ -53,6 +53,12 @@ const data = {
       icon: FileText,
       isActive: (pathname: string) => pathname.startsWith("/inhumaciones"),
     },
+     {
+      title: "Requisito Inhumaciones",
+      url: "/requisitos-inhumacion",
+      icon: FileText,
+      isActive: (pathname: string) => pathname.startsWith("/requisitos-inhumaciones"),
+    },
     {
       title: "Personas",
       url: "/persons",
