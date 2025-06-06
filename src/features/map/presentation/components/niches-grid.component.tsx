@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Tooltip,
     TooltipContent,
@@ -10,6 +10,7 @@ import { NichoEntity } from '@/features/nichos/domain/entities/nicho.entity';
 import { useNiches } from '../hooks/use-niches';
 import { HuecoTooltip } from './hole-tooltip.component';
 import { getColorByHuecoOcupado } from '@/shared/lib/get-hueco-color';
+import { ColumnsSelector } from './column-selector';
 
 interface NichesGridProps {
     cemetery: CementeryEntity;
@@ -37,17 +38,31 @@ const getNicheColorByHuecos = (nicho: NichoEntity) => {
 
 export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {
     const { niches, loading, error } = useNiches();
+    const [gridColumns, setGridColumns] = useState<number>(10);
 
     const filteredNiches = niches.filter(
-        (n: NichoEntity) =>
-            n.idCementerio?.idCementerio === cemetery.idCementerio
+        (n: NichoEntity) => n.idCementerio?.idCementerio === cemetery.idCementerio
     );
 
     if (loading) return <div>Cargando nichos...</div>;
     if (error) return <div>{error}</div>;
 
+    // Crear el estilo dinámico para las columnas del grid
+    const gridStyle = {
+        gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`
+    };
+
     return (
-        <div className="space-y-4">
+        <div className="space-y-6">
+            {/* Selector de columnas */}
+            <ColumnsSelector 
+                columns={gridColumns} 
+                onChange={setGridColumns}
+                maxColumns={20}
+                minColumns={1}
+            />
+
+            {/* Leyenda de colores */}
             <div className="flex justify-center flex-wrap gap-4 mb-6">
                 {Object.entries(holeCountConfig).map(([count, { color, label }]) => (
                     <div key={count} className="flex items-center gap-2">
@@ -57,7 +72,11 @@ export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {
                 ))}
             </div>
 
-            <div className="grid grid-cols-10 gap-2 max-w-4xl mx-auto p-6 border rounded-lg bg-gray-50">
+            {/* Grid de nichos con columnas dinámicas */}
+            <div 
+                className="grid gap-2 max-w-6xl mx-auto p-6 border rounded-lg bg-gray-50"
+                style={gridStyle}
+            >
                 <TooltipProvider>
                     {filteredNiches.map((niche) => {
                         const colorStatus = getNicheColorByHuecos(niche);
@@ -94,6 +113,16 @@ export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {
                         );
                     })}
                 </TooltipProvider>
+            </div>
+
+            {/* Información adicional del grid */}
+            <div className="text-center text-sm text-muted-foreground">
+                <p>
+                    Mostrando {filteredNiches.length} nichos en {gridColumns} columnas
+                    {filteredNiches.length > 0 && (
+                        <> • {Math.ceil(filteredNiches.length / gridColumns)} filas</>
+                    )}
+                </p>
             </div>
         </div>
     );
