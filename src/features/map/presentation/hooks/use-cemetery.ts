@@ -12,7 +12,6 @@ export const useCemetery = () => {
         refetch
     } = useFindAllCementeriesQuery();
 
-    // Seleccionar automáticamente el primer cementerio cuando se cargan los datos
     useEffect(() => {
         if (cemeteries.length > 0 && !selectedCemetery) {
             setSelectedCemetery(cemeteries[0]);
