@@ -1,5 +1,12 @@
 import NichoEditView from "@/features/nichos/presentation/views/nicho-edit.view";
 
-export default function NichoEditPage({ params }: { params: { id: string } }) {
-  return <NichoEditView nichoId={params.id} />;
+interface NichoEditPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function NichoEditPage({ params }: NichoEditPageProps) {
+  const { id } = await params;
+  return <NichoEditView nichoId={id} />;
 } 

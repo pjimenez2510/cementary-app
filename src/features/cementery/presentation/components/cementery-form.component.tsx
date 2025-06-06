@@ -2,7 +2,7 @@
 import { FormProvider } from "react-hook-form";
 import { CementeryEntity } from "../../domain/entities/cementery.entity";
 import { Button } from "@/shared/components/ui/button";
-import RHFInput from "@/shared/components/form/rhf/RHFInput";
+import RHFInput from "@/shared/components/form/rhf/rhf-input";
 import { useCementeryForm } from "../hooks/use-cementery-form";
 import clsx from "clsx";
 

@@ -4,7 +4,7 @@ import { Calendar } from "../../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { useController, useFormContext } from "react-hook-form";
 import { format } from "date-fns";
-
+import { cn } from "@/shared/lib/utils";
 
 export default function RHFDatePicker({ name, label, placeholder }: { name: string; label?: string; placeholder?: string }) {
   const { control, formState } = useFormContext();
@@ -19,17 +19,21 @@ export default function RHFDatePicker({ name, label, placeholder }: { name: stri
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className={"w-full justify-start text-left font-normal " + (!field.value ? "text-muted-foreground" : "")}
+            className={cn(
+              "w-full justify-start text-left font-normal",
+              !field.value && "text-muted-foreground"
+            )}
           >
             {selectedDate ? format(selectedDate, "dd/MM/yyyy") : (placeholder || "Selecciona una fecha")}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
+        <PopoverContent className="w-auto p-0" align="start" side="bottom" sideOffset={4}>
           <Calendar
             mode="single"
             selected={selectedDate}
             onSelect={date => field.onChange(date ? format(date, "yyyy-MM-dd") : "")}
             initialFocus
+            className="rounded-md border"
           />
         </PopoverContent>
       </Popover>

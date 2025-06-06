@@ -34,7 +34,7 @@ export const useUpdateNichoMutation = () => {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: NICHO_QUERY_KEYS.all() });
-      queryClient.invalidateQueries({ queryKey: NICHO_QUERY_KEYS.byId(data.idNicho) });
+      queryClient.invalidateQueries({ queryKey: NICHO_QUERY_KEYS.byId(data.idNicho!) });
       toast.success("Nicho actualizado exitosamente");
     },
     onError: (error) => {

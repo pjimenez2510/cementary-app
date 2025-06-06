@@ -35,7 +35,7 @@ export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {
     const { niches, loading, error } = useNiches();
 
     const filteredNiches = niches.filter(
-        (n: NichoEntity) => n.idCementerio.idCementerio === cemetery.idCementerio
+        (n: NichoEntity) => n.idCementerio?.idCementerio === cemetery.idCementerio
     );
 
     if (loading) return <div>Cargando nichos...</div>;
