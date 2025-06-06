@@ -74,12 +74,6 @@ const data = {
       icon: UsersRound,
       isActive: (pathname: string) => pathname === "/persons",
     },
-    {
-      title: "Inhumaciones",
-      url: "/inhumaciones",
-      icon: FileText,
-      isActive: (pathname: string) => pathname.startsWith("/inhumaciones"),
-    },
   ],
 };
 

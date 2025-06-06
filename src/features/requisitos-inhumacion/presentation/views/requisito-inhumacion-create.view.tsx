@@ -1,14 +1,13 @@
 import ContainerApp from "@/core/layout/container-app";
 import { Button } from "@/shared/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
+import { Card, CardContent } from "@/shared/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { RequisitoInhumacionForm } from "../components/requisito-inhumacion-form.component";
 
-
 export default function RequisitoInhumacionCreateView() {
-    return (
-         <ContainerApp title="Nuevo Requisito Inhumacion">
+  return (
+    <ContainerApp title="Nuevo Requisito Inhumacion">
       <div className="min-w-3xl mx-auto">
         <div className="mb-4">
           <Link href="/requisitos-inhumacion">
@@ -28,5 +27,5 @@ export default function RequisitoInhumacionCreateView() {
         </Card>
       </div>
     </ContainerApp>
-    );
+  );
 }
