@@ -10,7 +10,6 @@ export const useFindAllPersonsQuery = () => {
   });
 };
 
-
 export const useFindPersonByIdQuery = (id: string) => {
   return useQuery<PersonEntity>({
     queryKey: PERSON_QUERY_KEYS.byId(id),

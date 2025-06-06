@@ -29,4 +29,4 @@ export interface UpdateHuecoModel {
   id_detalle_hueco: string;
   estado: string;
   id_fallecido?: string;
-} 
+}

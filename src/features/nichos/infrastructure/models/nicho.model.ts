@@ -41,4 +41,4 @@ export interface UpdateNichoModel {
   fecha_construccion?: string;
   observaciones?: string;
   num_huecos?: number;
-} 
+}

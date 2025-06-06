@@ -1,5 +1,10 @@
-import React from 'react';
-import { useController, Control, FieldPath, FieldValues } from 'react-hook-form';
+import React from "react";
+import {
+  useController,
+  Control,
+  FieldPath,
+  FieldValues,
+} from "react-hook-form";
 
 interface RHFCheckboxProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -22,7 +27,7 @@ export default function RHFCheckbox<
   label,
   description,
   disabled = false,
-  className = '',
+  className = "",
 }: RHFCheckboxProps<TFieldValues, TName>) {
   const {
     field: { value, onChange, onBlur },
@@ -30,6 +35,7 @@ export default function RHFCheckbox<
   } = useController({
     name,
     control,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     defaultValue: false as any,
   });
 
@@ -47,7 +53,7 @@ export default function RHFCheckbox<
             className={`
               w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded 
               focus:ring-blue-500 focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed
-              ${error ? 'border-red-500 focus:ring-red-500' : ''}
+              ${error ? "border-red-500 focus:ring-red-500" : ""}
             `}
           />
         </div>
@@ -56,21 +62,27 @@ export default function RHFCheckbox<
             htmlFor={name}
             className={`
               text-sm font-medium cursor-pointer select-none
-              ${error ? 'text-red-700' : 'text-gray-700'}
-              ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:text-gray-900'}
+              ${error ? "text-red-700" : "text-gray-700"}
+              ${
+                disabled
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:text-gray-900"
+              }
             `}
           >
             {label}
           </label>
           {description && (
-            <p className={`text-xs mt-1 ${error ? 'text-red-600' : 'text-gray-500'}`}>
+            <p
+              className={`text-xs mt-1 ${
+                error ? "text-red-600" : "text-gray-500"
+              }`}
+            >
               {description}
             </p>
           )}
           {error && (
-            <p className="text-xs text-red-600 mt-1">
-              {error.message}
-            </p>
+            <p className="text-xs text-red-600 mt-1">{error.message}</p>
           )}
         </div>
       </div>
