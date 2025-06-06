@@ -20,17 +20,19 @@ const holeCountConfig: Record<
     number,
     { color: string; hover: string; label: string }
 > = {
-    1: { color: 'bg-green-400', hover: 'hover:bg-green-500', label: '1 hueco ocupado' },
-    2: { color: 'bg-yellow-400', hover: 'hover:bg-yellow-500', label: '2 huecos ocupados' },
-    3: { color: 'bg-orange-400', hover: 'hover:bg-orange-500', label: '3 huecos ocupados' },
-    4: { color: 'bg-amber-600', hover: 'hover:bg-amber-700', label: '4 huecos ocupados' },
-    5: { color: 'bg-red-600', hover: 'hover:bg-red-700', label: '5 huecos ocupados (Lleno)' }
+    0: { color: 'bg-green-400', hover: 'hover:bg-green-500', label: 'Disponible' },
+    1: { color: 'bg-blue-400', hover: 'hover:bg-blue-500', label: 'Reservado' },
+    2: { color: 'bg-yellow-400', hover: 'hover:bg-yellow-500', label: 'Uso moderado' },
+    3: { color: 'bg-orange-500', hover: 'hover:bg-orange-600', label: 'Uso alto' },
+    4: { color: 'bg-red-500', hover: 'hover:bg-red-600', label: 'Muy alto' },
+    5: { color: 'bg-red-600', hover: 'hover:bg-red-700', label: 'Lleno' },
 };
 
 const getNicheColorByHuecos = (nicho: NichoEntity) => {
-  const ocupados = nicho.huecos?.filter(h => h.estado === 'ocupado')?.length || 0;
-  const total = nicho.huecos?.length || nicho.numHuecos || 0;
-  return getColorByHuecoOcupado(ocupados, total);
+    const ocupados = nicho.huecos?.filter(h => h.estado === 'ocupado')?.length || 0;
+    const reservados = nicho.huecos?.filter(h => h.estado === 'reservado')?.length || 0;
+    const total = nicho.huecos?.length || nicho.numHuecos || 0;
+    return getColorByHuecoOcupado(ocupados, reservados, total);
 };
 
 export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {

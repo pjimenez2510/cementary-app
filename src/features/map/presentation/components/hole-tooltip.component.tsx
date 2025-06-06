@@ -14,15 +14,17 @@ export const HuecoTooltip: React.FC<HuecoTooltipProps> = ({ nicho }) => {
   if (error) return <p className="text-xs text-destructive">Error al cargar huecos</p>;
 
   const ocupados = huecos?.filter(h => h.estado === 'ocupado').length || 0;
-  const total = huecos?.length || nicho.numHuecos || 0;
-  const disponibles = Math.max(total - ocupados, 0); 
-  const { color, label } = getColorByHuecoOcupado(ocupados, total);
+const reservados = huecos?.filter(h => h.estado === 'reservado').length || 0;
+const total = huecos?.length || nicho.numHuecos || 0;
+const disponibles = Math.max(total - ocupados - reservados, 0);
+const { color, label } = getColorByHuecoOcupado(ocupados, reservados, total);
 
-  const getEstadoDescripcion = () => {
-    if (ocupados === 0) return 'Disponible';
-    if (ocupados === total) return 'Ocupado';
-    return `Disponible (${disponibles}/${total} huecos libres)`;
-  };
+const getEstadoDescripcion = () => {
+  if (ocupados + reservados === 0) return 'Disponible';
+  if (ocupados + reservados === total) return 'Lleno';
+  return `Disponible (${disponibles}/${total})`;
+};
+
 
   return (
     <div className="text-sm text-center space-y-1">
