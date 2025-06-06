@@ -8,7 +8,17 @@ import {
 } from "@/shared/components/ui/table";
 import { useDeletePersonMutation } from "../hooks/use-person-mutation";
 import { useFindAllPersonsQuery } from "../hooks/use-person-queries";
-import { AlertCircle, Columns4, House, IdCard, Mail, Pencil, Phone, Trash2, User } from "lucide-react";
+import {
+  AlertCircle,
+  Columns4,
+  House,
+  IdCard,
+  Mail,
+  Pencil,
+  Phone,
+  Trash2,
+  User,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -38,27 +48,44 @@ export function PersonListTable() {
           <TableHeader>
             <TableRow>
               <TableHead>
-                <span className="flex items-center gap-1"><IdCard className="w-4 h-4"/>Cédula</span>
+                <span className="flex items-center gap-1">
+                  <IdCard className="w-4 h-4" />
+                  Cédula
+                </span>
               </TableHead>
               <TableHead>
-                <span className="flex items-center gap-1"><User className="w-4 h-4"/> Nombres</span>
+                <span className="flex items-center gap-1">
+                  <User className="w-4 h-4" /> Nombres
+                </span>
               </TableHead>
               <TableHead>
-                <span className="flex items-center gap-1"><User className="w-4 h-4"/> Apellidos</span>
+                <span className="flex items-center gap-1">
+                  <User className="w-4 h-4" /> Apellidos
+                </span>
               </TableHead>
               <TableHead>
-                <span className="flex items-center gap-1"><House className="w-4 h-4"/>Dirección</span>
+                <span className="flex items-center gap-1">
+                  <House className="w-4 h-4" />
+                  Dirección
+                </span>
               </TableHead>
               <TableHead>
-                <span className="flex items-center gap-1"><Phone className="w-4 h-4"/>Teléfono</span>
+                <span className="flex items-center gap-1">
+                  <Phone className="w-4 h-4" />
+                  Teléfono
+                </span>
               </TableHead>
               <TableHead>
-                <span className="flex items-center gap-1"><Mail className="w-4 h-4"/>
+                <span className="flex items-center gap-1">
+                  <Mail className="w-4 h-4" />
                   Correo Electrónico
                 </span>
               </TableHead>
               <TableHead>
-                <span className="flex items-center gap-1"><Columns4 className="w-4 h-4"/>Tipo</span>
+                <span className="flex items-center gap-1">
+                  <Columns4 className="w-4 h-4" />
+                  Tipo
+                </span>
               </TableHead>
               <TableHead>
                 <span className="flex items-center gap-1">Acciones</span>
@@ -92,7 +119,11 @@ export function PersonListTable() {
                   <TableCell>{person.direccion ?? "N/A"}</TableCell>
                   <TableCell>{person.telefono ?? "N/A"}</TableCell>
                   <TableCell>{person.correo}</TableCell>
-                  <TableCell><span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">{person.tipo}</span></TableCell>
+                  <TableCell>
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                      {person.tipo}
+                    </span>
+                  </TableCell>
                   <TableCell>
                     <div className="flex gap-2">
                       <Link href={`/persons/${person.id_persona}/editar`}>

@@ -5,6 +5,8 @@ const AR_KEYS = {
   PROPIETARIOS_NICHOS: "propietarios-nichos",
   PERSON: "personas",
   HUECOS: "huecos-nichos",
+  INHUMACIONES: "inhumaciones",
+  REQUISITOS_INHUMACION: "requisitos-inhumacion",
 };
 
 export const API_ROUTES = {
@@ -46,10 +48,27 @@ export const API_ROUTES = {
   PROPIETARIOS_NICHOS: {
     LIST: AR_KEYS.PROPIETARIOS_NICHOS,
     GET_BY_ID: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
-    GET_BY_NICHO: (idNicho: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/por-nicho/${idNicho}`,
-    GET_BY_PERSONA: (idPersona: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/persona/${idPersona}`,
+    GET_BY_NICHO: (idNicho: string) =>
+      `${AR_KEYS.PROPIETARIOS_NICHOS}/por-nicho/${idNicho}`,
+    GET_BY_PERSONA: (idPersona: string) =>
+      `${AR_KEYS.PROPIETARIOS_NICHOS}/persona/${idPersona}`,
     CREATE: AR_KEYS.PROPIETARIOS_NICHOS,
     UPDATE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
+  },
+  INHUMACIONES: {
+    LIST: AR_KEYS.INHUMACIONES,
+    GET_BY_ID: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+    CREATE: AR_KEYS.INHUMACIONES,
+    UPDATE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+    DELETE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+  },
+  REQUISITOS_INHUMACION: {
+    LIST: AR_KEYS.REQUISITOS_INHUMACION,
+    GET_BY_ID: (id: string) =>
+      `${AR_KEYS.REQUISITOS_INHUMACION}/requisito/${id}`,
+    CREATE: AR_KEYS.REQUISITOS_INHUMACION,
+    UPDATE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
+    DELETE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
   },
 };

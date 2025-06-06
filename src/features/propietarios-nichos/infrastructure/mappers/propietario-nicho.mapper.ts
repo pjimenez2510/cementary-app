@@ -1,5 +1,13 @@
-import { PropietarioNichoModel, CreatePropietarioNichoModel, UpdatePropietarioNichoModel } from "../models/propietario-nicho.model";
-import { PropietarioNichoEntity, CreatePropietarioNichoEntity, UpdatePropietarioNichoEntity } from "../../domain/entities/propietario-nicho.entity";
+import {
+  PropietarioNichoModel,
+  CreatePropietarioNichoModel,
+  UpdatePropietarioNichoModel,
+} from "../models/propietario-nicho.model";
+import {
+  PropietarioNichoEntity,
+  CreatePropietarioNichoEntity,
+  UpdatePropietarioNichoEntity,
+} from "../../domain/entities/propietario-nicho.entity";
 import { NichoMapper } from "@/features/nichos/infrastructure/mappers/nicho.mapper";
 import { PersonMapper } from "@/features/person/infraestrcture/mappers/person.mapper";
 
@@ -19,7 +27,9 @@ export class PropietarioNichoMapper {
     };
   }
 
-  static toModel(entity: CreatePropietarioNichoEntity): CreatePropietarioNichoModel {
+  static toModel(
+    entity: CreatePropietarioNichoEntity
+  ): CreatePropietarioNichoModel {
     return {
       id_persona: entity.idPersona,
       id_nicho: entity.idNicho,
@@ -31,7 +41,9 @@ export class PropietarioNichoMapper {
     };
   }
 
-  static toUpdateModel(entity: UpdatePropietarioNichoEntity): UpdatePropietarioNichoModel {
+  static toUpdateModel(
+    entity: UpdatePropietarioNichoEntity
+  ): UpdatePropietarioNichoModel {
     return {
       id_propietario_nicho: entity.idPropietarioNicho,
       estado: entity.estado,
@@ -40,4 +52,4 @@ export class PropietarioNichoMapper {
       numero_documento: entity.numeroDocumento,
     };
   }
-} 
+}

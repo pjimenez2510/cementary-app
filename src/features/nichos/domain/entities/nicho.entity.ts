@@ -41,4 +41,4 @@ export interface UpdateNichoEntity {
   fechaConstruccion?: string;
   observaciones?: string;
   numHuecos?: number;
-} 
+}
