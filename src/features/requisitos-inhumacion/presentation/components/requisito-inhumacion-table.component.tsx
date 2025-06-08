@@ -1,14 +1,4 @@
-import {
-  AlertCircle,
-  User,
-  MapPin,
-  Calendar,
-  UserCheck,
-  Pencil,
-  Trash2,
-  Building,
-  Clock,
-} from "lucide-react";
+import { AlertCircle, Hash, User, MapPin, Calendar, UserCheck, Shield, Pencil, Trash2, Building, Clock, FileText, Eye } from "lucide-react";
 import Link from "next/link";
 import { useDeleteRequisitoInhumacionMutation } from "../hooks/use-requisito-inhumacion-mutation";
 import { useFindAllRequisitosInhumacionQuery } from "../hooks/use-requisito-inhumacion-queries";
@@ -155,9 +145,12 @@ export function RequisitoInhumacionListTable() {
                 <TableCell>{requisito.horaInhumacion}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">
-                    <Link
-                      href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}/editar`}
-                    >
+                    <Link href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}`}>
+                      <Button size="icon" variant="ghost">
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                    <Link href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}/editar`}>
                       <Button size="icon" variant="ghost">
                         <Pencil className="w-4 h-4" />
                       </Button>
