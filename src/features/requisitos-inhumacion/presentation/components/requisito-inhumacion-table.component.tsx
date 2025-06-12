@@ -150,11 +150,11 @@ export function RequisitoInhumacionListTable() {
                         <Eye className="w-4 h-4" />
                       </Button>
                     </Link>
-                    <Link href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}/editar`}>
+                    {/* <Link href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}/editar`}>
                       <Button size="icon" variant="ghost">
                         <Pencil className="w-4 h-4" />
                       </Button>
-                    </Link>
+                    </Link> */}
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button size="icon" variant="ghost">
