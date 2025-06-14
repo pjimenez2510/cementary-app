@@ -44,6 +44,7 @@ export interface RequisitoInhumacionEntity {
         horaInhumacion: string;
     }
 
+
     export interface UpdateRequisitoInhumacionEntity {
         idRequisitoInhumacion: string;
         observacionSolicitante: string;

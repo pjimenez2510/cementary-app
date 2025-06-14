@@ -7,5 +7,4 @@ export interface RequisitoInhumacionRepository {
     create(requisitoInhumacion: CreateRequisitoInhumacionEntity): Promise<RequisitoInhumacionEntity>;
     update(requisitoInhumacion: UpdateRequisitoInhumacionEntity): Promise<RequisitoInhumacionEntity>;
     delete(id: string): Promise<void>;
-
 }
