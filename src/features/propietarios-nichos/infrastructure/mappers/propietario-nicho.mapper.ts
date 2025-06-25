@@ -24,6 +24,7 @@ export class PropietarioNichoMapper {
       observaciones: model.observaciones,
       fechaCreacion: model.fecha_creacion,
       fechaActualizacion: model.fecha_actualizacion,
+      tipo: model.tipo,
     };
   }
 
@@ -38,6 +39,7 @@ export class PropietarioNichoMapper {
       numero_documento: entity.numeroDocumento,
       estado: entity.estado,
       observaciones: entity.observaciones,
+      tipo: entity.tipo,
     };
   }
 
@@ -50,6 +52,7 @@ export class PropietarioNichoMapper {
       observaciones: entity.observaciones,
       tipo_documento: entity.tipoDocumento,
       numero_documento: entity.numeroDocumento,
+      tipo: entity.tipo,
     };
   }
 }

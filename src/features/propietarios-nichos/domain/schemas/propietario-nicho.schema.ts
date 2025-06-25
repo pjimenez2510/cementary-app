@@ -12,6 +12,9 @@ export const CreatePropietarioNichoSchema = z.object({
     message: "Estado inválido",
   }),
   observaciones: z.string().min(1, "Las observaciones son requeridas"),
+  tipo: z.enum(["Dueño", "Heredero"] as const, {
+    message: "Tipo de propietario inválido",
+  }),
 });
 
 export const UpdatePropietarioNichoSchema = z.object({

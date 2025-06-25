@@ -8,6 +8,7 @@ import { usePropietarioForm } from "../hooks/use-propietario-form";
 import clsx from "clsx";
 import { DOCUMENT_TYPES } from "../../domain/constants/document-types";
 import { STATUS_OPTIONS } from "../../domain/constants/status-options";
+import { TIPO_PROPIETARIO_OPTIONS } from "../../domain/constants/tipo-propietario";
 
 interface NichoPropietarioFormProps {
   nichoId: string;
@@ -26,6 +27,7 @@ export function NichoPropietarioForm({ nichoId, onSuccess }: NichoPropietarioFor
           <RHFSelect name="tipoDocumento" label="Tipo de Documento" options={DOCUMENT_TYPES} placeholder="Selecciona el tipo de documento" />
           <RHFInput name="numeroDocumento" label="Número de Documento" />
           <RHFSelect name="estado" label="Estado" options={STATUS_OPTIONS} placeholder="Selecciona el estado" />
+          <RHFSelect name="tipo" label="Tipo de Propietario" options={TIPO_PROPIETARIO_OPTIONS} placeholder="Selecciona el tipo de propietario" />
           <RHFInput name="observaciones" label="Observaciones" />
         </div>
         <div className="flex justify-end pt-2">
