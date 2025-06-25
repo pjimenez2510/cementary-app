@@ -5,12 +5,14 @@ export interface PersonEntity {
     apellidos: string;
     fecha_nacimiento: string;
     fecha_defuncion: string| null;
+    fecha_inumacion: string | null;
     lugar_defuncion: string| null;
     causa_defuncion: string | null;
-    direccion: string | null;
-    telefono: string | null;
-    correo:string;
-    tipo: string;
+    fallecido: boolean;
+    direccion?: string | null;
+    telefono?: string | null;
+    correo?: string | null;
+    nacionalidad?: string | null;
 }
 
 export interface CreatePersonEntity{
@@ -19,12 +21,14 @@ export interface CreatePersonEntity{
     apellidos: string;
     fecha_nacimiento: string;
     fecha_defuncion?: string | null;
+    fecha_inumacion?: string | null;
     lugar_defuncion?: string | null;
     causa_defuncion?: string | null;
+    nacionalidad?: string | null;
+    fallecido: boolean;
     direccion?: string | null;
     telefono?: string | null;
-    correo: string;
-    tipo: string;
+    correo?: string | null;
 }
 
 export interface UpdatePersonEntity {
@@ -34,10 +38,12 @@ export interface UpdatePersonEntity {
     apellidos?: string;
     fecha_nacimiento?: string;
     fecha_defuncion?: string | null;
+    fecha_inumacion?: string | null;
     lugar_defuncion?: string | null;
     causa_defuncion?: string | null;
+    fallecido?: boolean;
+    nacionalidad?: string | null;
     direccion?: string | null;
     telefono?: string | null;
-    correo?: string;
-    tipo?: string;
+    correo?: string | null;
 }

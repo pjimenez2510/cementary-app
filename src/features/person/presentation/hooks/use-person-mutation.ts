@@ -9,6 +9,7 @@ export const useCreatePersonMutation = () => {
 
   return useMutation<PersonEntity, Error, CreatePersonEntity>({
     mutationFn: async (data) => {
+      console.log("Creating person with data:", data);
       const repository = PersonRepositoryImpl.getInstance();
       return await repository.create(data);
     },

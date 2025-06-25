@@ -12,10 +12,12 @@ export class PersonMapper{
             fecha_defuncion: model.fecha_defuncion,
             lugar_defuncion: model.lugar_defuncion,
             causa_defuncion: model.causa_defuncion,
+            fecha_inumacion: model.fecha_inumacion,
+            fallecido: model.fallecido,
+            nacionalidad: model.nacionalidad ,
             direccion: model.direccion,
             telefono: model.telefono,
             correo: model.correo,
-            tipo: model.tipo,
         };
     }
 
@@ -26,12 +28,14 @@ export class PersonMapper{
             apellidos: entity.apellidos,
             fecha_nacimiento: entity.fecha_nacimiento,
             fecha_defuncion: entity.fecha_defuncion,
+            fecha_inumacion: entity.fecha_inumacion,
             lugar_defuncion: entity.lugar_defuncion,
             causa_defuncion: entity.causa_defuncion,
+            fallecido: entity.fallecido,
+            nacionalidad: entity.nacionalidad,
             direccion: entity.direccion,
             telefono: entity.telefono,
             correo: entity.correo,
-            tipo: entity.tipo,
         };
     }
 
@@ -43,12 +47,11 @@ export class PersonMapper{
             apellidos: entity.apellidos,
             fecha_nacimiento: entity.fecha_nacimiento,
             fecha_defuncion: entity.fecha_defuncion,
+            fecha_inumacion: entity.fecha_inumacion,
             lugar_defuncion: entity.lugar_defuncion,
             causa_defuncion: entity.causa_defuncion,
-            direccion: entity.direccion,
-            telefono: entity.telefono,
-            correo: entity.correo,
-            tipo: entity.tipo,
+            fallecido: entity.fallecido,
+            nacionalidad: entity.nacionalidad,
         };
     }
 }

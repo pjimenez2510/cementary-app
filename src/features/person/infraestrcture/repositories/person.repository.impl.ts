@@ -32,7 +32,9 @@ export class PersonRepositoryImpl implements PersonRepository {
   }
 
   async create(person: CreatePersonEntity): Promise<PersonEntity> {
+    console.log("Creating person with data promise:", person);
     const model = PersonMapper.toModel(person);
+    console.log("Creating person with model promise:", model);
     const { data } = await this.httpClient.post<PersonModel>(API_ROUTES.PERSONS.CREATE, model);
     return PersonMapper.toEntity(data.data);
   }
