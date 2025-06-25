@@ -59,14 +59,14 @@ const steps = [
     description: "Requisitos y documentación",
     color: "bg-red-500",
     requiredFields: [
+    ],
+    optionalFields: [
       "copiaCertificadoDefuncion",
       "informeEstadisticoINEC",
       "copiaCedula",
       "pagoTasaInhumacion",
       "copiaTituloPropiedadNicho",
       "oficioDeSolicitud",
-    ],
-    optionalFields: [
       "observacionCertificadoDefuncion",
       "observacionInformeEstadisticoINEC",
       "observacionCopiaCedula",
@@ -98,13 +98,6 @@ const validationMessages: { [key: string]: string } = {
   idFallecido: "Por favor selecciona la persona fallecida",
   fechaInhumacion: "La fecha de inhumación es requerida",
   horaInhumacion: "La hora de inhumación es requerida",
-  copiaCertificadoDefuncion:
-    "Debe marcar la copia del certificado de defunción",
-  informeEstadisticoINEC: "Debe marcar el informe estadístico INEC",
-  copiaCedula: "Debe marcar la copia de cédula",
-  pagoTasaInhumacion: "Debe marcar el pago de tasa de inhumación",
-  copiaTituloPropiedadNicho: "Debe marcar la copia del título de propiedad",
-  oficioDeSolicitud: "Debe marcar el oficio de solicitud",
   firmaAceptacionSepulcro: "La firma de aceptación del sepulcro es requerida",
 };
 
@@ -183,7 +176,6 @@ export function RequisitoInhumacionForm({
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      {/* Header del Wizard */}
       <div className="bg-white shadow-lg rounded-lg mb-6">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-2xl font-bold text-gray-800">
@@ -337,243 +329,285 @@ export function RequisitoInhumacionForm({
             )}
 
             {/* Paso 4: Documentos */}
-{currentStep === 4 && (
-  <div className="space-y-6">
-    <div className="flex items-center mb-6">
-      <span className="w-3 h-3 bg-red-500 rounded-full mr-3"></span>
-      <h3 className="text-xl font-semibold text-gray-800">
-        Documentos y Requisitos
-      </h3>
-    </div>
+            {currentStep === 4 && (
+              <div className="space-y-6">
+                <div className="flex items-center mb-6">
+                  <span className="w-3 h-3 bg-red-500 rounded-full mr-3"></span>
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    Documentos y Requisitos
+                  </h3>
+                </div>
 
-    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-      <p className="text-yellow-800 text-sm">
-        <span className="text-red-500">*</span> Los siguientes
-        documentos son requeridos para continuar. Solo la
-        "Autorización de Movilización del Cadáver" es opcional.
-      </p>
-    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Copia Certificado de Defunción */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="copiaCertificadoDefuncion"
+                      label="Copia de Certificado de Defunción"
+                      description="Documento requerido para el proceso"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionCertificadoDefuncion")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionCertificadoDefuncion"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionCertificadoDefuncion"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionCertificadoDefuncion"
+                            label=""
+                            placeholder="Observaciones sobre el certificado de defunción..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {/* Copia Certificado de Defunción */}
-      <div className="border rounded-lg p-4 bg-gray-50">
-        <RHFCheckbox
-          name="copiaCertificadoDefuncion"
-          label="Copia de Certificado de Defunción *"
-          description="Documento requerido para el proceso"
-        />
-        <div className="mt-3 ml-6">
-          <button
-            type="button"
-            onClick={() => toggleObservation('observacionCertificadoDefuncion')}
-            className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <span className="mr-1">
-              {expandedObservations['observacionCertificadoDefuncion'] ? "▼" : "▶"}
-            </span>
-            Agregar observación
-          </button>
-          {expandedObservations['observacionCertificadoDefuncion'] && (
-            <div className="mt-2 animate-fade-in">
-              <RHFTextarea
-                name="observacionCertificadoDefuncion"
-                label=""
-                placeholder="Observaciones sobre el certificado de defunción..."
-                rows={2}
-              />
-            </div>
-          )}
-        </div>
-      </div>
+                  {/* Informe Estadístico INEC */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="informeEstadisticoINEC"
+                      label="Informe Estadístico INEC"
+                      description="Reporte estadístico del Instituto Nacional"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionInformeEstadisticoINEC")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionInformeEstadisticoINEC"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionInformeEstadisticoINEC"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionInformeEstadisticoINEC"
+                            label=""
+                            placeholder="Observaciones sobre el informe estadístico INEC..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-      {/* Informe Estadístico INEC */}
-      <div className="border rounded-lg p-4 bg-gray-50">
-        <RHFCheckbox
-          name="informeEstadisticoINEC"
-          label="Informe Estadístico INEC *"
-          description="Reporte estadístico del Instituto Nacional"
-        />
-        <div className="mt-3 ml-6">
-          <button
-            type="button"
-            onClick={() => toggleObservation('observacionInformeEstadisticoINEC')}
-            className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <span className="mr-1">
-              {expandedObservations['observacionInformeEstadisticoINEC'] ? "▼" : "▶"}
-            </span>
-            Agregar observación
-          </button>
-          {expandedObservations['observacionInformeEstadisticoINEC'] && (
-            <div className="mt-2 animate-fade-in">
-              <RHFTextarea
-                name="observacionInformeEstadisticoINEC"
-                label=""
-                placeholder="Observaciones sobre el informe estadístico INEC..."
-                rows={2}
-              />
-            </div>
-          )}
-        </div>
-      </div>
+                  {/* Copia de Cédula */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="copiaCedula"
+                      label="Copia de Cédula"
+                      description="Identificación del solicitante"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionCopiaCedula")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations["observacionCopiaCedula"]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations["observacionCopiaCedula"] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionCopiaCedula"
+                            label=""
+                            placeholder="Observaciones sobre la copia de cédula..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-      {/* Copia de Cédula */}
-      <div className="border rounded-lg p-4 bg-gray-50">
-        <RHFCheckbox
-          name="copiaCedula"
-          label="Copia de Cédula *"
-          description="Identificación del solicitante"
-        />
-        <div className="mt-3 ml-6">
-          <button
-            type="button"
-            onClick={() => toggleObservation('observacionCopiaCedula')}
-            className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <span className="mr-1">
-              {expandedObservations['observacionCopiaCedula'] ? "▼" : "▶"}
-            </span>
-            Agregar observación
-          </button>
-          {expandedObservations['observacionCopiaCedula'] && (
-            <div className="mt-2 animate-fade-in">
-              <RHFTextarea
-                name="observacionCopiaCedula"
-                label=""
-                placeholder="Observaciones sobre la copia de cédula..."
-                rows={2}
-              />
-            </div>
-          )}
-        </div>
-      </div>
+                  {/* Pago Tasa de Inhumación */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="pagoTasaInhumacion"
+                      label="Pago de Tasa de Inhumación"
+                      description="Comprobante de pago de tasas"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionPagoTasaInhumacion")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations["observacionPagoTasaInhumacion"]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionPagoTasaInhumacion"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionPagoTasaInhumacion"
+                            label=""
+                            placeholder="Observaciones sobre el pago de tasa de inhumación..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-      {/* Pago Tasa de Inhumación */}
-      <div className="border rounded-lg p-4 bg-gray-50">
-        <RHFCheckbox
-          name="pagoTasaInhumacion"
-          label="Pago de Tasa de Inhumación *"
-          description="Comprobante de pago de tasas"
-        />
-        <div className="mt-3 ml-6">
-          <button
-            type="button"
-            onClick={() => toggleObservation('observacionPagoTasaInhumacion')}
-            className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <span className="mr-1">
-              {expandedObservations['observacionPagoTasaInhumacion'] ? "▼" : "▶"}
-            </span>
-            Agregar observación
-          </button>
-          {expandedObservations['observacionPagoTasaInhumacion'] && (
-            <div className="mt-2 animate-fade-in">
-              <RHFTextarea
-                name="observacionPagoTasaInhumacion"
-                label=""
-                placeholder="Observaciones sobre el pago de tasa de inhumación..."
-                rows={2}
-              />
-            </div>
-          )}
-        </div>
-      </div>
+                  {/* Copia Título de Propiedad */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="copiaTituloPropiedadNicho"
+                      label="Copia Título de Propiedad del Nicho"
+                      description="Documento de propiedad del espacio"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation(
+                            "observacionCopiaTituloPropiedadNicho"
+                          )
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionCopiaTituloPropiedadNicho"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionCopiaTituloPropiedadNicho"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionCopiaTituloPropiedadNicho"
+                            label=""
+                            placeholder="Observaciones sobre el título de propiedad del nicho..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-      {/* Copia Título de Propiedad */}
-      <div className="border rounded-lg p-4 bg-gray-50">
-        <RHFCheckbox
-          name="copiaTituloPropiedadNicho"
-          label="Copia Título de Propiedad del Nicho *"
-          description="Documento de propiedad del espacio"
-        />
-        <div className="mt-3 ml-6">
-          <button
-            type="button"
-            onClick={() => toggleObservation('observacionCopiaTituloPropiedadNicho')}
-            className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <span className="mr-1">
-              {expandedObservations['observacionCopiaTituloPropiedadNicho'] ? "▼" : "▶"}
-            </span>
-            Agregar observación
-          </button>
-          {expandedObservations['observacionCopiaTituloPropiedadNicho'] && (
-            <div className="mt-2 animate-fade-in">
-              <RHFTextarea
-                name="observacionCopiaTituloPropiedadNicho"
-                label=""
-                placeholder="Observaciones sobre el título de propiedad del nicho..."
-                rows={2}
-              />
-            </div>
-          )}
-        </div>
-      </div>
+                  {/* Oficio de Solicitud */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="oficioDeSolicitud"
+                      label="Oficio de Solicitud"
+                      description="Documento oficial de solicitud"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionOficioSolicitud")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations["observacionOficioSolicitud"]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations["observacionOficioSolicitud"] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionOficioSolicitud"
+                            label=""
+                            placeholder="Observaciones sobre el oficio de solicitud..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-      {/* Oficio de Solicitud */}
-      <div className="border rounded-lg p-4 bg-gray-50">
-        <RHFCheckbox
-          name="oficioDeSolicitud"
-          label="Oficio de Solicitud *"
-          description="Documento oficial de solicitud"
-        />
-        <div className="mt-3 ml-6">
-          <button
-            type="button"
-            onClick={() => toggleObservation('observacionOficioSolicitud')}
-            className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <span className="mr-1">
-              {expandedObservations['observacionOficioSolicitud'] ? "▼" : "▶"}
-            </span>
-            Agregar observación
-          </button>
-          {expandedObservations['observacionOficioSolicitud'] && (
-            <div className="mt-2 animate-fade-in">
-              <RHFTextarea
-                name="observacionOficioSolicitud"
-                label=""
-                placeholder="Observaciones sobre el oficio de solicitud..."
-                rows={2}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Autorización de Movilización (Opcional) */}
-      <div className="border rounded-lg p-4 bg-blue-50 md:col-span-2">
-        <RHFCheckbox
-          name="autorizacionDeMovilizacionDelCadaver"
-          label="Autorización de Movilización del Cadáver (Opcional)"
-          description="Este documento es opcional - puede omitirse si no aplica"
-        />
-        <div className="mt-3 ml-6">
-          <button
-            type="button"
-            onClick={() => toggleObservation('observacionAutorizacionMovilizacion')}
-            className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <span className="mr-1">
-              {expandedObservations['observacionAutorizacionMovilizacion'] ? "▼" : "▶"}
-            </span>
-            Agregar observación
-          </button>
-          {expandedObservations['observacionAutorizacionMovilizacion'] && (
-            <div className="mt-2 animate-fade-in">
-              <RHFTextarea
-                name="observacionAutorizacionMovilizacion"
-                label=""
-                placeholder="Observaciones sobre la autorización de movilización..."
-                rows={2}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+                  {/* Autorización de Movilización (Opcional) */}
+                  <div className="border rounded-lg p-4 bg-blue-50 md:col-span-2">
+                    <RHFCheckbox
+                      name="autorizacionDeMovilizacionDelCadaver"
+                      label="Autorización de Movilización del Cadáver"
+                      description="Este documento es opcional - puede omitirse si no aplica"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation(
+                            "observacionAutorizacionMovilizacion"
+                          )
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionAutorizacionMovilizacion"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionAutorizacionMovilizacion"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionAutorizacionMovilizacion"
+                            label=""
+                            placeholder="Observaciones sobre la autorización de movilización..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Paso 5: Autorización */}
             {currentStep === 5 && (

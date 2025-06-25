@@ -18,7 +18,7 @@ export default function RequisitoInhumacionDetailView({ requisitoInhumacionId }:
 
      if (isLoading) {
         return (
-          <ContainerApp title="Detalles del Nicho">
+          <ContainerApp title="Detalles del requisito de inhumación">
             <div className="text-center py-8">Cargando...</div>
           </ContainerApp>
         );

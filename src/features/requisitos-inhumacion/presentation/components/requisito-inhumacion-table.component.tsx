@@ -35,7 +35,6 @@ export function RequisitoInhumacionListTable() {
   const { mutate: downloadRequisitoInhumacionPdf, isPending: isDownloading } =
     useDownloadRequisitoInhumacionPdfMutation();
 
-  console.log("Requisitos de Inhumación:", requisitosInhumacion);
   return (
     <div className="rounded-lg border bg-white p-6 mt-4">
       <h3 className="text-lg font-semibold mb-4">
@@ -45,12 +44,7 @@ export function RequisitoInhumacionListTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              {/* <TableHead>
-                <span className="flex items-center gap-1">
-                  <Building className="w-4 h-4" />
-                  ID
-                </span>
-              </TableHead> */}
+        
               <TableHead>
                 <span className="flex items-center gap-1">
                   <Building className="w-4 h-4" />
@@ -127,7 +121,6 @@ export function RequisitoInhumacionListTable() {
               )}
             {requisitosInhumacion?.map((requisito) => (
               <TableRow key={requisito.idRequsitoInhumacion}>
-                {/* <TableCell>{requisito.idRequsitoInhumacion}</TableCell> */}
                 <TableCell>
                   {requisito.idCementerio?.nombre ?? "Sin cementerio"}
                 </TableCell>
@@ -163,11 +156,6 @@ export function RequisitoInhumacionListTable() {
                     >
                       <Download className="w-4 h-4" />
                     </Button>
-                    {/* <Link href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}/editar`}>
-                      <Button size="icon" variant="ghost">
-                        <Pencil className="w-4 h-4" />
-                      </Button>
-                    </Link> */}
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button size="icon" variant="ghost">

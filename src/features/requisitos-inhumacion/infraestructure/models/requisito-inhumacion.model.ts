@@ -68,4 +68,7 @@ export interface UpdateRequisitoInhumacionModel {
   copiaCedula: boolean;
   pagoTasaInhumacion: boolean;
   copiaTituloPropiedadNicho: boolean;
+  autorizacionDeMovilizacionDelCadaver: boolean;
+  OficioDeSolicitud: boolean;
+  
 }

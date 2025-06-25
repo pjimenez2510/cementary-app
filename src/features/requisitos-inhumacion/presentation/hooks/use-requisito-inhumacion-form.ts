@@ -35,10 +35,7 @@ export function useRequisitoInhumacionForm(requisitoInhumacion?: RequisitoInhuma
     const { mutate: create, isPending: isCreating } = useCreateRequisitoInhumacionMutation();
     const { mutate: update, isPending: isUpdating } = useUpdateRequisitoInhumacionMutation();
 
-    const onSubmit = (data: CreateRequisitoInhumacionDTO) => {
-        console.log("Datos del formulario:", data); // Para debug
-        
-        // Corregir el nombre de la propiedad (tenías un typo)
+    const onSubmit = (data: CreateRequisitoInhumacionDTO) => {        
         if (requisitoInhumacion && requisitoInhumacion.idRequsitoInhumacion) {
             update({
                 idRequisitoInhumacion: requisitoInhumacion.idRequsitoInhumacion,
@@ -46,7 +43,7 @@ export function useRequisitoInhumacionForm(requisitoInhumacion?: RequisitoInhuma
             }, {
                 onSuccess: () => {
                     console.log("Actualización exitosa");
-                    router.push("/requisitos-inhumacion");
+                    router.push(`/requisitos-inhumacion/${requisitoInhumacion.idRequsitoInhumacion}`);
                 },
                 onError: (error) => {
                     console.error("Error en actualización:", error);

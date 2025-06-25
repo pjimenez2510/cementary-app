@@ -57,7 +57,6 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
             name="horaInhumacion"
             label="Hora de Inhumación"
             type="time"
-            // Este campo SÍ se puede editar
           />
         </div>
 

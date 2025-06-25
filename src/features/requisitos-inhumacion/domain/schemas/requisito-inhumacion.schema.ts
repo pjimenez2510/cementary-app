@@ -7,34 +7,22 @@ export const CreateRequisitoInhumacionSchema = z.object({
     idSolicitante: z.string().uuid("El solicitante es requerido y debe ser un UUID válido"),
     observacionSolicitante: z.string().max(500, "Máximo 500 caracteres").optional(),
     
-    copiaCertificadoDefuncion: z.boolean().refine(val => val === true, {
-        message: "Debe marcar la copia del certificado de defunción"
-    }),
+    copiaCertificadoDefuncion: z.boolean(),
     observacionCertificadoDefuncion: z.string().max(500, "Máximo 500 caracteres").optional(),
     
-    informeEstadisticoINEC: z.boolean().refine(val => val === true, {
-        message: "Debe marcar el informe estadístico INEC"
-    }),
+    informeEstadisticoINEC: z.boolean(),
     observacionInformeEstadisticoINEC: z.string().max(500, "Máximo 500 caracteres").optional(),
     
-    copiaCedula: z.boolean().refine(val => val === true, {
-        message: "Debe marcar la copia de cédula"
-    }),
+    copiaCedula: z.boolean(),
     observacionCopiaCedula: z.string().max(500, "Máximo 500 caracteres").optional(),
     
-    pagoTasaInhumacion: z.boolean().refine(val => val === true, {
-        message: "Debe marcar el pago de tasa de inhumación"
-    }),
+    pagoTasaInhumacion: z.boolean(),
     observacionPagoTasaInhumacion: z.string().max(500, "Máximo 500 caracteres").optional(),
     
-    copiaTituloPropiedadNicho: z.boolean().refine(val => val === true, {
-        message: "Debe marcar la copia del título de propiedad"
-    }),
+    copiaTituloPropiedadNicho: z.boolean(),
     observacionCopiaTituloPropiedadNicho: z.string().max(500, "Máximo 500 caracteres").optional(),
     
-    oficioDeSolicitud: z.boolean().refine(val => val === true, {
-        message: "Debe marcar el oficio de solicitud"
-    }),
+    oficioDeSolicitud: z.boolean(),
     observacionOficioSolicitud: z.string().max(500, "Máximo 500 caracteres").optional(),
     
     autorizacionDeMovilizacionDelCadaver: z.boolean(),

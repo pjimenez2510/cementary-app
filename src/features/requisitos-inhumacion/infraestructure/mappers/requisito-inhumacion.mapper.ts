@@ -77,6 +77,8 @@ export class RequisitoInhumacionMapper {
             copiaCedula: entity.copiaCedula,
             pagoTasaInhumacion: entity.pagoTasaInhumacion,
             copiaTituloPropiedadNicho: entity.copiaTituloPropiedadNicho,
+            autorizacionDeMovilizacionDelCadaver: entity.autorizacionDeMovilizacionDelCadaver,
+            OficioDeSolicitud: entity.oficioDeSolicitud,
         }
 
     }
