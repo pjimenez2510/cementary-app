@@ -17,12 +17,15 @@ export function usePersonForm(person?: PersonEntity) {
         apellidos: person.apellidos,
         fecha_nacimiento: person.fecha_nacimiento,
         fecha_defuncion: person.fecha_defuncion ?? undefined,
+        fecha_inumacion: person.fecha_inumacion ?? undefined,
         lugar_defuncion: person.lugar_defuncion ?? undefined,
         causa_defuncion: person.causa_defuncion ?? undefined,
+        fallecido: person.fallecido ,
+        nacionalidad: person.nacionalidad ?? undefined,
         direccion: person.direccion ?? undefined,
         telefono: person.telefono ?? undefined,
-        correo: person.correo,
-        tipo: person.tipo as CreatePersonDTO["tipo"],
+        correo: person.correo ?? undefined,
+
     } : {},
   });
   
