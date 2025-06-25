@@ -43,6 +43,7 @@ export function NichoPropietariosList({ nichoId }: NichoPropietariosListProps) {
             <TableHead><span className="flex items-center gap-1"><FileText className="w-4 h-4" />Tipo Documento</span></TableHead>
             <TableHead><span className="flex items-center gap-1"><FileText className="w-4 h-4" />Número Documento</span></TableHead>
             <TableHead><span className="flex items-center gap-1"><BadgeCheck className="w-4 h-4" />Estado</span></TableHead>
+            <TableHead><span className="flex items-center gap-1">Tipo</span></TableHead>
             <TableHead><span className="flex items-center gap-1">Acciones</span></TableHead>
           </TableRow>
         </TableHeader>
@@ -75,6 +76,7 @@ export function NichoPropietariosList({ nichoId }: NichoPropietariosListProps) {
               <TableCell>{propietario.tipoDocumento}</TableCell>
               <TableCell>{propietario.numeroDocumento}</TableCell>
               <TableCell><EstadoChip estado={propietario.estado} /></TableCell>
+              <TableCell>{propietario.tipo}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
                   <AlertDialog>

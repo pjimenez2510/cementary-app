@@ -9,6 +9,7 @@ export function usePropietarioForm(nichoId: string, onSuccess?: () => void) {
     defaultValues: {
       idNicho: nichoId,
       estado: "Activo",
+      tipo: "Dueño",
     },
   });
 
