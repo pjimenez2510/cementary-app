@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NichoEntity } from "@/features/nichos/domain/entities/nicho.entity";
+import { PersonEntity } from "@/features/person/domain/entities/person.entity";
 
 export interface FallecidoEntity {
   idPersona: string;
@@ -12,7 +13,7 @@ export interface HuecoEntity {
   idNicho?: NichoEntity;
   numHueco: number;
   estado: string;
-  idFallecido: FallecidoEntity | null;
+  idFallecido: PersonEntity | null;
   fechaCreacion: string;
   fechaActualizacion: string | null;
   requisitosInhumacion: any[]; // TODO: Definir interfaz cuando se implemente el módulo de requisitos
