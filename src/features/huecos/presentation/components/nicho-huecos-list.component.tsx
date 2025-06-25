@@ -71,7 +71,7 @@ export function NichoHuecosList({ nichoId }: NichoHuecosListProps) {
               <TableRow key={hueco.idDetalleHueco}>
                 <TableCell>{hueco.numHueco}</TableCell>
                 <TableCell><StatusChip estado={hueco.estado} /></TableCell>
-                <TableCell>{hueco.idFallecido ? `${hueco.idFallecido.nombre} ${hueco.idFallecido.apellido}` : '-'}</TableCell>
+                <TableCell>{hueco.idFallecido ? `${hueco.idFallecido.nombres} ${hueco.idFallecido.apellidos} (${hueco.idFallecido.cedula})` : '-'}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">
                     <AlertDialog>

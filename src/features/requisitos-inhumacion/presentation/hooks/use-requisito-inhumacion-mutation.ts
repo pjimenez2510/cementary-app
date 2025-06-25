@@ -68,3 +68,27 @@ export const useDeleteRequisitoInhumacionMutation = () => {
         },
     })
 }
+
+export const useDownloadRequisitoInhumacionPdfMutation = () => {
+    
+    return useMutation<Blob, Error, string>({
+        mutationFn: async(id) => {
+            const repository = RequisitoInhumacionRepositoryImpl.getInstance();
+            return await repository.downloadPdf(id);
+        },
+        onSuccess: (blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "requisito_inhumacion.pdf");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        },
+        onError: (error) => {
+            toast.error("Error al descargar el PDF del requisito de inhumación", {
+                description: error.message,
+            });
+        },
+    });
+};

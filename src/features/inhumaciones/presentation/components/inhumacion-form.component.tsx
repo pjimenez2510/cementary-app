@@ -13,9 +13,7 @@ import RHFAutocompletePerson from "@/shared/components/form/rhf/rhf-autocomplete
 
 const estadoOptions = [
   { value: "Pendiente", label: "Pendiente" },
-  { value: "Programada", label: "Programada" },
   { value: "Realizada", label: "Realizada" },
-  { value: "Cancelada", label: "Cancelada" },
 ];
 
 interface InhumacionFormProps {
@@ -59,7 +57,6 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
             name="horaInhumacion"
             label="Hora de Inhumación"
             type="time"
-            // Este campo SÍ se puede editar
           />
         </div>
 

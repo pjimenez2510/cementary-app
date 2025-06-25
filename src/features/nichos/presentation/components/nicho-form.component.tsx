@@ -8,12 +8,13 @@ import RHFCementerySelect from "@/shared/components/form/rhf/rhf-cementery-selec
 import { useNichoForm } from "../hooks/use-nicho-form";
 import clsx from "clsx";
 import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
+import { useEffect } from "react";
+import { useWatch } from "react-hook-form";
 
 const tipoOptions = [
-  { value: "Bóveda", label: "Bóveda" },
   { value: "Nicho", label: "Nicho" },
-  { value: "Doble", label: "Doble" },
-  { value: "Especial", label: "Especial" },
+  { value: "Mausoleo", label: "Mausoleo" },
+  { value: "Tumba en tierra", label: "Tumba en tierra" },
 ];
 
 interface NichoFormProps {
@@ -22,6 +23,22 @@ interface NichoFormProps {
 
 export function NichoForm({ nicho }: NichoFormProps) {
   const { methods, onSubmit, isPending } = useNichoForm(nicho);
+
+  const tipo = useWatch({ control: methods.control, name: "tipo" });
+
+  useEffect(() => {
+    if (tipo === "Nicho" || tipo === "Tumba en tierra") {
+      methods.setValue("numHuecos", 1);
+    } else if (tipo === "Mausoleo") {
+      const numHuecos = methods.getValues("numHuecos");
+      if (!numHuecos || numHuecos < 1 || numHuecos > 9) {
+        methods.setValue("numHuecos", 1);
+      }
+    }
+  }, [tipo, methods]);
+
+  const isFixedOne = tipo === "Nicho" || tipo === "Tumba en tierra";
+  const isMausoleo = tipo === "Mausoleo";
 
   return (
     <FormProvider {...methods}>
@@ -32,8 +49,13 @@ export function NichoForm({ nicho }: NichoFormProps) {
           <RHFInput name="fila" label="Fila" />
           <RHFInput name="numero" label="Número" />
           <RHFSelect name="tipo" label="Tipo" options={tipoOptions} placeholder="Selecciona el tipo de nicho" />
-          <RHFCalendar name="fechaConstruccion" label="Fecha de Construcción" />
-          <RHFInput name="numHuecos" label="Número de Huecos" type="number" />
+          <RHFCalendar name="fechaConstruccion" label="Fecha de adquisición" />
+          <RHFInput
+            name="numHuecos"
+            label="Número de Huecos"
+            type="number"
+            disabled={isFixedOne}
+          />
           <RHFInput name="observaciones" label="Observaciones" />
         </div>
         <div className="flex justify-end pt-2">

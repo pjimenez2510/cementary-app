@@ -18,7 +18,7 @@ export default function RequisitoInhumacionDetailView({ requisitoInhumacionId }:
 
      if (isLoading) {
         return (
-          <ContainerApp title="Detalles del Nicho">
+          <ContainerApp title="Detalles del requisito de inhumación">
             <div className="text-center py-8">Cargando...</div>
           </ContainerApp>
         );
@@ -26,8 +26,8 @@ export default function RequisitoInhumacionDetailView({ requisitoInhumacionId }:
 
        if (!requisitoInhumacion) {
           return (
-            <ContainerApp title="Detalles del Nicho">
-              <div className="text-center py-8 text-red-500">No se encontró el nicho.</div>
+            <ContainerApp title="Detalles del Requisito de Inhumación">
+              <div className="text-center py-8 text-red-500">No se encontró el requisito.</div>
             </ContainerApp>
           );
         }

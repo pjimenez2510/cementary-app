@@ -28,38 +28,53 @@ const steps = [
     title: "Información General",
     description: "Datos básicos del cementerio y solicitud",
     color: "bg-blue-500",
-    fields: [
+    requiredFields: [
       "idCementerio",
       "pantoneroACargo",
       "metodoSolicitud",
       "idHuecoNicho",
+      "nombreAdministradorNicho",
     ],
+    optionalFields: [],
   },
   {
     id: 2,
     title: "Personas Involucradas",
     description: "Datos del solicitante y fallecido",
     color: "bg-green-500",
-    fields: ["idSolicitante", "idFallecido", "observacionSolicitante"],
+    requiredFields: ["idSolicitante", "idFallecido"],
+    optionalFields: ["observacionSolicitante"],
   },
   {
     id: 3,
     title: "Programación",
     description: "Fecha y hora de la inhumación",
     color: "bg-purple-500",
-    fields: ["fechaInhumacion", "horaInhumacion"],
+    requiredFields: ["fechaInhumacion", "horaInhumacion"],
+    optionalFields: [],
   },
   {
     id: 4,
     title: "Documentos",
     description: "Requisitos y documentación",
     color: "bg-red-500",
-    fields: [
+    requiredFields: [
+    ],
+    optionalFields: [
       "copiaCertificadoDefuncion",
       "informeEstadisticoINEC",
       "copiaCedula",
       "pagoTasaInhumacion",
       "copiaTituloPropiedadNicho",
+      "oficioDeSolicitud",
+      "observacionCertificadoDefuncion",
+      "observacionInformeEstadisticoINEC",
+      "observacionCopiaCedula",
+      "observacionPagoTasaInhumacion",
+      "observacionCopiaTituloPropiedadNicho",
+      "observacionOficioSolicitud",
+      "autorizacionDeMovilizacionDelCadaver",
+      "observacionAutorizacionMovilizacion",
     ],
   },
   {
@@ -67,9 +82,24 @@ const steps = [
     title: "Autorización",
     description: "Firma y confirmación final",
     color: "bg-orange-500",
-    fields: ["firmaAceptacionSepulcro"],
+    requiredFields: ["firmaAceptacionSepulcro"],
+    optionalFields: [],
   },
 ];
+
+const validationMessages: { [key: string]: string } = {
+  idCementerio: "Por favor selecciona un cementerio",
+  pantoneroACargo: "El nombre del panteonero a cargo es requerido",
+  metodoSolicitud: "Por favor selecciona el método de solicitud",
+  idHuecoNicho: "Por favor selecciona un hueco o nicho",
+  nombreAdministradorNicho:
+    "El nombre del administrador del nicho es requerido",
+  idSolicitante: "Por favor selecciona un solicitante",
+  idFallecido: "Por favor selecciona la persona fallecida",
+  fechaInhumacion: "La fecha de inhumación es requerida",
+  horaInhumacion: "La hora de inhumación es requerida",
+  firmaAceptacionSepulcro: "La firma de aceptación del sepulcro es requerida",
+};
 
 export function RequisitoInhumacionForm({
   requistoInhumacion,
@@ -77,17 +107,39 @@ export function RequisitoInhumacionForm({
   const { methods, onSubmit, isPending } =
     useRequisitoInhumacionForm(requistoInhumacion);
   const [currentStep, setCurrentStep] = useState(1);
+  const [expandedObservations, setExpandedObservations] = useState<{
+    [key: string]: boolean;
+  }>({});
 
-  const validateStep = async (stepFields: string[]) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = await methods.trigger(stepFields as any);
+  const toggleObservation = (field: string) => {
+    setExpandedObservations((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
+
+  const validateStep = async (requiredFields: string[]) => {
+    const result = await methods.trigger(requiredFields as any);
+
+    if (!result) {
+      const errors = methods.formState.errors;
+      requiredFields.forEach((field) => {
+        if ((errors as any)[field] && validationMessages[field]) {
+          methods.setError(field as any, {
+            type: "manual",
+            message: validationMessages[field],
+          });
+        }
+      });
+    }
+
     return result;
   };
 
   const handleNext = async () => {
     const currentStepData = steps.find((step) => step.id === currentStep);
     if (currentStepData) {
-      const isValid = await validateStep(currentStepData.fields);
+      const isValid = await validateStep(currentStepData.requiredFields);
       if (isValid) {
         setCurrentStep((prev) => Math.min(prev + 1, steps.length));
       }
@@ -107,7 +159,7 @@ export function RequisitoInhumacionForm({
     for (let i = 1; i < stepNumber; i++) {
       const stepData = steps.find((step) => step.id === i);
       if (stepData) {
-        const isValid = await validateStep(stepData.fields);
+        const isValid = await validateStep(stepData.requiredFields);
         if (!isValid) {
           return;
         }
@@ -118,9 +170,12 @@ export function RequisitoInhumacionForm({
 
   const currentStepData = steps.find((step) => step.id === currentStep);
 
+  if (!currentStepData) {
+    return <div>Error: Paso no encontrado</div>;
+  }
+
   return (
     <div className="max-w-6xl mx-auto p-6">
-      {/* Header del Wizard */}
       <div className="bg-white shadow-lg rounded-lg mb-6">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-2xl font-bold text-gray-800">
@@ -138,15 +193,15 @@ export function RequisitoInhumacionForm({
                 <button
                   onClick={() => goToStep(step.id)}
                   className={`
-                                        flex items-center justify-center w-10 h-10 rounded-full font-semibold text-sm transition-all duration-200
-                                        ${
-                                          currentStep === step.id
-                                            ? `${step.color} text-white shadow-lg`
-                                            : currentStep > step.id
-                                            ? "bg-gray-400 text-white cursor-pointer hover:bg-gray-500"
-                                            : "bg-gray-200 text-gray-500 cursor-not-allowed"
-                                        }
-                                    `}
+                    flex items-center justify-center w-10 h-10 rounded-full font-semibold text-sm transition-all duration-200
+                    ${
+                      currentStep === step.id
+                        ? `${step.color} text-white shadow-lg`
+                        : currentStep > step.id
+                        ? "bg-gray-400 text-white cursor-pointer hover:bg-gray-500"
+                        : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                    }
+                  `}
                   disabled={currentStep < step.id}
                 >
                   {currentStep > step.id ? "✓" : step.id}
@@ -189,30 +244,30 @@ export function RequisitoInhumacionForm({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <RHFCementerySelect
                     name="idCementerio"
-                    label="Cementerio"
+                    label="Cementerio *"
                     placeholder="Selecciona un cementerio"
                   />
                   <RHFInput
                     name="pantoneroACargo"
-                    label="Panteonero a Cargo"
+                    label="Panteonero a Cargo *"
                     placeholder="Nombre del panteonero a cargo"
                   />
                   <RHFSelect
                     name="metodoSolicitud"
-                    label="Método de Solicitud"
+                    label="Método de Solicitud *"
                     options={metodoSolicitudOptions}
                     placeholder="Selecciona el método de solicitud"
                   />
                   <RHFHuecoNichoSelect
                     name="idHuecoNicho"
-                    label="Hueco/Nicho"
+                    label="Hueco/Nicho *"
                     placeholder="Selecciona un hueco o nicho"
                   />
-                  {/* <RHFInput 
-                                        name="idHuecoNicho" 
-                                        label="ID Hueco/Nicho" 
-                                        placeholder="Identificador del hueco o nicho" 
-                                    /> */}
+                  <RHFInput
+                    name="nombreAdministradorNicho"
+                    label="Administrador del Nicho *"
+                    placeholder="Nombre del administrador del nicho"
+                  />
                 </div>
               </div>
             )}
@@ -229,19 +284,19 @@ export function RequisitoInhumacionForm({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <RHFAutocompletePerson
                     name="idSolicitante"
-                    label="Solicitante"
+                    label="Solicitante *"
                     placeholder="Selecciona un solicitante"
                   />
                   <RHFAutocompletePerson
                     name="idFallecido"
-                    label="Fallecido"
+                    label="Fallecido *"
                     placeholder="Ingrese a la persona fallecida"
                   />
                 </div>
                 <div className="col-span-2">
                   <RHFTextarea
                     name="observacionSolicitante"
-                    label="Observación del Solicitante"
+                    label="Observación del Solicitante (Opcional)"
                     placeholder="Observaciones del solicitante"
                     rows={4}
                   />
@@ -261,11 +316,11 @@ export function RequisitoInhumacionForm({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <RHFDatePicker
                     name="fechaInhumacion"
-                    label="Fecha de Inhumación"
+                    label="Fecha de Inhumación *"
                   />
                   <RHFInput
                     name="horaInhumacion"
-                    label="Hora de Inhumación"
+                    label="Hora de Inhumación *"
                     type="time"
                     placeholder="HH:MM"
                   />
@@ -282,32 +337,274 @@ export function RequisitoInhumacionForm({
                     Documentos y Requisitos
                   </h3>
                 </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <RHFCheckbox
-                    name="copiaCertificadoDefuncion"
-                    label="Copia de Certificado de Defunción"
-                    description="Documento requerido para el proceso"
-                  />
-                  <RHFCheckbox
-                    name="informeEstadisticoINEC"
-                    label="Informe Estadístico INEC"
-                    description="Reporte estadístico del Instituto Nacional"
-                  />
-                  <RHFCheckbox
-                    name="copiaCedula"
-                    label="Copia de Cédula"
-                    description="Identificación del solicitante"
-                  />
-                  <RHFCheckbox
-                    name="pagoTasaInhumacion"
-                    label="Pago de Tasa de Inhumación"
-                    description="Comprobante de pago de tasas"
-                  />
-                  <RHFCheckbox
-                    name="copiaTituloPropiedadNicho"
-                    label="Copia Título de Propiedad del Nicho"
-                    description="Documento de propiedad del espacio"
-                  />
+                  {/* Copia Certificado de Defunción */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="copiaCertificadoDefuncion"
+                      label="Copia de Certificado de Defunción"
+                      description="Documento requerido para el proceso"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionCertificadoDefuncion")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionCertificadoDefuncion"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionCertificadoDefuncion"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionCertificadoDefuncion"
+                            label=""
+                            placeholder="Observaciones sobre el certificado de defunción..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Informe Estadístico INEC */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="informeEstadisticoINEC"
+                      label="Informe Estadístico INEC"
+                      description="Reporte estadístico del Instituto Nacional"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionInformeEstadisticoINEC")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionInformeEstadisticoINEC"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionInformeEstadisticoINEC"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionInformeEstadisticoINEC"
+                            label=""
+                            placeholder="Observaciones sobre el informe estadístico INEC..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Copia de Cédula */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="copiaCedula"
+                      label="Copia de Cédula"
+                      description="Identificación del solicitante"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionCopiaCedula")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations["observacionCopiaCedula"]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations["observacionCopiaCedula"] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionCopiaCedula"
+                            label=""
+                            placeholder="Observaciones sobre la copia de cédula..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Pago Tasa de Inhumación */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="pagoTasaInhumacion"
+                      label="Pago de Tasa de Inhumación"
+                      description="Comprobante de pago de tasas"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionPagoTasaInhumacion")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations["observacionPagoTasaInhumacion"]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionPagoTasaInhumacion"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionPagoTasaInhumacion"
+                            label=""
+                            placeholder="Observaciones sobre el pago de tasa de inhumación..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Copia Título de Propiedad */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="copiaTituloPropiedadNicho"
+                      label="Copia Título de Propiedad del Nicho"
+                      description="Documento de propiedad del espacio"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation(
+                            "observacionCopiaTituloPropiedadNicho"
+                          )
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionCopiaTituloPropiedadNicho"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionCopiaTituloPropiedadNicho"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionCopiaTituloPropiedadNicho"
+                            label=""
+                            placeholder="Observaciones sobre el título de propiedad del nicho..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Oficio de Solicitud */}
+                  <div className="border rounded-lg p-4 bg-gray-50">
+                    <RHFCheckbox
+                      name="oficioDeSolicitud"
+                      label="Oficio de Solicitud"
+                      description="Documento oficial de solicitud"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation("observacionOficioSolicitud")
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations["observacionOficioSolicitud"]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations["observacionOficioSolicitud"] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionOficioSolicitud"
+                            label=""
+                            placeholder="Observaciones sobre el oficio de solicitud..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Autorización de Movilización (Opcional) */}
+                  <div className="border rounded-lg p-4 bg-blue-50 md:col-span-2">
+                    <RHFCheckbox
+                      name="autorizacionDeMovilizacionDelCadaver"
+                      label="Autorización de Movilización del Cadáver"
+                      description="Este documento es opcional - puede omitirse si no aplica"
+                    />
+                    <div className="mt-3 ml-6">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleObservation(
+                            "observacionAutorizacionMovilizacion"
+                          )
+                        }
+                        className="flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <span className="mr-1">
+                          {expandedObservations[
+                            "observacionAutorizacionMovilizacion"
+                          ]
+                            ? "▼"
+                            : "▶"}
+                        </span>
+                        Agregar observación
+                      </button>
+                      {expandedObservations[
+                        "observacionAutorizacionMovilizacion"
+                      ] && (
+                        <div className="mt-2 animate-fade-in">
+                          <RHFTextarea
+                            name="observacionAutorizacionMovilizacion"
+                            label=""
+                            placeholder="Observaciones sobre la autorización de movilización..."
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -323,7 +620,7 @@ export function RequisitoInhumacionForm({
                 </div>
                 <RHFInput
                   name="firmaAceptacionSepulcro"
-                  label="Firma de Aceptación del Sepulcro"
+                  label="Firma de Aceptación del Sepulcro *"
                   placeholder="Firma digitalizada o nombre completo"
                 />
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">

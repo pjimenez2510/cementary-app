@@ -19,12 +19,14 @@ export class RequisitoInhumacionMapper {
             copiaCedula: data.copiaCedula,
             pagoTasaInhumacion: data.pagoTasaInhumacion,
             copiaTituloPropiedadNicho: data.copiaTituloPropiedadNicho,
+            autorizacionDeMovilizacionDelCadaver: data.autorizacionDeMovilizacionDelCadaver,
+            oficioDeSolicitud: data.OficioDeSolicitud,
             idHuecoNicho: HuecoMapper.toEntity( data.id_hueco_nicho),
             firmaAceptacionSepulcro: data.firmaAceptacionSepulcro,
             idFallecido: PersonMapper.toEntity( data.id_fallecido),
             fechaInhumacion: data.fechaInhumacion,
             horaInhumacion: data.horaInhumacion,
-            pdfUrls: data.pdfUrls
+            nombreAdministradorNicho: data.nombreAdministradorNicho,
         };
     }
 
@@ -34,24 +36,49 @@ export class RequisitoInhumacionMapper {
             pantoneroACargo: entity.pantoneroACargo,
             metodoSolictud: entity.metodoSolicitud,
             id_solicitante: entity.idSolicitante,
-            observacionSolicitante: entity.observacionSolicitante,
+            observacionSolicitante: entity.observacionSolicitante || "",
+
             copiaCertificadoDefuncion: entity.copiaCertificadoDefuncion ,
+            observacionCertificadoDefuncion: entity.observacionCertificadoDefuncion || "",
+
             informeEstadisticoINEC: entity.informeEstadisticoINEC ,
+            observacionInformeEstadisticoINEC: entity.observacionInformeEstadisticoINEC,
+
             copiaCedula: entity.copiaCedula ,
+            observacionCopiaCedula: entity.observacionCopiaCedula || "",
+
             pagoTasaInhumacion: entity.pagoTasaInhumacion,
+            observacionPagoTasaInhumacion: entity.observacionPagoTasaInhumacion || "",
+
             copiaTituloPropiedadNicho: entity.copiaTituloPropiedadNicho,
+            observacionCopiaTituloPropiedadNicho: entity.observacionCopiaTituloPropiedadNicho || "",
+
+            autorizacionDeMovilizacionDelCadaver: entity.autorizacionDeMovilizacionDelCadaver,
+            observacionAutorizacionMovilizacion: entity.observacionAutorizacionMovilizacion || "",
+
+            OficioDeSolicitud: entity.oficioDeSolicitud,
+            observacionOficioSolicitud: entity.observacionOficioSolicitud || "",
+            
             id_hueco_nicho: entity.idHuecoNicho,
             firmaAceptacionSepulcro: entity.firmaAceptacionSepulcro,
             id_fallecido: entity.idFallecido,
             fechaInhumacion: entity.fechaInhumacion,
-            horaInhumacion: entity.horaInhumacion
+            horaInhumacion: entity.horaInhumacion,
+            
+            nombreAdministradorNicho: entity.nombreAdministradorNicho,
         }
     }
 
     static toUpdateModel(entity: UpdateRequisitoInhumacionEntity): UpdateRequisitoInhumacionModel{
         return {
             id_requisitoInhumacion: entity.idRequisitoInhumacion,
-            observacionSolicitante: entity.observacionSolicitante 
+            copiaCertificadoDefuncion: entity.copiaCertificadoDefuncion,
+            informeEstadisticoINEC: entity.informeEstadisticoINEC,
+            copiaCedula: entity.copiaCedula,
+            pagoTasaInhumacion: entity.pagoTasaInhumacion,
+            copiaTituloPropiedadNicho: entity.copiaTituloPropiedadNicho,
+            autorizacionDeMovilizacionDelCadaver: entity.autorizacionDeMovilizacionDelCadaver,
+            OficioDeSolicitud: entity.oficioDeSolicitud,
         }
 
     }

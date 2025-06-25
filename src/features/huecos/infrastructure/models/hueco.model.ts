@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NichoModel } from "@/features/nichos/infrastructure/models/nicho.model";
+import { PersonModel } from "@/features/person/infraestrcture/models/person.model";
 
 export interface FallecidoModel {
   id_persona: string;
@@ -12,7 +13,7 @@ export interface HuecoModel {
   id_nicho?: NichoModel;
   num_hueco: number;
   estado: string;
-  id_fallecido: FallecidoModel | null;
+  id_fallecido: PersonModel | null;
   fecha_creacion: string;
   fecha_actualizacion: string | null;
   requisitos_inhumacion: any[]; // TODO: Definir interfaz cuando se implemente el módulo de requisitos

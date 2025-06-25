@@ -4,6 +4,7 @@ import { RequisitoInhumacionModel } from "../models/requisito-inhumacion.model";
 import { RequisitoInhumacionMapper } from "../mappers/requisito-inhumacion.mapper";
 import { API_ROUTES } from "@/core/constants/api-routes";
 import { RequisitoInhumacionRepository } from "../../domain/repositories/requisito-inhumacion.repository";
+import { AxiosResponse } from "axios";
 
 
 export class RequisitoInhumacionRepositoryImpl implements RequisitoInhumacionRepository {
@@ -45,5 +46,14 @@ export class RequisitoInhumacionRepositoryImpl implements RequisitoInhumacionRep
 
     async delete(id: string): Promise<void> {
         await this.httpClient.delete(API_ROUTES.REQUISITOS_INHUMACION.DELETE(id));
+    }
+
+
+    async downloadPdf(id: string): Promise<Blob> {
+        const response = await this.httpClient.get(API_ROUTES.REQUISITOS_INHUMACION.DOWNLOAD_PDF(id), {
+            responseType: "blob",
+        }) as AxiosResponse<Blob>;
+        
+        return response.data;
     }
 }

@@ -5,58 +5,66 @@ import { CreateRequisitoInhumacionDTO, CreateRequisitoInhumacionSchema } from ".
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateRequisitoInhumacionMutation, useUpdateRequisitoInhumacionMutation } from "./use-requisito-inhumacion-mutation";
 
-
 export function useRequisitoInhumacionForm(requisitoInhumacion?: RequisitoInhumacionEntity) {
     const router = useRouter();
     const methods = useForm<CreateRequisitoInhumacionDTO>({
-    resolver: zodResolver(CreateRequisitoInhumacionSchema),
-    defaultValues: requisitoInhumacion ? {
-        idCementerio: requisitoInhumacion.idCementerio?.idCementerio,
-        pantoneroACargo: requisitoInhumacion.pantoneroACargo,
-        metodoSolicitud: requisitoInhumacion.metodoSolicitud,
-        idSolicitante: requisitoInhumacion.idSolicitante?.id_persona,
-        observacionSolicitante: requisitoInhumacion.observacionSolicitante ,
-        copiaCertificadoDefuncion: requisitoInhumacion.copiaCertificadoDefuncion ,
-        informeEstadisticoINEC: requisitoInhumacion.informeEstadisticoINEC ,
-        copiaCedula: requisitoInhumacion.copiaCedula,
-        pagoTasaInhumacion: requisitoInhumacion.pagoTasaInhumacion ,
-        copiaTituloPropiedadNicho: requisitoInhumacion.copiaTituloPropiedadNicho,
-        idHuecoNicho: requisitoInhumacion.idHuecoNicho?.idDetalleHueco,
-        firmaAceptacionSepulcro: requisitoInhumacion.firmaAceptacionSepulcro,
-        idFallecido: requisitoInhumacion.idFallecido?.id_persona,
-        fechaInhumacion: requisitoInhumacion.fechaInhumacion,
-        horaInhumacion: requisitoInhumacion.horaInhumacion
-    } : {},
-  });
+        resolver: zodResolver(CreateRequisitoInhumacionSchema),
+        defaultValues: requisitoInhumacion ? {
+            idCementerio: requisitoInhumacion.idCementerio?.idCementerio,
+            pantoneroACargo: requisitoInhumacion.pantoneroACargo,
+            metodoSolicitud: requisitoInhumacion.metodoSolicitud,
+            idSolicitante: requisitoInhumacion.idSolicitante?.id_persona,
+            observacionSolicitante: requisitoInhumacion.observacionSolicitante || "",
+            copiaCertificadoDefuncion: requisitoInhumacion.copiaCertificadoDefuncion || false,
+            informeEstadisticoINEC: requisitoInhumacion.informeEstadisticoINEC || false,
+            copiaCedula: requisitoInhumacion.copiaCedula || false,
+            pagoTasaInhumacion: requisitoInhumacion.pagoTasaInhumacion || false,
+            copiaTituloPropiedadNicho: requisitoInhumacion.copiaTituloPropiedadNicho || false,
+            oficioDeSolicitud: requisitoInhumacion.oficioDeSolicitud || false,
+            autorizacionDeMovilizacionDelCadaver: requisitoInhumacion.autorizacionDeMovilizacionDelCadaver || false,
+            idHuecoNicho: requisitoInhumacion.idHuecoNicho?.idDetalleHueco,
+            firmaAceptacionSepulcro: requisitoInhumacion.firmaAceptacionSepulcro,
+            idFallecido: requisitoInhumacion.idFallecido?.id_persona,
+            fechaInhumacion: requisitoInhumacion.fechaInhumacion,
+            horaInhumacion: requisitoInhumacion.horaInhumacion,
+            nombreAdministradorNicho: requisitoInhumacion.nombreAdministradorNicho,
+        } : {   
+        },
+    });
 
-  const { mutate: create, isPending: isCreating } = useCreateRequisitoInhumacionMutation();
-  const { mutate: update, isPending: isUpdating } = useUpdateRequisitoInhumacionMutation();
+    const { mutate: create, isPending: isCreating } = useCreateRequisitoInhumacionMutation();
+    const { mutate: update, isPending: isUpdating } = useUpdateRequisitoInhumacionMutation();
 
-  const  onSubmit = (data: CreateRequisitoInhumacionDTO) => {
-
-    if(requisitoInhumacion && requisitoInhumacion.idRequsitoInhumacion) {
-        update({
-            idRequisitoInhumacion: requisitoInhumacion.idRequsitoInhumacion,
-            ...data,
-        }, {
-            onSuccess: () => {
-                router.push("/requisitos-inhumacion");
-            },
-        });
-    } else {
-        create(data, {
-            onSuccess: () => {
-                router.push("/requisitos-inhumacion");
-            },
-        });
-    }
-  };
+    const onSubmit = (data: CreateRequisitoInhumacionDTO) => {        
+        if (requisitoInhumacion && requisitoInhumacion.idRequsitoInhumacion) {
+            update({
+                idRequisitoInhumacion: requisitoInhumacion.idRequsitoInhumacion,
+                ...data,
+            }, {
+                onSuccess: () => {
+                    console.log("Actualización exitosa");
+                    router.push(`/requisitos-inhumacion/${requisitoInhumacion.idRequsitoInhumacion}`);
+                },
+                onError: (error) => {
+                    console.error("Error en actualización:", error);
+                },
+            });
+        } else {
+            create(data, {
+                onSuccess: () => {
+                    console.log("Creación exitosa");
+                    router.push("/requisitos-inhumacion");
+                },
+                onError: (error) => {
+                    console.error("Error en creación:", error);
+                },
+            });
+        }
+    };
 
     return {
         methods,
         onSubmit,
         isPending: isCreating || isUpdating,
     };
-
 }
-

@@ -1,5 +1,13 @@
-import { CreatePersonEntity, PersonEntity, UpdatePersonEntity } from "../../domain/entities/person.entity";
-import { CreatePersonModel, PersonModel, UpdatePersonModel } from "../models/person.model";
+import {
+	CreatePersonEntity,
+	PersonEntity,
+	UpdatePersonEntity,
+} from "../../domain/entities/person.entity";
+import {
+	CreatePersonModel,
+	PersonModel,
+	UpdatePersonModel,
+} from "../models/person.model";
 
 export class PersonMapper{
     static toEntity(model: PersonModel): PersonEntity {
@@ -55,3 +63,4 @@ export class PersonMapper{
         };
     }
 }
+

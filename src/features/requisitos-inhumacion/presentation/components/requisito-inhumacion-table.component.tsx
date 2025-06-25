@@ -1,6 +1,6 @@
-import { AlertCircle, Hash, User, MapPin, Calendar, UserCheck, Shield, Pencil, Trash2, Building, Clock, FileText, Eye } from "lucide-react";
+import { AlertCircle, Hash, User, MapPin, Calendar, UserCheck, Shield, Pencil, Trash2, Building, Clock, FileText, Eye, Download } from "lucide-react";
 import Link from "next/link";
-import { useDeleteRequisitoInhumacionMutation } from "../hooks/use-requisito-inhumacion-mutation";
+import { useDeleteRequisitoInhumacionMutation, useDownloadRequisitoInhumacionPdfMutation } from "../hooks/use-requisito-inhumacion-mutation";
 import { useFindAllRequisitosInhumacionQuery } from "../hooks/use-requisito-inhumacion-queries";
 import {
   Table,
@@ -32,8 +32,9 @@ export function RequisitoInhumacionListTable() {
   } = useFindAllRequisitosInhumacionQuery();
   const { mutate: deleteRequisitoInhumacion, isPending } =
     useDeleteRequisitoInhumacionMutation();
+  const { mutate: downloadRequisitoInhumacionPdf, isPending: isDownloading } =
+    useDownloadRequisitoInhumacionPdfMutation();
 
-  console.log("Requisitos de Inhumación:", requisitosInhumacion);
   return (
     <div className="rounded-lg border bg-white p-6 mt-4">
       <h3 className="text-lg font-semibold mb-4">
@@ -43,12 +44,7 @@ export function RequisitoInhumacionListTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              {/* <TableHead>
-                <span className="flex items-center gap-1">
-                  <Building className="w-4 h-4" />
-                  ID
-                </span>
-              </TableHead> */}
+        
               <TableHead>
                 <span className="flex items-center gap-1">
                   <Building className="w-4 h-4" />
@@ -125,7 +121,6 @@ export function RequisitoInhumacionListTable() {
               )}
             {requisitosInhumacion?.map((requisito) => (
               <TableRow key={requisito.idRequsitoInhumacion}>
-                {/* <TableCell>{requisito.idRequsitoInhumacion}</TableCell> */}
                 <TableCell>
                   {requisito.idCementerio?.nombre ?? "Sin cementerio"}
                 </TableCell>
@@ -150,11 +145,17 @@ export function RequisitoInhumacionListTable() {
                         <Eye className="w-4 h-4" />
                       </Button>
                     </Link>
-                    {/* <Link href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}/editar`}>
-                      <Button size="icon" variant="ghost">
-                        <Pencil className="w-4 h-4" />
-                      </Button>
-                    </Link> */}
+                    <Button 
+                      size="icon" 
+                      variant="ghost"
+                      onClick={() => downloadRequisitoInhumacionPdf(requisito.idRequsitoInhumacion)}
+                      disabled={isDownloading}
+                      className={clsx(
+                        isDownloading && "opacity-50 cursor-not-allowed"
+                      )}
+                    >
+                      <Download className="w-4 h-4" />
+                    </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button size="icon" variant="ghost">

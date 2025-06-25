@@ -20,6 +20,7 @@ export interface PropietarioNichoEntity {
   observaciones: string;
   fechaCreacion: string;
   fechaActualizacion: string | null;
+  tipo: 'Dueño' | 'Heredero';
 }
 
 export interface CreatePropietarioNichoEntity {
@@ -30,6 +31,7 @@ export interface CreatePropietarioNichoEntity {
   numeroDocumento: string;
   estado: EstadoPropietario;
   observaciones: string;
+  tipo: 'Dueño' | 'Heredero';
 }
 
 export interface UpdatePropietarioNichoEntity {
@@ -38,4 +40,5 @@ export interface UpdatePropietarioNichoEntity {
   observaciones?: string;
   tipoDocumento?: TipoDocumento;
   numeroDocumento?: string;
+  tipo?: 'Dueño' | 'Heredero';
 }
