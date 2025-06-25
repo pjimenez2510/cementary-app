@@ -13,9 +13,7 @@ import {
   Columns4,
   House,
   IdCard,
-  Mail,
   Pencil,
-  Phone,
   Trash2,
   User,
 } from "lucide-react";
