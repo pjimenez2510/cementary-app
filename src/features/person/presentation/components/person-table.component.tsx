@@ -66,19 +66,7 @@ export function PersonListTable() {
               <TableHead>
                 <span className="flex items-center gap-1">
                   <House className="w-4 h-4" />
-                  Dirección
-                </span>
-              </TableHead>
-              <TableHead>
-                <span className="flex items-center gap-1">
-                  <Phone className="w-4 h-4" />
-                  Teléfono
-                </span>
-              </TableHead>
-              <TableHead>
-                <span className="flex items-center gap-1">
-                  <Mail className="w-4 h-4" />
-                  Correo Electrónico
+                  Fecha de Nacimiento
                 </span>
               </TableHead>
               <TableHead>
@@ -116,14 +104,24 @@ export function PersonListTable() {
                   <TableCell>{person.cedula}</TableCell>
                   <TableCell>{person.nombres}</TableCell>
                   <TableCell>{person.apellidos}</TableCell>
-                  <TableCell>{person.direccion ?? "N/A"}</TableCell>
-                  <TableCell>{person.telefono ?? "N/A"}</TableCell>
-                  <TableCell>{person.correo}</TableCell>
                   <TableCell>
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
-                      {person.tipo}
+                    {new Date(person.fecha_nacimiento).toLocaleDateString(
+                      "es-ES"
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <span
+                      className={clsx(
+                        "px-3 py-1 rounded-full text-xs font-semibold",
+                        person.fallecido
+                          ? "bg-red-100 text-red-700"
+                          : "bg-green-100 text-green-700"
+                      )}
+                    >
+                      {person.fallecido ? "Fallecido" : "Propietario"}
                     </span>
                   </TableCell>
+
                   <TableCell>
                     <div className="flex gap-2">
                       <Link href={`/persons/${person.id_persona}/editar`}>
