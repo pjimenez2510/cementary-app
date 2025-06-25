@@ -13,9 +13,7 @@ import RHFAutocompletePerson from "@/shared/components/form/rhf/rhf-autocomplete
 
 const estadoOptions = [
   { value: "Pendiente", label: "Pendiente" },
-  { value: "Programada", label: "Programada" },
   { value: "Realizada", label: "Realizada" },
-  { value: "Cancelada", label: "Cancelada" },
 ];
 
 interface InhumacionFormProps {

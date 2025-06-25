@@ -442,41 +442,43 @@ export function RequisitoInhumacionCard({
                     {formatBoolean(requisitoInhumacion.copiaTituloPropiedadNicho)}
                   </span>
                 </div>
+
+                <div className="flex items-center justify-between p-3 rounded border border-gray-300 bg-gray-50">
+                  <div className="flex items-center space-x-3">
+                    <span className={`w-4 h-4 rounded-full ${
+                      requisitoInhumacion.autorizacionDeMovilizacionDelCadaver ? 'bg-green-500' : 'bg-red-500'
+                    }`}></span>
+                    <span className="text-black font-medium">Autorizacion de Movilizacion</span>
+                  </div>
+                  <span className={`px-3 py-1 rounded text-sm font-medium ${
+                    requisitoInhumacion.autorizacionDeMovilizacionDelCadaver
+                      ? 'bg-green-100 text-green-800 border border-green-300' 
+                      : 'bg-red-100 text-red-800 border border-red-300'
+                  }`}>
+                    {formatBoolean(requisitoInhumacion.autorizacionDeMovilizacionDelCadaver)}
+                  </span>
+                </div>
+
+
+                <div className="flex items-center justify-between p-3 rounded border border-gray-300 bg-gray-50">
+                  <div className="flex items-center space-x-3">
+                    <span className={`w-4 h-4 rounded-full ${
+                      requisitoInhumacion.oficioDeSolicitud ? 'bg-green-500' : 'bg-red-500'
+                    }`}></span>
+                    <span className="text-black font-medium">Oficio de Solicitud</span>
+                  </div>
+                  <span className={`px-3 py-1 rounded text-sm font-medium ${
+                    requisitoInhumacion.oficioDeSolicitud 
+                      ? 'bg-green-100 text-green-800 border border-green-300' 
+                      : 'bg-red-100 text-red-800 border border-red-300'
+                  }`}>
+                    {formatBoolean(requisitoInhumacion.oficioDeSolicitud)}
+                  </span>
+                </div>
               </div>
             </div>
           )}
         </div>
-
-        {/* Documentos Adjuntos */}
-        {requisitoInhumacion.pdfUrls && requisitoInhumacion.pdfUrls.length > 0 && (
-          <div>
-            <SectionHeader 
-              title="Documentos Adjuntos" 
-              sectionKey="pdfs"
-              bgColor="bg-gray-50"
-              textColor="text-black"
-              borderColor="border-gray-500"
-            />
-            {expandedSections.pdfs && (
-              <div className="p-4 bg-white border border-gray-200 border-t-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {requisitoInhumacion.pdfUrls.map((url, index) => (
-                    <a
-                      key={index}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center px-4 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors"
-                    >
-                      <span className="mr-2">📄</span>
-                      Documento {index + 1}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
       </CardContent>
     </Card>
   );

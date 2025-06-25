@@ -70,5 +70,7 @@ export const API_ROUTES = {
     CREATE: AR_KEYS.REQUISITOS_INHUMACION,
     UPDATE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
+    DOWNLOAD_PDF: (id: string) =>
+      `${AR_KEYS.REQUISITOS_INHUMACION}/${id}/pdf`,
   },
 };
