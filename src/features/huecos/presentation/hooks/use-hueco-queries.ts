@@ -26,4 +26,11 @@ export const useFindHuecoByIdQuery = (id: string) => {
     queryFn: () => HuecoRepositoryImpl.getInstance().findById(id),
     enabled: !!id,
   });
+};
+
+export const useFindHuecosDisponiblesQuery = () => {
+  return useQuery<HuecoEntity[]>({
+    queryKey: [...HUECO_QUERY_KEYS.all(), "disponibles"],
+    queryFn: () => HuecoRepositoryImpl.getInstance().findAllDisponibles(),
+  });
 }; 

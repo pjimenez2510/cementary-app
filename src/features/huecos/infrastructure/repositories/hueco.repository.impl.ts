@@ -31,6 +31,11 @@ export class HuecoRepositoryImpl implements HuecoRepository {
     return data.data.map(HuecoMapper.toEntity);
   }
 
+  async findAllDisponibles(): Promise<HuecoEntity[]> {
+    const { data } = await this.httpClient.get<HuecoModel[]>(API_ROUTES.HUECOS.GET_DISPONIBLES);
+    return data.data.map(HuecoMapper.toEntity);
+  }
+
   async create(hueco: CreateHuecoEntity): Promise<HuecoEntity> {
     const model = HuecoMapper.toModel(hueco);
     const { data } = await this.httpClient.post<HuecoModel>(API_ROUTES.HUECOS.CREATE, model);

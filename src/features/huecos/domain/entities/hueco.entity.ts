@@ -21,8 +21,8 @@ export interface HuecoEntity {
 
 export interface CreateHuecoEntity {
   idNicho: string;
-  numeroHueco: number;
-  estado: string;
+  numeroHueco?: number;
+  estado?: string;
   idFallecido?: string;
 }
 

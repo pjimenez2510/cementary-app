@@ -41,6 +41,7 @@ export const API_ROUTES = {
     LIST: AR_KEYS.HUECOS,
     GET_BY_ID: (id: string) => `${AR_KEYS.HUECOS}/${id}`,
     GET_BY_NICHO: (idNicho: string) => `${AR_KEYS.HUECOS}/por-nicho/${idNicho}`,
+    GET_DISPONIBLES: `${AR_KEYS.HUECOS}/disponibles`,
     CREATE: AR_KEYS.HUECOS,
     UPDATE: (id: string) => `${AR_KEYS.HUECOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.HUECOS}/${id}`,
