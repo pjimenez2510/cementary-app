@@ -63,11 +63,16 @@ class AxiosClient {
       },
       (error) => {
         const apiError = ApiErrorHandler.handle(error);
-        toast.error(apiError.message, {
-          description: Array.isArray(apiError.errors)
-            ? apiError.errors.join("\n")
-            : apiError.errors || "",
-        });
+        
+        // Only show toast in client-side environments
+        if (typeof window !== 'undefined') {
+          toast.error(apiError.message, {
+            description: Array.isArray(apiError.errors)
+              ? apiError.errors.join("\n")
+              : apiError.errors || "",
+          });
+        }
+        
         return Promise.reject(apiError);
       }
     );
