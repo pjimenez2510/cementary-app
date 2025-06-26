@@ -8,35 +8,51 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
-import { AlertCircle, FileText, User2, BadgeCheck, Trash2 } from "lucide-react";
+import { AlertCircle, FileText, User2, BadgeCheck, History } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
-import { useDeletePropietarioNichoMutation } from "../hooks/use-propietario-nicho-mutations";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
-import clsx from "clsx";
+// import { useDeletePropietarioNichoMutation } from "../hooks/use-propietario-nicho-mutations";
+// import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
+import { HistorialPropietariosModal } from "./historial-propietarios-modal";
+import { useState } from "react";
+// import clsx from "clsx";
 
-function EstadoChip({ estado }: { estado: string }) {
-  let color = "bg-gray-200 text-gray-700";
-  if (estado.toLowerCase() === "activo") color = "bg-green-100 text-green-700";
-  if (estado.toLowerCase() === "inactivo") color = "bg-gray-300 text-gray-500";
-  if (estado.toLowerCase() === "en proceso") color = "bg-yellow-100 text-yellow-700";
-  if (estado.toLowerCase() === "vendido") color = "bg-blue-100 text-blue-700";
-  if (estado.toLowerCase() === "heredado") color = "bg-purple-100 text-purple-700";
+function ActivoChip({ activo }: { activo: boolean }) {
+  const color = activo 
+    ? "bg-green-100 text-green-700" 
+    : "bg-gray-300 text-gray-500";
+  const texto = activo ? "Activo" : "Inactivo";
   return (
-    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${color}`}>{estado}</span>
+    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${color}`}>{texto}</span>
   );
 }
 
 interface NichoPropietariosListProps {
   nichoId: string;
+  nichoInfo?: string;
 }
 
-export function NichoPropietariosList({ nichoId }: NichoPropietariosListProps) {
+export function NichoPropietariosList({ nichoId, nichoInfo }: NichoPropietariosListProps) {
   const { data: propietarios, isLoading, error } = useFindPropietariosByNichoQuery(nichoId);
-  const { mutate: deletePropietario, isPending } = useDeletePropietarioNichoMutation();
+  // const { mutate: deletePropietario, isPending } = useDeletePropietarioNichoMutation();
+  const [isHistorialOpen, setIsHistorialOpen] = useState(false);
 
   return (
-    <div className="overflow-x-auto">
-      <Table>
+    <>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Propietarios Activos</h3>
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={() => setIsHistorialOpen(true)}
+          className="flex items-center gap-2"
+        >
+          <History className="w-4 h-4" />
+          Ver Historial
+        </Button>
+      </div>
+      
+      <div className="overflow-x-auto">
+        <Table>
         <TableHeader>
           <TableRow>
             <TableHead><span className="flex items-center gap-1"><User2 className="w-4 h-4" />Propietario</span></TableHead>
@@ -44,7 +60,7 @@ export function NichoPropietariosList({ nichoId }: NichoPropietariosListProps) {
             <TableHead><span className="flex items-center gap-1"><FileText className="w-4 h-4" />Número Documento</span></TableHead>
             <TableHead><span className="flex items-center gap-1"><BadgeCheck className="w-4 h-4" />Estado</span></TableHead>
             <TableHead><span className="flex items-center gap-1">Tipo</span></TableHead>
-            <TableHead><span className="flex items-center gap-1">Acciones</span></TableHead>
+            {/* <TableHead><span className="flex items-center gap-1">Acciones</span></TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -75,9 +91,9 @@ export function NichoPropietariosList({ nichoId }: NichoPropietariosListProps) {
               <TableCell>{`${propietario.idPersona?.nombres} ${propietario.idPersona?.apellidos}`}</TableCell>
               <TableCell>{propietario.tipoDocumento}</TableCell>
               <TableCell>{propietario.numeroDocumento}</TableCell>
-              <TableCell><EstadoChip estado={propietario.estado} /></TableCell>
+              <TableCell><ActivoChip activo={propietario.activo} /></TableCell>
               <TableCell>{propietario.tipo}</TableCell>
-              <TableCell>
+              {/* <TableCell>
                 <div className="flex gap-2">
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
@@ -108,11 +124,19 @@ export function NichoPropietariosList({ nichoId }: NichoPropietariosListProps) {
                     </AlertDialogContent>
                   </AlertDialog>
                 </div>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </div>
+    
+    <HistorialPropietariosModal
+      isOpen={isHistorialOpen}
+      onClose={() => setIsHistorialOpen(false)}
+      nichoId={nichoId}
+      nichoInfo={nichoInfo}
+    />
+  </>
   );
 } 

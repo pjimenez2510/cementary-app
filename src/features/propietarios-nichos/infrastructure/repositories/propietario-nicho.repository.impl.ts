@@ -36,6 +36,16 @@ export class PropietarioNichoRepositoryImpl implements PropietarioNichoRepositor
     return data.data.map(PropietarioNichoMapper.toEntity);
   }
 
+  async findHistorialByNicho(idNicho: string): Promise<PropietarioNichoEntity[]> {
+    const { data } = await this.httpClient.get<PropietarioNichoModel[]>(API_ROUTES.PROPIETARIOS_NICHOS.GET_HISTORIAL_BY_NICHO(idNicho));
+    return data.data.map(PropietarioNichoMapper.toEntity);
+  }
+
+  async findByPersonaCedula(cedula: string): Promise<PropietarioNichoEntity[]> {
+    const { data } = await this.httpClient.get<PropietarioNichoModel[]>(API_ROUTES.PROPIETARIOS_NICHOS.GET_BY_PERSONA_CEDULA(cedula));
+    return data.data.map(PropietarioNichoMapper.toEntity);
+  }
+
   async create(propietario: CreatePropietarioNichoEntity): Promise<PropietarioNichoEntity> {
     const model = PropietarioNichoMapper.toModel(propietario);
     const { data } = await this.httpClient.post<PropietarioNichoModel>(API_ROUTES.PROPIETARIOS_NICHOS.CREATE, model);

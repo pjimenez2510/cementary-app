@@ -8,7 +8,6 @@ export function usePropietarioForm(nichoId: string, onSuccess?: () => void) {
     resolver: zodResolver(CreatePropietarioNichoSchema),
     defaultValues: {
       idNicho: nichoId,
-      estado: "Activo",
       tipo: "Dueño",
     },
   });

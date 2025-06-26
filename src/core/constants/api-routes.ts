@@ -55,6 +55,10 @@ export const API_ROUTES = {
     CREATE: AR_KEYS.PROPIETARIOS_NICHOS,
     UPDATE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
+    GET_HISTORIAL_BY_NICHO: (idNicho: string) =>
+      `${AR_KEYS.PROPIETARIOS_NICHOS}/historial/${idNicho}`,
+    GET_BY_PERSONA_CEDULA: (cedula: string) =>
+      `${AR_KEYS.PROPIETARIOS_NICHOS}/por-persona/${cedula}`,
   },
   INHUMACIONES: {
     LIST: AR_KEYS.INHUMACIONES,

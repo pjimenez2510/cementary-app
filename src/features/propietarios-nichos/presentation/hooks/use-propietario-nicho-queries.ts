@@ -17,4 +17,20 @@ export const useFindPropietarioNichoByIdQuery = (id: string) => {
     queryFn: () => PropietarioNichoRepositoryImpl.getInstance().findById(id),
     enabled: !!id,
   });
+};
+
+export const useFindHistorialPropietariosByNichoQuery = (nichoId: string) => {
+  return useQuery<PropietarioNichoEntity[]>({
+    queryKey: [...PROPIETARIO_NICHO_QUERY_KEYS.byNicho(nichoId), "historial"],
+    queryFn: () => PropietarioNichoRepositoryImpl.getInstance().findHistorialByNicho(nichoId),
+    enabled: !!nichoId,
+  });
+};
+
+export const useFindPropietariosByPersonaCedulaQuery = (cedula: string) => {
+  return useQuery<PropietarioNichoEntity[]>({
+    queryKey: [...PROPIETARIO_NICHO_QUERY_KEYS.byPersona(cedula), "cedula"],
+    queryFn: () => PropietarioNichoRepositoryImpl.getInstance().findByPersonaCedula(cedula),
+    enabled: !!cedula && cedula.length >= 10,
+  });
 }; 
