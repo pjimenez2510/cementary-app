@@ -23,7 +23,6 @@ interface InhumacionFormProps {
 export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
   const { methods, onSubmit, isPending } = useInhumacionForm(inhumacion);
   
-  // Determinar si es modo edición (ya existe una inhumación)
   const isEditMode = !!inhumacion;
 
   return (

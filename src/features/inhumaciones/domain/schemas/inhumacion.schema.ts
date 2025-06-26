@@ -7,7 +7,7 @@ export const CreateInhumacionSchema = z.object({
     solicitante: z.string().min(1, "El solicitante es requerido").max(100, "Máximo 100 caracteres"),
     responsableInhumacion: z.string().min(1, "El responsable de inhumación es requerido").max(100, "Máximo 100 caracteres"),
     observaciones: z.string().max(500, "Máximo 500 caracteres").optional(),
-    estado: z.enum(["Programada", "Realizada", "Cancelada", "Pendiente" ], { message: "Estado inválido" }),
+    estado: z.enum(["Realizada", "Pendiente" ], { message: "Estado inválido" }),
     codigoInhumacion: z.string().min(1, "El código de inhumación es requerido").max(50, "Máximo 50 caracteres"),
 
 });

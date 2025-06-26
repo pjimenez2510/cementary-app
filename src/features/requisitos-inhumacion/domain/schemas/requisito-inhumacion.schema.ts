@@ -8,28 +8,27 @@ export const CreateRequisitoInhumacionSchema = z.object({
     observacionSolicitante: z.string().max(500, "Máximo 500 caracteres").optional(),
     
     copiaCertificadoDefuncion: z.boolean(),
-    observacionCertificadoDefuncion: z.string().max(500, "Máximo 500 caracteres").optional(),
+    observacionCertificadoDefuncion: z.string().optional(),
     
     informeEstadisticoINEC: z.boolean(),
-    observacionInformeEstadisticoINEC: z.string().max(500, "Máximo 500 caracteres").optional(),
+    observacionInformeEstadisticoINEC: z.string().optional(),
     
     copiaCedula: z.boolean(),
-    observacionCopiaCedula: z.string().max(500, "Máximo 500 caracteres").optional(),
+    observacionCopiaCedula: z.string().optional(),
     
     pagoTasaInhumacion: z.boolean(),
-    observacionPagoTasaInhumacion: z.string().max(500, "Máximo 500 caracteres").optional(),
+    observacionPagoTasaInhumacion: z.string().optional(),
     
     copiaTituloPropiedadNicho: z.boolean(),
-    observacionCopiaTituloPropiedadNicho: z.string().max(500, "Máximo 500 caracteres").optional(),
+    observacionCopiaTituloPropiedadNicho: z.string().optional(),
     
     oficioDeSolicitud: z.boolean(),
-    observacionOficioSolicitud: z.string().max(500, "Máximo 500 caracteres").optional(),
+    observacionOficioSolicitud: z.string().optional(),
     
     autorizacionDeMovilizacionDelCadaver: z.boolean(),
-    observacionAutorizacionMovilizacion: z.string().max(500, "Máximo 500 caracteres").optional(),
+    observacionAutorizacionMovilizacion: z.string().optional(),
     
     idHuecoNicho: z.string().uuid("El hueco de nicho es requerido y debe ser un UUID válido"),
-    firmaAceptacionSepulcro: z.string().min(1, "La firma de aceptación del sepulcro es requerida").max(100, "Máximo 100 caracteres"),
     idFallecido: z.string().uuid("El fallecido es requerido y debe ser un UUID válido"),
     fechaInhumacion: z.string().min(1, "La fecha de inhumación es requerida"),
     horaInhumacion: z.string().min(1, "La hora de inhumación es requerida"),

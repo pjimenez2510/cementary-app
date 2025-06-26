@@ -12,6 +12,7 @@ import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";
 import RHFDatePicker from "@/shared/components/form/rhf/rhf-calendar";
 import RHFCheckbox from "@/shared/components/form/rhf/rhf-chechbox";
 import RHFHuecoNichoSelect from "@/shared/components/form/rhf/rhf-hueco-nicho-select";
+import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
 
 interface RequisitoInhumacionFormProps {
   requistoInhumacion?: RequisitoInhumacionEntity;
@@ -58,8 +59,7 @@ const steps = [
     title: "Documentos",
     description: "Requisitos y documentación",
     color: "bg-red-500",
-    requiredFields: [
-    ],
+    requiredFields: [],
     optionalFields: [
       "copiaCertificadoDefuncion",
       "informeEstadisticoINEC",
@@ -77,14 +77,6 @@ const steps = [
       "observacionAutorizacionMovilizacion",
     ],
   },
-  {
-    id: 5,
-    title: "Autorización",
-    description: "Firma y confirmación final",
-    color: "bg-orange-500",
-    requiredFields: ["firmaAceptacionSepulcro"],
-    optionalFields: [],
-  },
 ];
 
 const validationMessages: { [key: string]: string } = {
@@ -98,7 +90,6 @@ const validationMessages: { [key: string]: string } = {
   idFallecido: "Por favor selecciona la persona fallecida",
   fechaInhumacion: "La fecha de inhumación es requerida",
   horaInhumacion: "La hora de inhumación es requerida",
-  firmaAceptacionSepulcro: "La firma de aceptación del sepulcro es requerida",
 };
 
 export function RequisitoInhumacionForm({
@@ -168,6 +159,24 @@ export function RequisitoInhumacionForm({
     setCurrentStep(stepNumber);
   };
 
+  const handleFormSubmit = async () => {
+    // Validar todos los pasos antes de enviar
+    for (let i = 1; i <= steps.length; i++) {
+      const stepData = steps.find((step) => step.id === i);
+      if (stepData) {
+        const isValid = await validateStep(stepData.requiredFields);
+        if (!isValid) {
+          setCurrentStep(i);
+          return;
+        }
+      }
+    }
+    
+    // Si todas las validaciones pasan, obtener los datos y enviar
+    const formData = methods.getValues();
+    onSubmit(formData);
+  };
+
   const currentStepData = steps.find((step) => step.id === currentStep);
 
   if (!currentStepData) {
@@ -232,7 +241,7 @@ export function RequisitoInhumacionForm({
 
       <div className="bg-white shadow-lg rounded-lg">
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)} className="p-6">
+          <form onSubmit={(e) => e.preventDefault()} className="p-6">
             {currentStep === 1 && (
               <div className="space-y-6">
                 <div className="flex items-center mb-6">
@@ -314,10 +323,17 @@ export function RequisitoInhumacionForm({
                   </h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <RHFDatePicker
+                 
+                  {/* <RHFDatePicker
                     name="fechaInhumacion"
                     label="Fecha de Inhumación *"
+                  /> */}
+
+                  <RHFDatePickerCalendar
+                  name="fechaInhumacion"
+                    label="Fecha de Inhumación *" 
                   />
+
                   <RHFInput
                     name="horaInhumacion"
                     label="Hora de Inhumación *"
@@ -606,67 +622,62 @@ export function RequisitoInhumacionForm({
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
 
-            {/* Paso 5: Autorización */}
-            {currentStep === 5 && (
-              <div className="space-y-6">
-                <div className="flex items-center mb-6">
-                  <span className="w-3 h-3 bg-orange-500 rounded-full mr-3"></span>
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    Autorización Final
-                  </h3>
-                </div>
-                <RHFInput
-                  name="firmaAceptacionSepulcro"
-                  label="Firma de Aceptación del Sepulcro *"
-                  placeholder="Firma digitalizada o nombre completo"
-                />
+                {/* Resumen y botón de guardado en el paso de documentos */}
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
                   <h4 className="font-semibold text-blue-800 mb-2">
                     Resumen de la Solicitud
                   </h4>
-                  <p className="text-blue-700 text-sm">
-                    Por favor, revise todos los datos antes de enviar la
-                    solicitud. Una vez enviada, algunos campos no podrán ser
-                    modificados.
+                  <p className="text-blue-700 text-sm mb-4">
+                    Ha completado todos los pasos necesarios. Revise la información y haga clic en "Guardar" para finalizar el registro.
                   </p>
-                </div>
-              </div>
-            )}
-
-            {/* Botones de Navegación */}
-            <div className="flex justify-between pt-8 border-t border-gray-200 mt-8">
-              <button
-                type="button"
-                onClick={handlePrevious}
-                disabled={currentStep === 1}
-                className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-              >
-                ← Anterior
-              </button>
-
-              <div className="flex space-x-4">
-                {currentStep < steps.length ? (
+                  
                   <button
                     type="button"
-                    onClick={handleNext}
-                    className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
-                  >
-                    Siguiente →
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                    onClick={handleFormSubmit}
+                    className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                     disabled={isPending}
                   >
                     {isPending ? "Guardando..." : "✓ Guardar Requisitos"}
                   </button>
-                )}
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* Botones de Navegación - Solo mostrar cuando no esté en el último paso */}
+            {currentStep < steps.length && (
+              <div className="flex justify-between pt-8 border-t border-gray-200 mt-8">
+                <button
+                  type="button"
+                  onClick={handlePrevious}
+                  disabled={currentStep === 1}
+                  className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                >
+                  ← Anterior
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Siguiente →
+                </button>
+              </div>
+            )}
+
+            {/* Botón Anterior para el último paso */}
+            {currentStep === steps.length && (
+              <div className="flex justify-start pt-8 border-t border-gray-200 mt-8">
+                <button
+                  type="button"
+                  onClick={handlePrevious}
+                  className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
+                >
+                  ← Anterior
+                </button>
+              </div>
+            )}
           </form>
         </FormProvider>
       </div>

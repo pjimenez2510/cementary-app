@@ -9,15 +9,21 @@ export interface RequisitoInhumacionEntity {
   metodoSolicitud: string;
   idSolicitante: PersonEntity;
   observacionSolicitante?: string;
+  observacionCertificadoDefuncion?: string;
   copiaCertificadoDefuncion: boolean;
+  observacionInformeEstadisticoINEC?: string;
   informeEstadisticoINEC: boolean;
+  observacionCopiaCedula?: string;
   copiaCedula: boolean;
+  observacionPagoTasaInhumacion?: string;
   pagoTasaInhumacion: boolean;
+  observacionCopiaTituloPropiedadNicho?: string;
   copiaTituloPropiedadNicho: boolean;
+  observacionAutorizacionMovilizacion?: string;
   autorizacionDeMovilizacionDelCadaver: boolean;
+  observacionOficioSolicitud?: string;
   oficioDeSolicitud: boolean;
   idHuecoNicho: HuecoEntity;
-  firmaAceptacionSepulcro: string;
   idFallecido: PersonEntity;
   fechaInhumacion: string;
   horaInhumacion: string;
@@ -50,7 +56,6 @@ export interface CreateRequisitoInhumacionEntity {
   observacionAutorizacionMovilizacion?: string;
 
   idHuecoNicho: string;
-  firmaAceptacionSepulcro: string;
   idFallecido: string;
   fechaInhumacion: string;
 
@@ -65,10 +70,23 @@ export interface CreateRequisitoInhumacionEntity {
 export interface UpdateRequisitoInhumacionEntity {
   idRequisitoInhumacion: string;
   copiaCertificadoDefuncion: boolean;
+  observacionCertificadoDefuncion?: string;
+
   informeEstadisticoINEC: boolean;
+  observacionInformeEstadisticoINEC?: string;
+
   copiaCedula: boolean;
+  observacionCopiaCedula?: string;
+
   pagoTasaInhumacion: boolean;
+  observacionPagoTasaInhumacion?: string;
+
   copiaTituloPropiedadNicho: boolean;
+  observacionCopiaTituloPropiedadNicho?: string;
+
   autorizacionDeMovilizacionDelCadaver: boolean;
+  observacionAutorizacionMovilizacion?: string;
+
   oficioDeSolicitud: boolean;
+  observacionOficioSolicitud?: string;
 }

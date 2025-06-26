@@ -9,15 +9,21 @@ export interface RequisitoInhumacionModel {
   metodoSolicitud: string;
   id_solicitante: PersonModel;
   observacionSolicitante: string;
+  observacionCertificadoDefuncion?: string;
   copiaCertificadoDefuncion: boolean;
+  observacionInformeEstadisticoINEC?: string;
   informeEstadisticoINEC: boolean;
+  observacionCopiaCedula?: string;
   copiaCedula: boolean;
+  observacionPagoTasaInhumacion?: string;
   pagoTasaInhumacion: boolean;
+  observacionOficioSolicitud?: string;
   OficioDeSolicitud: boolean;
+  observacionAutorizacionMovilizacion?: string;
   autorizacionDeMovilizacionDelCadaver: boolean;
+  observacionCopiaTituloPropiedadNicho?: string;
   copiaTituloPropiedadNicho: boolean;
   id_hueco_nicho: HuecoModel;
-  firmaAceptacionSepulcro: string;
   id_fallecido: PersonModel;
   fechaInhumacion: string;
   horaInhumacion: string;
@@ -53,7 +59,6 @@ export interface CreateRequisitoInhumacionModel {
   observacionOficioSolicitud?: string;
 
   id_hueco_nicho: string;
-  firmaAceptacionSepulcro: string;
   id_fallecido: string;
   fechaInhumacion: string;
   horaInhumacion: string;
@@ -64,11 +69,24 @@ export interface CreateRequisitoInhumacionModel {
 export interface UpdateRequisitoInhumacionModel {
   id_requisitoInhumacion: string;
   copiaCertificadoDefuncion: boolean;
+  observacionCertificadoDefuncion?: string;
+
   informeEstadisticoINEC: boolean;
+  observacionInformeEstadisticoINEC?: string;
+
   copiaCedula: boolean;
+  observacionCopiaCedula?: string;
+  
   pagoTasaInhumacion: boolean;
+  observacionPagoTasaInhumacion?: string;
+
   copiaTituloPropiedadNicho: boolean;
+  observacionCopiaTituloPropiedadNicho?: string;
+
   autorizacionDeMovilizacionDelCadaver: boolean;
+  observacionAutorizacionMovilizacion?: string;
+
   OficioDeSolicitud: boolean;
+  observacionOficioSolicitud?: string;
   
 }

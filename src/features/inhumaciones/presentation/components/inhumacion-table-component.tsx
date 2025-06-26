@@ -16,12 +16,9 @@ import clsx from "clsx";
 
 function StatusChip({ estado }: { estado: string }) {
   let color = "bg-gray-200 text-gray-800";
-  if (estado.toLowerCase() === "programada")
-    color = "bg-yellow-100 text-yellow-800";
   if (estado.toLowerCase() === "realizada")
     color = "bg-green-100 text-green-800";
-  if (estado.toLowerCase() === "cancelada")
-    color = "bg-red-100 text-red-800";
+  
   return (
     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${color}`}>
       {estado}
@@ -121,7 +118,7 @@ export function InhumacionListTable() {
             {inhumaciones?.map((inhumacion) => (
               <TableRow key={inhumacion.idInhumacion}>
                 <TableCell>{inhumacion.codigoInhumacion}</TableCell>
-                <TableCell>{inhumacion.idFallecido.nombres}</TableCell>
+                <TableCell>{inhumacion.idFallecido.nombres + ' ' +  inhumacion.idFallecido.apellidos}</TableCell>
                 <TableCell>{inhumacion.idNicho?.sector} - Fila: {inhumacion.idNicho?.fila} - Número: {inhumacion.idNicho?.numero} - Tipo: {inhumacion.idNicho?.tipo}</TableCell>
                 <TableCell>{new Date(inhumacion.fechaInhumacion).toLocaleDateString()}</TableCell>
                 <TableCell>{inhumacion.solicitante}</TableCell>
