@@ -2,11 +2,11 @@
 import { FormProvider, useWatch } from "react-hook-form";
 import { PersonEntity } from "../../domain/entities/person.entity";
 import { usePersonForm } from "../hooks/use-person-form";
-import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
 import { Button } from "@/shared/components/ui/button";
 import clsx from "clsx";
 import RHFInput from "@/shared/components/form/rhf/rhf-input";
 import RHFSwitch from "@/shared/components/form/rhf/rhf-switch";
+import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
 
 interface PersonFormProps {
   person?: PersonEntity;
@@ -28,7 +28,7 @@ export function PersonForm({ person }: PersonFormProps) {
           <RHFInput name="cedula" label="Cédula" />
           <RHFInput name="nombres" label="Nombres" />
           <RHFInput name="apellidos" label="Apellidos" />
-          <RHFCalendar name="fecha_nacimiento" label="Fecha de Nacimiento" />
+          <RHFDatePickerCalendar name="fecha_nacimiento" label="Fecha de Nacimiento" />
 
           <RHFSwitch name="fallecido" label="Fallecido" />
           <div></div>
@@ -43,8 +43,8 @@ export function PersonForm({ person }: PersonFormProps) {
 
           {fallecido && (
             <>
-              <RHFCalendar name="fecha_defuncion" label="Fecha de Defunción" />
-              <RHFCalendar name="fecha_inumacion" label="Fecha de Inhumación" />
+              <RHFDatePickerCalendar name="fecha_defuncion" label="Fecha de Defunción" />
+              <RHFDatePickerCalendar name="fecha_inhumacion" label="Fecha de Inhumación" />
               <RHFInput name="lugar_defuncion" label="Lugar de Defunción" />
               <RHFInput name="causa_defuncion" label="Causa de Defunción" />
               <RHFInput name="nacionalidad" label="Nacionalidad" />

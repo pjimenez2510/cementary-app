@@ -6,7 +6,7 @@ export const CreatePersonSchema = z.object({
     apellidos: z.string().min(1, "Los apellidos son requeridos").max(50, "Máximo 50 caracteres"),
     fecha_nacimiento: z.string().min(1, "La fecha de nacimiento es requerida"),
     fecha_defuncion: z.string().optional(),
-    fecha_inumacion: z.string().optional(),
+    fecha_inhumacion: z.string().optional(),
     lugar_defuncion: z.string().optional(),
     causa_defuncion: z.string().optional(),
     nacionalidad: z.string().optional(),
