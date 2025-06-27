@@ -25,6 +25,9 @@ export const API_ROUTES = {
   NICHOS: {
     LIST: AR_KEYS.NICHOS,
     GET_BY_ID: (id: string) => `${AR_KEYS.NICHOS}/${id}`,
+    GET_PROPIETARIOS: (id: string) => `${AR_KEYS.NICHOS}/propietarios/${id}`,
+    GET_BY_CEDULA_FALLECIDO: (cedula: string) => `${AR_KEYS.NICHOS}/fallecidos/${cedula}`,
+    SEARCH_FALLECIDOS: (busqueda: string) => `${AR_KEYS.NICHOS}/fallecidos/${busqueda}`,
     CREATE: AR_KEYS.NICHOS,
     UPDATE: (id: string) => `${AR_KEYS.NICHOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.NICHOS}/${id}`,
