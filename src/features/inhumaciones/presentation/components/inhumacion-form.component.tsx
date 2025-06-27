@@ -10,6 +10,7 @@ import { Button } from "@/shared/components/ui/button";
 import clsx from "clsx";
 import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";
 import RHFAutocompletePerson from "@/shared/components/form/rhf/rhf-autocomplete-person";
+import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
 
 const estadoOptions = [
   { value: "Pendiente", label: "Pendiente" },
@@ -47,7 +48,7 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={clsx(isEditMode && "opacity-60 pointer-events-none")}>
-            <RHFCalendar 
+            <RHFDatePickerCalendar
               name="fechaInhumacion" 
               label="Fecha de Inhumación"
             />
@@ -76,7 +77,7 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
           <div className={clsx(isEditMode && "opacity-60 pointer-events-none")}>
             <RHFInput
               name="codigoInhumacion"
@@ -84,12 +85,14 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
               placeholder="Código de inhumación"
             />
           </div>
+          <div className={clsx(isEditMode && "opacity-60 pointer-events-none")}>
           <RHFSelect
             name="estado"
             label="Estado"
             placeholder="Selecciona el estado"
             options={estadoOptions}
           />
+          </div>
         </div>
 
         <div className="space-y-2">

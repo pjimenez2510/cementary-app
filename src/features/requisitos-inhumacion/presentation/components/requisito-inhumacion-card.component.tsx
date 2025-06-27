@@ -130,12 +130,12 @@ export function RequisitoInhumacionCard({
               {expandedSections.basicos && (
                 <div className="p-4 bg-white border border-gray-200 border-t-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p>
+                    {/* <p>
                       <span className="font-medium text-black">ID:</span>{" "}
                       <span className="bg-gray-100 px-2 py-1 rounded text-sm text-gray-800">
                         {requisitoInhumacion.idRequsitoInhumacion}
                       </span>
-                    </p>
+                    </p> */}
                     <p>
                       <span className="font-medium text-black">
                         Pantonero a Cargo:
@@ -313,7 +313,7 @@ export function RequisitoInhumacionCard({
                       <span className="font-medium text-black">
                         Fecha de Defunción:
                       </span>{" "}
-                      <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">
+                      <span className="bg-gray-100 px-2 py-1 rounded text-sm text-gray-800">
                         {requisitoInhumacion.idFallecido?.fecha_defuncion
                           ? formatDate(
                               requisitoInhumacion.idFallecido.fecha_defuncion
