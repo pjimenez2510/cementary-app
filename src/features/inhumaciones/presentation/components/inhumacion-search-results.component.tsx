@@ -574,7 +574,7 @@ export function InhumacionSearchResults({
                           {inhumaciones.length > 0  && (
                             <span className="flex items-center gap-1">
                               <MapPin className="w-3 h-3" />
-                              {inhumaciones[0].idNicho?.sector} - Fila:{" "}
+                              {inhumaciones[0].idNicho?.sector} - Fila:{inhumaciones[0].idNicho?.fila} 
                             </span>
                           )}
                         </div>
@@ -598,7 +598,7 @@ export function InhumacionSearchResults({
                       className="gap-1"
                     >
                       <Eye className="w-4 h-4" />
-                      Ver Ubicación
+                      Ver detalles
                     </Button>
                   </div>
                 </div>
