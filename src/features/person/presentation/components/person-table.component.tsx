@@ -6,7 +6,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
-import { useDeletePersonMutation } from "../hooks/use-person-mutation";
 import { useFindAllPersonsQuery } from "../hooks/use-person-queries";
 import {
   AlertCircle,
@@ -14,27 +13,15 @@ import {
   House,
   IdCard,
   Pencil,
-  Trash2,
   User,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/shared/components/ui/alert-dialog";
+
 import clsx from "clsx";
 
 export function PersonListTable() {
   const { data: persons, isLoading } = useFindAllPersonsQuery();
-  const { mutate: deletePerson, isPending } = useDeletePersonMutation();
 
   return (
     <div className="rounded-lg border bg-white p-6 mt-4">
@@ -127,37 +114,6 @@ export function PersonListTable() {
                           <Pencil className="w-4 h-4" />
                         </Button>
                       </Link>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button size="icon" variant="ghost">
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>
-                              ¿Eliminar persona?
-                            </AlertDialogTitle>
-                            <AlertDialogDescription>
-                              Esta acción no se puede deshacer. ¿Deseas eliminar
-                              esta persona?
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                            <AlertDialogAction
-                              onClick={() => deletePerson(person.id_persona)}
-                              disabled={isPending}
-                              className={clsx(
-                                "px-8 bg-red-500 hover:bg-red-600",
-                                isPending && "opacity-50 cursor-not-allowed"
-                              )}
-                            >
-                              Eliminar
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
                     </div>
                   </TableCell>
                 </TableRow>

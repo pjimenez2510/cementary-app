@@ -1,26 +1,89 @@
+"use client";
+import { useState } from "react";
 import ContainerApp from "@/core/layout/container-app";
-import { Button } from "@/shared/components/ui/button";
-import { Plus } from "lucide-react";
+import { PersonSearchSection } from "../components/person-search-section.component";
+import { PersonViewHeader } from "../components/person-view-header.component";
 import { PersonListTable } from "../components/person-table.component";
-import { PersonFilters } from "../components/person-filters.component";
-import Link from "next/link";
+import { useSearchPersonsQuery } from "../hooks/use-person-queries";
+import { PersonEntity } from "../../domain/entities/person.entity";
+
+type ViewMode = "search" | "table";
 
 export default function PersonListView() {
+  const [viewMode, setViewMode] = useState<ViewMode>("search");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [hasSearched, setHasSearched] = useState(false);
+  const [selectedPerson, setSelectedPerson] = useState<PersonEntity | null>(null);
+
+  const { 
+    data: searchResults, 
+    isLoading: isSearching, 
+    error
+  } = useSearchPersonsQuery(searchTerm);
+
+  const handleSearch = (busqueda: string) => {
+    setSearchTerm(busqueda);
+    setHasSearched(true);
+    setSelectedPerson(null);
+  };
+
+  const handleNewSearch = () => {
+    setSearchTerm("");
+    setHasSearched(false);
+    setSelectedPerson(null);
+  };
+
+  const handleSelectPerson = (person: PersonEntity) => {
+    setSelectedPerson(person);
+  };
+
+  const handleBackToResults = () => {
+    setSelectedPerson(null);
+  };
+
+  const handleViewModeChange = (mode: ViewMode) => {
+    setViewMode(mode);
+    if (mode === "table") {
+      setSearchTerm("");
+      setHasSearched(false);
+      setSelectedPerson(null);
+    }
+  };
+
+  const handlePersonDeleted = () => {
+    // Volver a la búsqueda después de eliminar
+    setSelectedPerson(null);
+    setHasSearched(false);
+    setSearchTerm("");
+  };
+
   return (
-    <ContainerApp title="Personas">
-      <h2 className="text-2xl font-bold">Gestión de Personas</h2>
-      <div className="rounded-lg border bg-white p-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
-          <h3 className="text-lg font-semibold">Filtros</h3>
-          <Link href="/persons/nuevo">
-            <Button className="gap-2">
-              <Plus className="w-4 h-4" /> Nueva Persona
-            </Button>
-          </Link>
-        </div>
-        <PersonFilters/>
+    <ContainerApp title="Gestión de Personas">
+      <div className="space-y-6">
+        <PersonViewHeader 
+          viewMode={viewMode}
+          onViewModeChange={handleViewModeChange}
+        />
+
+        {/* Contenido según el modo */}
+        {viewMode === "search" ? (
+          <PersonSearchSection
+            searchTerm={searchTerm}
+            hasSearched={hasSearched}
+            selectedPerson={selectedPerson}
+            searchResults={searchResults}
+            isSearching={isSearching}
+            error={error}
+            onSearch={handleSearch}
+            onNewSearch={handleNewSearch}
+            onSelectPerson={handleSelectPerson}
+            onBackToResults={handleBackToResults}
+            onPersonDeleted={handlePersonDeleted}
+          />
+        ) : (
+          <PersonListTable />
+        )}
       </div>
-      <PersonListTable />
     </ContainerApp>
   );
 }

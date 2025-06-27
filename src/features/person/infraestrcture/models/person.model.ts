@@ -5,7 +5,7 @@ export interface PersonModel {
     apellidos: string;
     fecha_nacimiento: string;
     fecha_defuncion: string | null;
-    fecha_inumacion: string | null;
+    fecha_inhumacion: string | null;
     lugar_defuncion: string | null;
     causa_defuncion: string | null;
     fallecido: boolean;
@@ -21,7 +21,7 @@ export interface CreatePersonModel {
     apellidos: string;
     fecha_nacimiento: string;
     fecha_defuncion?: string | null;
-    fecha_inumacion?: string | null;
+    fecha_inhumacion?: string | null;
     lugar_defuncion?: string | null;
     causa_defuncion?: string | null;
     fallecido: boolean;
@@ -38,7 +38,7 @@ export interface UpdatePersonModel {
     apellidos?: string;
     fecha_nacimiento?: string;
     fecha_defuncion?: string | null;
-    fecha_inumacion?: string | null;
+    fecha_inhumacion?: string | null;
     lugar_defuncion?: string | null;
     causa_defuncion?: string | null;
     fallecido?: boolean;
