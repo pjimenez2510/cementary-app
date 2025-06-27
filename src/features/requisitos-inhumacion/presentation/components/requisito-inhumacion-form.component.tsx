@@ -12,6 +12,7 @@ import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";
 import RHFCheckbox from "@/shared/components/form/rhf/rhf-chechbox";
 import RHFHuecoNichoSelect from "@/shared/components/form/rhf/rhf-hueco-nicho-select";
 import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
+import RHFAutocompleteHuecoNicho from "@/shared/components/form/rhf/rhf-autocomplete-hueco-nicho";
 
 interface RequisitoInhumacionFormProps {
   requistoInhumacion?: RequisitoInhumacionEntity;
@@ -269,7 +270,13 @@ export function RequisitoInhumacionForm({
                     options={metodoSolicitudOptions}
                     placeholder="Selecciona el método de solicitud"
                   />
-                  <RHFHuecoNichoSelect
+                  {/* <RHFHuecoNichoSelect
+                    name="idHuecoNicho"
+                    label="Hueco/Nicho *"
+                    placeholder="Selecciona un hueco o nicho"
+                  /> */}
+
+                  <RHFAutocompleteHuecoNicho
                     name="idHuecoNicho"
                     label="Hueco/Nicho *"
                     placeholder="Selecciona un hueco o nicho"
