@@ -1,10 +1,12 @@
 import AxiosClient from "@/core/infrastructure/axios-client";
-import { CreateRequisitoInhumacionEntity, RequisitoInhumacionEntity, UpdateRequisitoInhumacionEntity } from "../../domain/entities/requisito-inhumacion.entity";
-import { RequisitoInhumacionModel } from "../models/requisito-inhumacion.model";
+import { CreateRequisitoInhumacionEntity, RequisitoInhumacionEntity, SearchFallecidosRequisitoInhumacionEntity, UpdateRequisitoInhumacionEntity } from "../../domain/entities/requisito-inhumacion.entity";
+import { RequisitoInhumacionModel, SearchFallecidosRequisitoInhumacionModel } from "../models/requisito-inhumacion.model";
 import { RequisitoInhumacionMapper } from "../mappers/requisito-inhumacion.mapper";
 import { API_ROUTES } from "@/core/constants/api-routes";
 import { RequisitoInhumacionRepository } from "../../domain/repositories/requisito-inhumacion.repository";
 import { AxiosResponse } from "axios";
+import { Search } from "lucide-react";
+import { SearchFallecidosRequisitoInhumacionMapper } from "../mappers/requisito-inhumacion-fallecido.mapper";
 
 
 export class RequisitoInhumacionRepositoryImpl implements RequisitoInhumacionRepository {
@@ -55,5 +57,10 @@ export class RequisitoInhumacionRepositoryImpl implements RequisitoInhumacionRep
         }) as AxiosResponse<Blob>;
         
         return response.data;
+    }
+
+    async searchFallecidos(busqueda: string): Promise<SearchFallecidosRequisitoInhumacionEntity> {
+        const { data } = await this.httpClient.get<SearchFallecidosRequisitoInhumacionModel>(API_ROUTES.REQUISITOS_INHUMACION.SEARCH_FALLECIDOS(busqueda));
+        return SearchFallecidosRequisitoInhumacionMapper.toEntity(data.data);
     }
 }

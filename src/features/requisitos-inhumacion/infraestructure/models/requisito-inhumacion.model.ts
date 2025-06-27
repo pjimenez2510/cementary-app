@@ -1,5 +1,6 @@
 import { CementeryModel } from "@/features/cementery/infrastructure/models/cementery.model";
 import { HuecoModel } from "@/features/huecos/infrastructure/models/hueco.model";
+import { NichoModel } from "@/features/nichos/infrastructure/models/nicho.model";
 import { PersonModel } from "@/features/person/infraestrcture/models/person.model";
 
 export interface RequisitoInhumacionModel {
@@ -89,4 +90,17 @@ export interface UpdateRequisitoInhumacionModel {
   OficioDeSolicitud: boolean;
   observacionOficioSolicitud?: string;
   
+}
+
+export interface RequisitoInhumacionFallecidosModel {
+  fallecido: PersonModel;
+  requisitos: RequisitoInhumacionModel[];
+  nichos: NichoModel[];
+  cementerios: CementeryModel[];
+}
+
+export interface SearchFallecidosRequisitoInhumacionModel {
+  termino_busqueda: string;
+  total_encontrados: number;
+  fallecidos: RequisitoInhumacionFallecidosModel[];
 }

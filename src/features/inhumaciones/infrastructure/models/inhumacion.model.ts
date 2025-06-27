@@ -1,3 +1,4 @@
+import { CementeryModel } from "@/features/cementery/infrastructure/models/cementery.model";
 import { NichoModel } from "@/features/nichos/infrastructure/models/nicho.model";
 import { PersonModel } from "@/features/person/infraestrcture/models/person.model";
 
@@ -38,4 +39,17 @@ export interface UpdateInhumacionModel {
     solicitante?: string;
     responsable_inhumacion?: string;
     codigo_inhumacion?: string;
+}
+
+export interface InhumacionFallecidosModel {
+    fallecido: PersonModel;
+    inhumaciones: InhumacionModel[];
+    nichos: NichoModel[];
+    cementerios: CementeryModel[];
+}
+
+export interface SearchFallecidosInhumacionModel {
+    termino_busqueda: string;
+    total_encontrados: number;
+    fallecidos: InhumacionFallecidosModel[];
 }

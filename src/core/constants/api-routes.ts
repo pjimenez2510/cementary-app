@@ -72,6 +72,8 @@ export const API_ROUTES = {
     CREATE: AR_KEYS.INHUMACIONES,
     UPDATE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+    SEARCH_FALLECIDOS: (busqueda: string) =>
+      `${AR_KEYS.INHUMACIONES}/fallecidos/${busqueda}`,
   },
   REQUISITOS_INHUMACION: {
     LIST: AR_KEYS.REQUISITOS_INHUMACION,
@@ -82,5 +84,7 @@ export const API_ROUTES = {
     DELETE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
     DOWNLOAD_PDF: (id: string) =>
       `${AR_KEYS.REQUISITOS_INHUMACION}/${id}/pdf`,
+    SEARCH_FALLECIDOS: (busqueda: string) =>
+      `${AR_KEYS.REQUISITOS_INHUMACION}/fallecidos/${busqueda}`,
   },
 };

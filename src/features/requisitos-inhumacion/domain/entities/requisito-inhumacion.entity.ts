@@ -1,5 +1,6 @@
 import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
 import { HuecoEntity } from "@/features/huecos/domain/entities/hueco.entity";
+import { NichoEntity } from "@/features/nichos/domain/entities/nicho.entity";
 import { PersonEntity } from "@/features/person/domain/entities/person.entity";
 
 export interface RequisitoInhumacionEntity {
@@ -89,4 +90,18 @@ export interface UpdateRequisitoInhumacionEntity {
 
   oficioDeSolicitud: boolean;
   observacionOficioSolicitud?: string;
+}
+
+
+export interface RequisitoInhumacionFallecidosEntity {
+  fallecido: PersonEntity;
+  requisitos: RequisitoInhumacionEntity[];
+  nichos: NichoEntity[];
+  cementerios: CementeryEntity[];
+}
+
+export interface SearchFallecidosRequisitoInhumacionEntity {
+  terminoBusqueda: string;
+  totalEncontrados: number;
+  fallecidos: RequisitoInhumacionFallecidosEntity[];
 }
