@@ -297,11 +297,13 @@ export function RequisitoInhumacionForm({
                     name="idSolicitante"
                     label="Solicitante *"
                     placeholder="Selecciona un solicitante"
+                    vivos={true}
                   />
                   <RHFAutocompletePerson
                     name="idFallecido"
                     label="Fallecido *"
                     placeholder="Ingrese a la persona fallecida"
+                    vivos={false}
                   />
                 </div>
                 <div className="col-span-2">

@@ -38,7 +38,20 @@ export const API_ROUTES = {
     CREATE: AR_KEYS.PERSON,
     UPDATE: (id: string) => `${AR_KEYS.PERSON}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.PERSON}/${id}`,
-    SEARCH: (query?: string) => `${AR_KEYS.PERSON}/search?query=${query}`,
+    SEARCH: (query?: string, vivos?: boolean) => {
+      const baseUrl = `${AR_KEYS.PERSON}/search`;
+      const params = new URLSearchParams();
+      
+      if (query) {
+        params.append('query', query);
+      }
+      
+      if (vivos !== undefined) {
+        params.append('vivos', vivos.toString());
+      }
+      
+      return params.toString() ? `${baseUrl}?${params.toString()}` : baseUrl;
+    },
   },
   HUECOS: {
     LIST: AR_KEYS.HUECOS,

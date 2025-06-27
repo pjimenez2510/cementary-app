@@ -18,9 +18,9 @@ export const useFindPersonByIdQuery = (id: string) => {
   });
 };
 
-export const useSearchPersonsQuery = (query?: string) => {
+export const useSearchPersonsQuery = (query?: string, vivos?: boolean) => {
   return useQuery<PersonEntity[]>({
-    queryKey: PERSON_QUERY_KEYS.search(query),
-    queryFn: () => PersonRepositoryImpl.getInstance().search(query),
+    queryKey: PERSON_QUERY_KEYS.search(query, vivos),
+    queryFn: () => PersonRepositoryImpl.getInstance().search(query, vivos),
   });
 };

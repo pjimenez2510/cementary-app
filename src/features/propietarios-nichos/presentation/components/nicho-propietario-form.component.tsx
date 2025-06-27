@@ -21,7 +21,7 @@ export function NichoPropietarioForm({ nichoId, onSuccess }: NichoPropietarioFor
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <RHFAutocompletePerson name="idPersona" label="Persona" />
+          <RHFAutocompletePerson name="idPersona" label="Persona" vivos={true} />
           <RHFCalendar name="fechaAdquisicion" label="Fecha de Adquisición" />
           <RHFSelect name="tipoDocumento" label="Tipo de Documento" options={DOCUMENT_TYPES} placeholder="Selecciona el tipo de documento" />
           <RHFInput name="numeroDocumento" label="Número de Documento" />

@@ -37,17 +37,17 @@ const data = {
       icon: LayoutDashboardIcon,
       isActive: (pathname: string) => pathname === "/main",
     },
-     {
-      title: "Personas",
-      url: "/persons",
-      icon: UsersRound,
-      isActive: (pathname: string) => pathname === "/persons",
-    },
     {
       title: "Cementerios",
       url: "/cementerio",
       icon: Building2Icon,
       isActive: (pathname: string) => pathname.startsWith("/cementerio"),
+    },
+    {
+      title: "Personas",
+      url: "/persons",
+      icon: UsersRound,
+      isActive: (pathname: string) => pathname === "/persons",
     },
     {
       title: "Nichos",

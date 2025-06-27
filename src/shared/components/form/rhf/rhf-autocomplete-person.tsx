@@ -13,14 +13,15 @@ interface RHFAutocompletePersonProps {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
+  vivos?: boolean; // true para personas vivas, false para fallecidas, undefined para todas
 }
 
-export default function RHFAutocompletePerson({ name, label, placeholder, disabled }: RHFAutocompletePersonProps) {
+export default function RHFAutocompletePerson({ name, label, placeholder, disabled, vivos }: RHFAutocompletePersonProps) {
   const { control } = useFormContext();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 400);
-  const { data: persons, isLoading } = useSearchPersonsQuery(debouncedSearch);
+  const { data: persons, isLoading } = useSearchPersonsQuery(debouncedSearch, vivos);
 
   return (
     <Controller

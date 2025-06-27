@@ -26,8 +26,8 @@ export class PersonRepositoryImpl implements PersonRepository {
     return PersonMapper.toEntity(data.data);
   }
 
-  async search(query?: string): Promise<PersonEntity[]> {
-    const { data } = await this.httpClient.get<PersonModel[]>(API_ROUTES.PERSONS.SEARCH(query));
+  async search(query?: string, vivos?: boolean): Promise<PersonEntity[]> {
+    const { data } = await this.httpClient.get<PersonModel[]>(API_ROUTES.PERSONS.SEARCH(query, vivos));
     return data.data.map(PersonMapper.toEntity);
   }
 

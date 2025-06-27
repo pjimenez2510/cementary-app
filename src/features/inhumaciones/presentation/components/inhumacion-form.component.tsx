@@ -41,6 +41,7 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
               name="idFallecido"
               label="Fallecido"
               placeholder="Ingrese a la persona fallecida"
+              vivos={false}
             />
           </div>
         </div>
