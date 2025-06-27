@@ -14,7 +14,7 @@ import { useWatch } from "react-hook-form";
 const tipoOptions = [
   { value: "Nicho", label: "Nicho" },
   { value: "Mausoleo", label: "Mausoleo" },
-  { value: "Tumba en tierra", label: "Tumba en tierra" },
+  { value: "Fosa", label: "Fosa" },
 ];
 
 interface NichoFormProps {
@@ -27,7 +27,7 @@ export function NichoForm({ nicho }: NichoFormProps) {
   const tipo = useWatch({ control: methods.control, name: "tipo" });
 
   useEffect(() => {
-    if (tipo === "Nicho" || tipo === "Tumba en tierra") {
+    if (tipo === "Nicho" || tipo === "Fosa") {
       methods.setValue("numHuecos", 1);
     } else if (tipo === "Mausoleo") {
       const numHuecos = methods.getValues("numHuecos");
@@ -37,8 +37,7 @@ export function NichoForm({ nicho }: NichoFormProps) {
     }
   }, [tipo, methods]);
 
-  const isFixedOne = tipo === "Nicho" || tipo === "Tumba en tierra";
-  const isMausoleo = tipo === "Mausoleo";
+  const isFixedOne = tipo === "Nicho" || tipo === "Fosa";
 
   return (
     <FormProvider {...methods}>

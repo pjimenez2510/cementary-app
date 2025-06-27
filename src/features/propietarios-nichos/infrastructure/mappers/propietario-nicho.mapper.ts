@@ -20,8 +20,8 @@ export class PropietarioNichoMapper {
       fechaAdquisicion: model.fecha_adquisicion,
       tipoDocumento: model.tipo_documento,
       numeroDocumento: model.numero_documento,
-      estado: model.estado,
-      observaciones: model.observaciones,
+      activo: model.activo,
+      razon: model.razon,
       fechaCreacion: model.fecha_creacion,
       fechaActualizacion: model.fecha_actualizacion,
       tipo: model.tipo,
@@ -37,8 +37,7 @@ export class PropietarioNichoMapper {
       fecha_adquisicion: entity.fechaAdquisicion,
       tipo_documento: entity.tipoDocumento,
       numero_documento: entity.numeroDocumento,
-      estado: entity.estado,
-      observaciones: entity.observaciones,
+      razon: entity.razon,
       tipo: entity.tipo,
     };
   }
@@ -48,8 +47,8 @@ export class PropietarioNichoMapper {
   ): UpdatePropietarioNichoModel {
     return {
       id_propietario_nicho: entity.idPropietarioNicho,
-      estado: entity.estado,
-      observaciones: entity.observaciones,
+      activo: entity.activo,
+      razon: entity.razon,
       tipo_documento: entity.tipoDocumento,
       numero_documento: entity.numeroDocumento,
       tipo: entity.tipo,

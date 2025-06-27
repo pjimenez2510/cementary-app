@@ -1,5 +1,5 @@
 import { NichoModel } from "@/features/nichos/infrastructure/models/nicho.model";
-import { TipoDocumento, EstadoPropietario } from "../../domain/entities/propietario-nicho.entity";
+import { TipoDocumento, TipoPropietario } from "../../domain/entities/propietario-nicho.entity";
 import { PersonModel } from "@/features/person/infraestrcture/models/person.model";
 
 export interface PropietarioNichoModel {
@@ -9,11 +9,11 @@ export interface PropietarioNichoModel {
   fecha_adquisicion: string;
   tipo_documento: TipoDocumento;
   numero_documento: string;
-  estado: EstadoPropietario;
-  observaciones: string;
+  activo: boolean;
+  razon: string;
   fecha_creacion: string;
   fecha_actualizacion: string | null;
-  tipo: 'Dueño' | 'Heredero';
+  tipo: TipoPropietario;
 }
 
 export interface CreatePropietarioNichoModel {
@@ -22,16 +22,15 @@ export interface CreatePropietarioNichoModel {
   fecha_adquisicion: string;
   tipo_documento: TipoDocumento;
   numero_documento: string;
-  estado: EstadoPropietario;
-  observaciones: string;
-  tipo: 'Dueño' | 'Heredero';
+  razon: string;
+  tipo: TipoPropietario;
 }
 
 export interface UpdatePropietarioNichoModel {
   id_propietario_nicho: string;
-  estado?: EstadoPropietario;
-  observaciones?: string;
+  activo?: boolean;
+  razon?: string;
   tipo_documento?: TipoDocumento;
   numero_documento?: string;
-  tipo?: 'Dueño' | 'Heredero';
+  tipo?: TipoPropietario;
 } 

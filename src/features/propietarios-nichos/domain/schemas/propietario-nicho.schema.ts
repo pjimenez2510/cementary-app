@@ -8,10 +8,7 @@ export const CreatePropietarioNichoSchema = z.object({
     message: "Tipo de documento inválido",
   }),
   numeroDocumento: z.string().min(1, "El número de documento es requerido"),
-  estado: z.enum(["Activo", "Inactivo", "En proceso", "Vendido", "Heredado"] as const, {
-    message: "Estado inválido",
-  }),
-  observaciones: z.string().min(1, "Las observaciones son requeridas"),
+  razon: z.string().min(1, "La razón es requerida"),
   tipo: z.enum(["Dueño", "Heredero"] as const, {
     message: "Tipo de propietario inválido",
   }),
@@ -19,14 +16,15 @@ export const CreatePropietarioNichoSchema = z.object({
 
 export const UpdatePropietarioNichoSchema = z.object({
   idPropietarioNicho: z.string().uuid("El ID del propietario es requerido y debe ser un UUID válido"),
-  estado: z.enum(["Activo", "Inactivo", "En proceso", "Vendido", "Heredado"] as const, {
-    message: "Estado inválido",
-  }).optional(),
-  observaciones: z.string().min(1, "Las observaciones son requeridas").optional(),
+  activo: z.boolean().optional(),
+  razon: z.string().min(1, "La razón es requerida").optional(),
   tipoDocumento: z.enum(["Escritura", "Contrato", "Factura", "Otro"] as const, {
     message: "Tipo de documento inválido",
   }).optional(),
   numeroDocumento: z.string().min(1, "El número de documento es requerido").optional(),
+  tipo: z.enum(["Dueño", "Heredero"] as const, {
+    message: "Tipo de propietario inválido",
+  }).optional(),
 });
 
 export type CreatePropietarioNichoDTO = z.infer<typeof CreatePropietarioNichoSchema>;

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CementeryModel } from "@/features/cementery/infrastructure/models/cementery.model";
 import { HuecoModel } from "@/features/huecos/infrastructure/models/hueco.model";
+import { PersonModel } from "@/features/person/infraestrcture/models/person.model";
 import { PropietarioNichoModel } from "@/features/propietarios-nichos/infrastructure/models/propietario-nicho.model";
 
 export interface NichoModel {
@@ -19,6 +20,19 @@ export interface NichoModel {
   propietarios_nicho?: PropietarioNichoModel[];
   huecos?: HuecoModel[];
   inhumaciones?: any[]; // TODO: Definir el tipo correcto cuando se implemente
+}
+
+export interface NichosFallecidosModel {
+  fallecido: PersonModel;
+  huecos: HuecoModel[];
+  nichos: NichoModel[];
+  cementerios: CementeryModel[];
+}
+
+export interface SearchFallecidosModel {
+  termino_busqueda: string;
+  total_encontrados: number;
+  fallecidos: NichosFallecidosModel[];
 }
 
 export interface CreateNichoModel {

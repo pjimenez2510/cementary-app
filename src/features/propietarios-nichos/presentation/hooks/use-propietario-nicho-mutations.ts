@@ -17,9 +17,7 @@ export const useCreatePropietarioNichoMutation = () => {
       toast.success("Propietario agregado exitosamente");
     },
     onError: (error) => {
-      toast.error("Error al agregar el propietario", {
-        description: error.message,
-      });
+      toast.error(error.message);
     },
   });
 };
@@ -37,9 +35,7 @@ export const useUpdatePropietarioNichoMutation = () => {
       toast.success("Propietario actualizado exitosamente");
     },
     onError: (error) => {
-      toast.error("Error al actualizar el propietario", {
-        description: error.message,
-      });
+      toast.error(error.message);
     },
   });
 };
