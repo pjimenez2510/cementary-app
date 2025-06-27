@@ -10,6 +10,7 @@ import clsx from "clsx";
 import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";
 import RHFAutocompletePerson from "@/shared/components/form/rhf/rhf-autocomplete-person";
 import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
+import RHFAutocompleteNicho from "@/shared/components/form/rhf/rhf-autocomplete-nicho";
 
 const estadoOptions = [
   { value: "Pendiente", label: "Pendiente" },
@@ -22,18 +23,27 @@ interface InhumacionFormProps {
 
 export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
   const { methods, onSubmit, isPending } = useInhumacionForm(inhumacion);
-  
+
   const isEditMode = !!inhumacion;
+  const estadoOptionsToShow = isEditMode
+  ? estadoOptions
+  : estadoOptions.filter(opt => opt.value === "Realizada");
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={clsx(isEditMode && "opacity-60 pointer-events-none")}>
-            <RHFNichoSelect
+            {/* <RHFNichoSelect
               name="idNicho"
               label="Nicho"
               placeholder="Selecciona un nicho"
+            /> */}
+
+            <RHFAutocompleteNicho
+              name="idNicho"
+              label="Nicho"
+              placeholder="Selecciona o busca un nicho"
             />
           </div>
           <div className={clsx(isEditMode && "opacity-60 pointer-events-none")}>
@@ -49,7 +59,7 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={clsx(isEditMode && "opacity-60 pointer-events-none")}>
             <RHFDatePickerCalendar
-              name="fechaInhumacion" 
+              name="fechaInhumacion"
               label="Fecha de Inhumación"
             />
           </div>
@@ -86,12 +96,12 @@ export function InhumacionForm({ inhumacion }: InhumacionFormProps) {
             />
           </div>
           <div className={clsx(isEditMode && "opacity-60 pointer-events-none")}>
-          <RHFSelect
-            name="estado"
-            label="Estado"
-            placeholder="Selecciona el estado"
-            options={estadoOptions}
-          />
+            <RHFSelect
+              name="estado"
+              label="Estado"
+              placeholder="Selecciona el estado"
+              options={estadoOptionsToShow}
+            />
           </div>
         </div>
 
