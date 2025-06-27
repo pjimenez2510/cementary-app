@@ -27,12 +27,11 @@ export function PersonDetails({ person }: PersonDetailsProps) {
         </Link>
       </div>
 
-      {/* Datos generales */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
         <Info label="Cédula" value={person.cedula} />
         <Info
           label="Fecha de Nacimiento"
-          value={new Date(person.fecha_nacimiento).toLocaleDateString("es-ES")}
+          value={person.fecha_nacimiento}
         />
         <div>
           <span className="font-semibold text-gray-700 block mb-1">Estado:</span>
@@ -58,7 +57,7 @@ export function PersonDetails({ person }: PersonDetailsProps) {
             {person.fecha_defuncion && (
               <Info
                 label="Fecha de Defunción"
-                value={new Date(person.fecha_defuncion).toLocaleDateString("es-ES")}
+                value={person.fecha_defuncion}
               />
             )}
             {person.lugar_defuncion && (
@@ -70,7 +69,7 @@ export function PersonDetails({ person }: PersonDetailsProps) {
             {person.fecha_inhumacion && (
               <Info
                 label="Fecha de Inhumación"
-                value={new Date(person.fecha_inhumacion).toLocaleDateString("es-ES")}
+                value={person.fecha_inhumacion}
               />
             )}
           </>
