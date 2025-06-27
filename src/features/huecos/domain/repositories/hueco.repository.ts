@@ -7,4 +7,6 @@ export interface HuecoRepository {
   create(hueco: CreateHuecoEntity): Promise<HuecoEntity>;
   update(hueco: UpdateHuecoEntity): Promise<HuecoEntity>;
   delete(id: string): Promise<void>;
+
+  findByCementerio(idCementerio: string): Promise<HuecoEntity[]>;
 } 

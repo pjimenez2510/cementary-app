@@ -20,6 +20,13 @@ export const useFindHuecosByNichoQuery = (nichoId: string) => {
   });
 };
 
+export const useFindHuecosByCementerioQuery = (cementerioId: string) => {
+  return useQuery<HuecoEntity[]>({
+    queryKey: HUECO_QUERY_KEYS.byCementerio(cementerioId),
+    queryFn: () => HuecoRepositoryImpl.getInstance().findByCementerio(cementerioId),
+    enabled: !!cementerioId,
+  });
+}
 export const useFindHuecoByIdQuery = (id: string) => {
   return useQuery<HuecoEntity>({
     queryKey: HUECO_QUERY_KEYS.byId(id),

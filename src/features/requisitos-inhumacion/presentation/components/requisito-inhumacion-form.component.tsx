@@ -19,8 +19,8 @@ interface RequisitoInhumacionFormProps {
 }
 
 const metodoSolicitudOptions = [
-  { value: "escrita", label: "Escrita" },
-  { value: "verbal", label: "Verbal" },
+  { value: "Escrita", label: "Escrita" },
+  // { value: "Verbal", label: "Verbal" },
 ];
 
 const steps = [

@@ -142,12 +142,10 @@ export function RequisitoInhumacionListTable() {
                   {requisito.idCementerio?.nombre ?? "Sin cementerio"}
                 </TableCell>
                 <TableCell>{requisito.pantoneroACargo}</TableCell>
-                <TableCell>
-                  <TableCell>
+                <TableCell>          
                     {requisito.idSolicitante
                       ? `${requisito.idSolicitante.nombres} ${requisito.idSolicitante.apellidos}`
                       : "No hay solicitante"}
-                  </TableCell>
                 </TableCell>
                 <TableCell>
                   {requisito.idHuecoNicho ?
