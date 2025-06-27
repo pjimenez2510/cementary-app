@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/shared/components/ui/table";
-import { AlertCircle, Hash, Landmark, MapPin, Phone, User2, BadgeCheck, Pencil, Trash2 } from "lucide-react";
+import { AlertCircle, Landmark, MapPin, Phone, User2, BadgeCheck, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import { useDeleteCementeryMutation } from "../hooks/use-cementery-mutations";
@@ -34,7 +34,6 @@ export function CementeryListTable() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead><span className="flex items-center gap-1"><Hash className="w-4 h-4" />ID</span></TableHead>
                             <TableHead><span className="flex items-center gap-1"><Landmark className="w-4 h-4" />Nombre</span></TableHead>
                             <TableHead><span className="flex items-center gap-1"><MapPin className="w-4 h-4" />Dirección</span></TableHead>
                             <TableHead><span className="flex items-center gap-1"><Phone className="w-4 h-4" />Teléfono</span></TableHead>
@@ -68,7 +67,6 @@ export function CementeryListTable() {
                         )}
                         {cementeries?.map((cementery) => (
                             <TableRow key={cementery.idCementerio}>
-                                <TableCell>{cementery.idCementerio}</TableCell>
                                 <TableCell>{cementery.nombre}</TableCell>
                                 <TableCell>{cementery.direccion}</TableCell>
                                 <TableCell>{cementery.telefono}</TableCell>

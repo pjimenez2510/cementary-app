@@ -17,7 +17,7 @@ export function usePersonForm(person?: PersonEntity) {
         apellidos: person.apellidos,
         fecha_nacimiento: person.fecha_nacimiento,
         fecha_defuncion: person.fecha_defuncion ?? undefined,
-        fecha_inumacion: person.fecha_inumacion ?? undefined,
+        fecha_inhumacion: person.fecha_inhumacion ?? undefined,
         lugar_defuncion: person.lugar_defuncion ?? undefined,
         causa_defuncion: person.causa_defuncion ?? undefined,
         fallecido: person.fallecido ,
@@ -25,7 +25,7 @@ export function usePersonForm(person?: PersonEntity) {
         direccion: person.direccion ?? undefined,
         telefono: person.telefono ?? undefined,
         correo: person.correo ?? undefined,
-
+      
     } : {},
   });
   
