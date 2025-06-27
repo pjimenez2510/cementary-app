@@ -18,3 +18,11 @@ export const useFindInhumacionByIdQuery = (id: string) => {
         enabled: !!id,
     })
 }
+
+export const useSearchInhumacionFallecidosQuery = (busqueda: string) => {
+    return useQuery({
+        queryKey: INHUMACION_QUERY_KEYS.searchFallecidos(busqueda),
+        queryFn: () => InhumacionRepositoryImpl.getInstance().searchFallecidos(busqueda),
+        enabled: !!busqueda && busqueda.trim().length >= 2,
+    });
+}

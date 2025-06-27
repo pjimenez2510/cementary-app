@@ -1,5 +1,6 @@
 import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
 import { HuecoEntity } from "@/features/huecos/domain/entities/hueco.entity";
+import { NichoEntity } from "@/features/nichos/domain/entities/nicho.entity";
 import { PersonEntity } from "@/features/person/domain/entities/person.entity";
 
 export interface RequisitoInhumacionEntity {
@@ -9,15 +10,21 @@ export interface RequisitoInhumacionEntity {
   metodoSolicitud: string;
   idSolicitante: PersonEntity;
   observacionSolicitante?: string;
+  observacionCertificadoDefuncion?: string;
   copiaCertificadoDefuncion: boolean;
+  observacionInformeEstadisticoINEC?: string;
   informeEstadisticoINEC: boolean;
+  observacionCopiaCedula?: string;
   copiaCedula: boolean;
+  observacionPagoTasaInhumacion?: string;
   pagoTasaInhumacion: boolean;
+  observacionCopiaTituloPropiedadNicho?: string;
   copiaTituloPropiedadNicho: boolean;
+  observacionAutorizacionMovilizacion?: string;
   autorizacionDeMovilizacionDelCadaver: boolean;
+  observacionOficioSolicitud?: string;
   oficioDeSolicitud: boolean;
   idHuecoNicho: HuecoEntity;
-  firmaAceptacionSepulcro: string;
   idFallecido: PersonEntity;
   fechaInhumacion: string;
   horaInhumacion: string;
@@ -50,7 +57,6 @@ export interface CreateRequisitoInhumacionEntity {
   observacionAutorizacionMovilizacion?: string;
 
   idHuecoNicho: string;
-  firmaAceptacionSepulcro: string;
   idFallecido: string;
   fechaInhumacion: string;
 
@@ -65,10 +71,37 @@ export interface CreateRequisitoInhumacionEntity {
 export interface UpdateRequisitoInhumacionEntity {
   idRequisitoInhumacion: string;
   copiaCertificadoDefuncion: boolean;
+  observacionCertificadoDefuncion?: string;
+
   informeEstadisticoINEC: boolean;
+  observacionInformeEstadisticoINEC?: string;
+
   copiaCedula: boolean;
+  observacionCopiaCedula?: string;
+
   pagoTasaInhumacion: boolean;
+  observacionPagoTasaInhumacion?: string;
+
   copiaTituloPropiedadNicho: boolean;
+  observacionCopiaTituloPropiedadNicho?: string;
+
   autorizacionDeMovilizacionDelCadaver: boolean;
+  observacionAutorizacionMovilizacion?: string;
+
   oficioDeSolicitud: boolean;
+  observacionOficioSolicitud?: string;
+}
+
+
+export interface RequisitoInhumacionFallecidosEntity {
+  fallecido: PersonEntity;
+  requisitos: RequisitoInhumacionEntity[];
+  nichos: NichoEntity[];
+  cementerios: CementeryEntity[];
+}
+
+export interface SearchFallecidosRequisitoInhumacionEntity {
+  terminoBusqueda: string;
+  totalEncontrados: number;
+  fallecidos: RequisitoInhumacionFallecidosEntity[];
 }

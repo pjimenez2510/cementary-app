@@ -23,11 +23,17 @@ export function useRequisitoInhumacionForm(requisitoInhumacion?: RequisitoInhuma
             oficioDeSolicitud: requisitoInhumacion.oficioDeSolicitud || false,
             autorizacionDeMovilizacionDelCadaver: requisitoInhumacion.autorizacionDeMovilizacionDelCadaver || false,
             idHuecoNicho: requisitoInhumacion.idHuecoNicho?.idDetalleHueco,
-            firmaAceptacionSepulcro: requisitoInhumacion.firmaAceptacionSepulcro,
             idFallecido: requisitoInhumacion.idFallecido?.id_persona,
             fechaInhumacion: requisitoInhumacion.fechaInhumacion,
             horaInhumacion: requisitoInhumacion.horaInhumacion,
             nombreAdministradorNicho: requisitoInhumacion.nombreAdministradorNicho,
+            observacionCertificadoDefuncion: requisitoInhumacion.observacionCertificadoDefuncion || "",
+            observacionInformeEstadisticoINEC: requisitoInhumacion.observacionInformeEstadisticoINEC || "",
+            observacionCopiaCedula: requisitoInhumacion.observacionCopiaCedula || "",
+            observacionPagoTasaInhumacion: requisitoInhumacion.observacionPagoTasaInhumacion || "",
+            observacionCopiaTituloPropiedadNicho: requisitoInhumacion.observacionCopiaTituloPropiedadNicho || "",
+            observacionOficioSolicitud: requisitoInhumacion.observacionOficioSolicitud || "",
+            observacionAutorizacionMovilizacion: requisitoInhumacion.observacionAutorizacionMovilizacion || "",
         } : {   
         },
     });
@@ -36,6 +42,8 @@ export function useRequisitoInhumacionForm(requisitoInhumacion?: RequisitoInhuma
     const { mutate: update, isPending: isUpdating } = useUpdateRequisitoInhumacionMutation();
 
     const onSubmit = (data: CreateRequisitoInhumacionDTO) => {        
+        console.log("Submitting requisito inhumacion data:", data);
+
         if (requisitoInhumacion && requisitoInhumacion.idRequsitoInhumacion) {
             update({
                 idRequisitoInhumacion: requisitoInhumacion.idRequsitoInhumacion,

@@ -37,6 +37,12 @@ const data = {
       icon: LayoutDashboardIcon,
       isActive: (pathname: string) => pathname === "/main",
     },
+     {
+      title: "Personas",
+      url: "/persons",
+      icon: UsersRound,
+      isActive: (pathname: string) => pathname === "/persons",
+    },
     {
       title: "Cementerios",
       url: "/cementerio",
@@ -55,13 +61,7 @@ const data = {
       icon: ListIcon,
       isActive: (pathname: string) => pathname === "/map",
     },
-    {
-      title: "Inhumaciones",
-      url: "/inhumaciones",
-      icon: FileText,
-      isActive: (pathname: string) => pathname.startsWith("/inhumaciones"),
-    },
-    {
+     {
       title: "Requisito Inhumaciones",
       url: "/requisitos-inhumacion",
       icon: FileText,
@@ -69,11 +69,13 @@ const data = {
         pathname.startsWith("/requisitos-inhumaciones"),
     },
     {
-      title: "Personas",
-      url: "/persons",
-      icon: UsersRound,
-      isActive: (pathname: string) => pathname === "/persons",
+      title: "Inhumaciones",
+      url: "/inhumaciones",
+      icon: FileText,
+      isActive: (pathname: string) => pathname.startsWith("/inhumaciones"),
     },
+   
+    
   ],
 };
 

@@ -1,3 +1,4 @@
+import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
 import { NichoEntity } from "@/features/nichos/domain/entities/nicho.entity";
 import { PersonEntity } from "@/features/person/domain/entities/person.entity";
 
@@ -14,6 +15,19 @@ export interface InhumacionEntity {
     codigoInhumacion: string;
     fechaCreacion: string;
     fechaActualizacion: string | null;
+}
+
+export interface InhumacionFallecidosEntity {
+    fallecido: PersonEntity;
+    inhumaciones: InhumacionEntity[];
+    nichos: NichoEntity[];
+    cementerios: CementeryEntity[];
+    }
+
+export interface SearchFallecidosInhumacionEntity {
+    terminoBusqueda: string;
+    totalEncontrados: number;
+    fallecidos: InhumacionFallecidosEntity[];
 }
 
 export interface CreateInhumacionEntity {

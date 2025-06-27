@@ -16,8 +16,7 @@ interface AxiosConfig {
 
 const DEFAULT_CONFIG: AxiosConfig = {
   baseURL:
-    process.env.NEXT_PUBLIC_BACKEND_API_URL ||
-    "https://backend-cementerio-pillaro.onrender.com",
+    process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://backend-cementerio-pillaro.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },

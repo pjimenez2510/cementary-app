@@ -2,12 +2,7 @@ import { NichoEntity } from "@/features/nichos/domain/entities/nicho.entity";
 import { PersonEntity } from "@/features/person/domain/entities/person.entity";
 
 export type TipoDocumento = "Escritura" | "Contrato" | "Factura" | "Otro";
-export type EstadoPropietario =
-  | "Activo"
-  | "Inactivo"
-  | "En proceso"
-  | "Vendido"
-  | "Heredado";
+export type TipoPropietario = "Dueño" | "Heredero";
 
 export interface PropietarioNichoEntity {
   idPropietarioNicho: string;
@@ -16,11 +11,11 @@ export interface PropietarioNichoEntity {
   fechaAdquisicion: string;
   tipoDocumento: TipoDocumento;
   numeroDocumento: string;
-  estado: EstadoPropietario;
-  observaciones: string;
+  activo: boolean;
+  razon: string;
   fechaCreacion: string;
   fechaActualizacion: string | null;
-  tipo: 'Dueño' | 'Heredero';
+  tipo: TipoPropietario;
 }
 
 export interface CreatePropietarioNichoEntity {
@@ -29,16 +24,15 @@ export interface CreatePropietarioNichoEntity {
   fechaAdquisicion: string;
   tipoDocumento: TipoDocumento;
   numeroDocumento: string;
-  estado: EstadoPropietario;
-  observaciones: string;
-  tipo: 'Dueño' | 'Heredero';
+  razon: string;
+  tipo: TipoPropietario;
 }
 
 export interface UpdatePropietarioNichoEntity {
   idPropietarioNicho: string;
-  estado?: EstadoPropietario;
-  observaciones?: string;
+  activo?: boolean;
+  razon?: string;
   tipoDocumento?: TipoDocumento;
   numeroDocumento?: string;
-  tipo?: 'Dueño' | 'Heredero';
+  tipo?: TipoPropietario;
 }

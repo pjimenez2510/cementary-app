@@ -23,3 +23,14 @@ export const useFindRequisitoInhumacionByIdQuery = (id: string) => {
     enabled: !!id,
   });
 };
+
+export const useSearchRequisitoInhumacionFallecidosQuery = (busqueda: string) => {
+  return useQuery({
+    queryKey: REQUISITO_INHUMACION_QUERY_KEYS.searchFallecidos(busqueda),
+    queryFn: () => {
+      const repository = RequisitoInhumacionRepositoryImpl.getInstance();
+      return repository.searchFallecidos(busqueda);
+    },
+    enabled: !!busqueda && busqueda.trim().length >= 2,
+  });
+};

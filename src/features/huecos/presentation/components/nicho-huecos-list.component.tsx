@@ -1,5 +1,4 @@
 "use client";
-import { useFindHuecosByNichoQuery } from "../hooks/use-hueco-queries";
 import {
   Table,
   TableBody,
@@ -8,12 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
-import { AlertCircle, Hash, User2, BadgeCheck, Trash2 } from "lucide-react";
+import { AlertCircle, Hash, User2, BadgeCheck, Trash2, Plus } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
-import { useDeleteHuecoMutation } from "../hooks/use-hueco-mutations";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import clsx from "clsx";
 import { StatusChip } from "../utils/status-chip";
+import { useNichoHuecosList } from "../hooks/use-nicho-huecos-list";
 
 
 interface NichoHuecosListProps {
@@ -21,19 +20,34 @@ interface NichoHuecosListProps {
 }
 
 export function NichoHuecosList({ nichoId }: NichoHuecosListProps) {
-  const { data: huecos, isLoading, error, refetch } = useFindHuecosByNichoQuery(nichoId);
-  const { mutate: deleteHueco, isPending } = useDeleteHuecoMutation();
-
-  const handleDelete = (id: string) => {
-    deleteHueco(id, {
-      onSuccess: () => {
-        refetch();
-      },
-    });
-  };
+  const {
+    huecos,
+    isLoading,
+    error,
+    isDeleting,
+    isCreating,
+    handleDelete,
+    handleCreateHueco,
+    canCreateHueco,
+    getCreateButtonMessage,
+    canDeleteHueco,
+  } = useNichoHuecosList({ nichoId });
 
   return (
     <div className="rounded-lg border bg-white p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-medium">Huecos</h3>
+        <Button 
+          onClick={handleCreateHueco}
+          disabled={isCreating || !canCreateHueco()}
+          size="sm"
+          className="gap-1"
+          variant={!canCreateHueco() ? "secondary" : "default"}
+        >
+          <Plus className="w-4 h-4" />
+          {isCreating ? "Creando..." : getCreateButtonMessage()}
+        </Button>
+      </div>
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
@@ -74,34 +88,45 @@ export function NichoHuecosList({ nichoId }: NichoHuecosListProps) {
                 <TableCell>{hueco.idFallecido ? `${hueco.idFallecido.nombres} ${hueco.idFallecido.apellidos} (${hueco.idFallecido.cedula})` : '-'}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button size="icon" variant="ghost">
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>¿Eliminar hueco?</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            Esta acción no se puede deshacer. ¿Deseas eliminar este hueco?
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => handleDelete(hueco.idDetalleHueco)}
-                            disabled={isPending}
-                            className={clsx(
-                              "px-8 bg-red-500 hover:bg-red-600",
-                              isPending && "opacity-50 cursor-not-allowed"
-                            )}
-                          >
-                            Eliminar
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                    {canDeleteHueco(hueco) ? (
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button size="icon" variant="ghost">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>¿Eliminar hueco?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Esta acción no se puede deshacer. ¿Deseas eliminar este hueco?
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleDelete(hueco.idDetalleHueco)}
+                              disabled={isDeleting}
+                              className={clsx(
+                                "px-8 bg-red-500 hover:bg-red-600",
+                                isDeleting && "opacity-50 cursor-not-allowed"
+                              )}
+                            >
+                              Eliminar
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    ) : (
+                      <Button 
+                        size="icon" 
+                        variant="ghost" 
+                        disabled 
+                        title="No se puede eliminar un hueco ocupado. Se requiere proceso de exhumación."
+                      >
+                        <Trash2 className="w-4 h-4 text-gray-400" />
+                      </Button>
+                    )}
                   </div>
                 </TableCell>
               </TableRow>

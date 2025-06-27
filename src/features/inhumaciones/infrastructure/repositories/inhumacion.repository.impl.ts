@@ -1,9 +1,10 @@
 import AxiosClient from "@/core/infrastructure/axios-client";
-import { CreateInhumacionEntity, InhumacionEntity, UpdateInhumacionEntity } from "../../domain/entities/inhumacion.entity";
-import { InhumacionModel } from "../models/inhumacion.model";
+import { CreateInhumacionEntity, InhumacionEntity, SearchFallecidosInhumacionEntity, UpdateInhumacionEntity} from "../../domain/entities/inhumacion.entity";
+import { InhumacionModel, SearchFallecidosInhumacionModel } from "../models/inhumacion.model";
 import { API_ROUTES } from "@/core/constants/api-routes";
 import { InhumacionMapper } from "../mappers/inhumacion.mapper";
 import { InhumacionRepository } from "../../domain/repositories/inhumacion.repository";
+import { SearchFallecidosInhumacionMapper } from "../mappers/inhumacion-fallecido.mapper";
 
 export class InhumacionRepositoryImpl implements InhumacionRepository {
     private httpClient: AxiosClient;
@@ -46,5 +47,10 @@ export class InhumacionRepositoryImpl implements InhumacionRepository {
 
     async delete(id: string): Promise<void> {
         await this.httpClient.delete(API_ROUTES.INHUMACIONES.DELETE(id));
+    }
+
+    async searchFallecidos(busqueda: string): Promise<SearchFallecidosInhumacionEntity> {
+        const { data } = await this.httpClient.get<SearchFallecidosInhumacionModel>(API_ROUTES.INHUMACIONES.SEARCH_FALLECIDOS(busqueda));
+        return SearchFallecidosInhumacionMapper.toEntity(data.data);
     }
 }

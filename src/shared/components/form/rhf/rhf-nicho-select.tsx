@@ -18,11 +18,6 @@ export default function RHFNichoSelect({
 }: RHFNichoSelectProps) {
   const { data: nichos, isLoading } = useFindAllNichosQuery();
 
-  // const options = nichos?.map(n => ({
-  //     value: n.idNicho,
-  //     label: `${n.sector}` + ` - Fila: ${n.fila} - Número: ${n.numero} - Tipo: ${n.tipo}`
-  // })) ?? [];
-
   const options = (nichos ?? [])
     .filter((n) => n.idNicho !== undefined)
     .map((n) => ({

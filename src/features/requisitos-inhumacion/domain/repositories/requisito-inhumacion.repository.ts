@@ -1,4 +1,4 @@
-import { CreateRequisitoInhumacionEntity, RequisitoInhumacionEntity, UpdateRequisitoInhumacionEntity } from "../entities/requisito-inhumacion.entity";
+import { CreateRequisitoInhumacionEntity, RequisitoInhumacionEntity, SearchFallecidosRequisitoInhumacionEntity, UpdateRequisitoInhumacionEntity } from "../entities/requisito-inhumacion.entity";
 
 
 export interface RequisitoInhumacionRepository {
@@ -8,4 +8,5 @@ export interface RequisitoInhumacionRepository {
     update(requisitoInhumacion: UpdateRequisitoInhumacionEntity): Promise<RequisitoInhumacionEntity>;
     delete(id: string): Promise<void>;
     downloadPdf(id: string): Promise<Blob>;
+    searchFallecidos(busqueda: string): Promise<SearchFallecidosRequisitoInhumacionEntity>;
 }

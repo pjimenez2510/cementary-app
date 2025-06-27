@@ -25,6 +25,9 @@ export const API_ROUTES = {
   NICHOS: {
     LIST: AR_KEYS.NICHOS,
     GET_BY_ID: (id: string) => `${AR_KEYS.NICHOS}/${id}`,
+    GET_PROPIETARIOS: (id: string) => `${AR_KEYS.NICHOS}/propietarios/${id}`,
+    GET_BY_CEDULA_FALLECIDO: (cedula: string) => `${AR_KEYS.NICHOS}/fallecidos/${cedula}`,
+    SEARCH_FALLECIDOS: (busqueda: string) => `${AR_KEYS.NICHOS}/fallecidos/${busqueda}`,
     CREATE: AR_KEYS.NICHOS,
     UPDATE: (id: string) => `${AR_KEYS.NICHOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.NICHOS}/${id}`,
@@ -41,6 +44,9 @@ export const API_ROUTES = {
     LIST: AR_KEYS.HUECOS,
     GET_BY_ID: (id: string) => `${AR_KEYS.HUECOS}/${id}`,
     GET_BY_NICHO: (idNicho: string) => `${AR_KEYS.HUECOS}/por-nicho/${idNicho}`,
+    GET_BY_CEMENTERIO: (idCementerio: string) =>
+      `${AR_KEYS.HUECOS}/Cementerio/nichos/${idCementerio}`,
+    GET_DISPONIBLES: `${AR_KEYS.HUECOS}/disponibles`,
     CREATE: AR_KEYS.HUECOS,
     UPDATE: (id: string) => `${AR_KEYS.HUECOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.HUECOS}/${id}`,
@@ -55,6 +61,10 @@ export const API_ROUTES = {
     CREATE: AR_KEYS.PROPIETARIOS_NICHOS,
     UPDATE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.PROPIETARIOS_NICHOS}/${id}`,
+    GET_HISTORIAL_BY_NICHO: (idNicho: string) =>
+      `${AR_KEYS.PROPIETARIOS_NICHOS}/historial/${idNicho}`,
+    GET_BY_PERSONA_CEDULA: (cedula: string) =>
+      `${AR_KEYS.PROPIETARIOS_NICHOS}/por-persona/${cedula}`,
   },
   INHUMACIONES: {
     LIST: AR_KEYS.INHUMACIONES,
@@ -62,6 +72,8 @@ export const API_ROUTES = {
     CREATE: AR_KEYS.INHUMACIONES,
     UPDATE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
     DELETE: (id: string) => `${AR_KEYS.INHUMACIONES}/${id}`,
+    SEARCH_FALLECIDOS: (busqueda: string) =>
+      `${AR_KEYS.INHUMACIONES}/fallecidos/${busqueda}`,
   },
   REQUISITOS_INHUMACION: {
     LIST: AR_KEYS.REQUISITOS_INHUMACION,
@@ -72,5 +84,7 @@ export const API_ROUTES = {
     DELETE: (id: string) => `${AR_KEYS.REQUISITOS_INHUMACION}/${id}`,
     DOWNLOAD_PDF: (id: string) =>
       `${AR_KEYS.REQUISITOS_INHUMACION}/${id}/pdf`,
+    SEARCH_FALLECIDOS: (busqueda: string) =>
+      `${AR_KEYS.REQUISITOS_INHUMACION}/fallecidos/${busqueda}`,
   },
 };

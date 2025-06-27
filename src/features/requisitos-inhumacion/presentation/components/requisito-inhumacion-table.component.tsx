@@ -1,6 +1,24 @@
-import { AlertCircle, Hash, User, MapPin, Calendar, UserCheck, Shield, Pencil, Trash2, Building, Clock, FileText, Eye, Download } from "lucide-react";
+import {
+  AlertCircle,
+  Hash,
+  User,
+  MapPin,
+  Calendar,
+  UserCheck,
+  Shield,
+  Pencil,
+  Trash2,
+  Building,
+  Clock,
+  FileText,
+  Eye,
+  Download,
+} from "lucide-react";
 import Link from "next/link";
-import { useDeleteRequisitoInhumacionMutation, useDownloadRequisitoInhumacionPdfMutation } from "../hooks/use-requisito-inhumacion-mutation";
+import {
+  useDeleteRequisitoInhumacionMutation,
+  useDownloadRequisitoInhumacionPdfMutation,
+} from "../hooks/use-requisito-inhumacion-mutation";
 import { useFindAllRequisitosInhumacionQuery } from "../hooks/use-requisito-inhumacion-queries";
 import {
   Table,
@@ -44,7 +62,6 @@ export function RequisitoInhumacionListTable() {
         <Table>
           <TableHeader>
             <TableRow>
-        
               <TableHead>
                 <span className="flex items-center gap-1">
                   <Building className="w-4 h-4" />
@@ -125,14 +142,21 @@ export function RequisitoInhumacionListTable() {
                   {requisito.idCementerio?.nombre ?? "Sin cementerio"}
                 </TableCell>
                 <TableCell>{requisito.pantoneroACargo}</TableCell>
-                <TableCell>
-                  {requisito.idSolicitante?.nombres ?? "No hay solicitante"}
+                <TableCell>          
+                    {requisito.idSolicitante
+                      ? `${requisito.idSolicitante.nombres} ${requisito.idSolicitante.apellidos}`
+                      : "No hay solicitante"}
                 </TableCell>
                 <TableCell>
-                  {requisito.idHuecoNicho?.numHueco ?? "Sin nicho"}
+                  {requisito.idHuecoNicho ?
+                    `${requisito.idHuecoNicho.idNicho?.sector} - Fila: ${requisito.idHuecoNicho.idNicho?.fila} 
+                    - Número: ${requisito.idHuecoNicho.idNicho?.numero} - Hueco: ${requisito.idHuecoNicho.numHueco}`
+                  : "Sin nicho"}
                 </TableCell>
                 <TableCell>
-                  {requisito.idFallecido?.nombres ?? "No hay fallecido"}
+                  {requisito.idFallecido
+                      ? `${requisito.idFallecido.nombres} ${requisito.idFallecido.apellidos}`
+                      : "No hay fallecido"}
                 </TableCell>
                 <TableCell>
                   {new Date(requisito.fechaInhumacion).toLocaleDateString()}
@@ -140,15 +164,21 @@ export function RequisitoInhumacionListTable() {
                 <TableCell>{requisito.horaInhumacion}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">
-                    <Link href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}`}>
+                    <Link
+                      href={`/requisitos-inhumacion/${requisito.idRequsitoInhumacion}`}
+                    >
                       <Button size="icon" variant="ghost">
                         <Eye className="w-4 h-4" />
                       </Button>
                     </Link>
-                    <Button 
-                      size="icon" 
+                    <Button
+                      size="icon"
                       variant="ghost"
-                      onClick={() => downloadRequisitoInhumacionPdf(requisito.idRequsitoInhumacion)}
+                      onClick={() =>
+                        downloadRequisitoInhumacionPdf(
+                          requisito.idRequsitoInhumacion
+                        )
+                      }
                       disabled={isDownloading}
                       className={clsx(
                         isDownloading && "opacity-50 cursor-not-allowed"
