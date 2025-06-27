@@ -114,6 +114,7 @@ export function RequisitoInhumacionCard({
             {Object.keys(methods.formState.errors).length > 0 && (
               <div className="text-red-600 mb-2">
                 {Object.entries(methods.formState.errors).map(([key, error]) => (
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   <div key={key}>{(error as any).message}</div>
                 ))}
               </div>

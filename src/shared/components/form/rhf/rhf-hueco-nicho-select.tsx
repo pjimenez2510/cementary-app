@@ -1,4 +1,4 @@
-import { useFindAllHuecosQuery, useFindHuecosByCementerioQuery } from "@/features/huecos/presentation/hooks/use-hueco-queries";
+import { useFindHuecosByCementerioQuery } from "@/features/huecos/presentation/hooks/use-hueco-queries";
 import RHFSelect from "./rhf-select";
 import { useWatch } from "react-hook-form";
 

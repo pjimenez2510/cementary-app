@@ -9,7 +9,6 @@ import RHFInput from "@/shared/components/form/rhf/rhf-input";
 import RHFSelect from "@/shared/components/form/rhf/rhf-select";
 import RHFAutocompletePerson from "@/shared/components/form/rhf/rhf-autocomplete-person";
 import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";
-import RHFDatePicker from "@/shared/components/form/rhf/rhf-calendar";
 import RHFCheckbox from "@/shared/components/form/rhf/rhf-chechbox";
 import RHFHuecoNichoSelect from "@/shared/components/form/rhf/rhf-hueco-nicho-select";
 import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
@@ -110,12 +109,15 @@ export function RequisitoInhumacionForm({
   };
 
   const validateStep = async (requiredFields: string[]) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = await methods.trigger(requiredFields as any);
 
     if (!result) {
       const errors = methods.formState.errors;
       requiredFields.forEach((field) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if ((errors as any)[field] && validationMessages[field]) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           methods.setError(field as any, {
             type: "manual",
             message: validationMessages[field],
@@ -629,7 +631,7 @@ export function RequisitoInhumacionForm({
                     Resumen de la Solicitud
                   </h4>
                   <p className="text-blue-700 text-sm mb-4">
-                    Ha completado todos los pasos necesarios. Revise la información y haga clic en "Guardar" para finalizar el registro.
+                    Ha completado todos los pasos necesarios. Revise la información y haga clic en &quot;Guardar&quot; para finalizar el registro.
                   </p>
                   
                   <button

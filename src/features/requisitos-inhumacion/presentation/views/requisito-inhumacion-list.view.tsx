@@ -3,7 +3,7 @@ import ContainerApp from "@/core/layout/container-app";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, Plus } from "lucide-react";
 import Link from "next/link";
-import { use, useState } from "react";
+import { useState } from "react";
 import { Alert, AlertDescription } from "@/shared/components/ui/alert";
 import { RequisitoInhumacionFallecidosEntity } from "../../domain/entities/requisito-inhumacion.entity";
 import { useSearchRequisitoInhumacionFallecidosQuery } from "../hooks/use-requisito-inhumacion-queries";

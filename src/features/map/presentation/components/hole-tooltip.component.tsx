@@ -17,7 +17,7 @@ export const HuecoTooltip: React.FC<HuecoTooltipProps> = ({ nicho }) => {
 const reservados = huecos?.filter(h => h.estado === 'reservado').length || 0;
 const total = huecos?.length || nicho.numHuecos || 0;
 const disponibles = Math.max(total - ocupados - reservados, 0);
-const { color, label } = getColorByHuecoOcupado(ocupados, reservados, total);
+const { color } = getColorByHuecoOcupado(ocupados, reservados, total);
 
 const getEstadoDescripcion = () => {
   if (ocupados + reservados === 0) return 'Disponible';

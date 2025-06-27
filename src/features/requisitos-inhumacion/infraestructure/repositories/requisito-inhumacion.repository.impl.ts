@@ -5,7 +5,6 @@ import { RequisitoInhumacionMapper } from "../mappers/requisito-inhumacion.mappe
 import { API_ROUTES } from "@/core/constants/api-routes";
 import { RequisitoInhumacionRepository } from "../../domain/repositories/requisito-inhumacion.repository";
 import { AxiosResponse } from "axios";
-import { Search } from "lucide-react";
 import { SearchFallecidosRequisitoInhumacionMapper } from "../mappers/requisito-inhumacion-fallecido.mapper";
 
 

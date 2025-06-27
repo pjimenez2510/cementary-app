@@ -5,7 +5,6 @@ import { useInhumacionForm } from "../hooks/use-inhumacion-form";
 import RHFNichoSelect from "@/shared/components/form/rhf/rhf-nicho-select";
 import RHFInput from "@/shared/components/form/rhf/rhf-input";
 import RHFSelect from "@/shared/components/form/rhf/rhf-select";
-import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
 import { Button } from "@/shared/components/ui/button";
 import clsx from "clsx";
 import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";

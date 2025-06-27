@@ -14,20 +14,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { Badge } from "@/shared/components/ui/badge";
 import {
   Eye,
   MapPin,
-  Building,
   User,
   Users,
-  CheckCircle,
   Pencil,
   Trash2,
   Calendar,
   UserCheck,
   Shield,
   Hash,
+  CheckCircle,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -77,13 +75,14 @@ export function InhumacionSearchResults({
   onSelectFallecido,
 }: InhumacionSearchResultsProps) {
   const isSingleResult = results.totalEncontrados === 1;
+  
+  // Move hook to top level to avoid conditional calling
+  const { mutate: deleteInhumacion, isPending } =
+    useDeleteInhumacionMutation();
 
   // Si hay un fallecido seleccionado, mostrar sus detalles
   if (selectedFallecido) {
-    const { fallecido, nichos, cementerios, inhumaciones } = selectedFallecido;
-
-    const { mutate: deleteInhumacion, isPending } =
-      useDeleteInhumacionMutation();
+    const { fallecido, inhumaciones } = selectedFallecido;
 
     return (
       <div className="space-y-6">
@@ -305,9 +304,7 @@ export function InhumacionSearchResults({
   if (isSingleResult) {
     // Auto-seleccionar el único resultado
     const unicoResultado = results.fallecidos[0];
-    const { fallecido, nichos, cementerios, inhumaciones } = unicoResultado;
-    const { mutate: deleteInhumacion, isPending } =
-      useDeleteInhumacionMutation();
+    const { fallecido, inhumaciones } = unicoResultado;
     return (
       <div className="space-y-6">
         {/* Confirmación de búsqueda exitosa */}
@@ -550,7 +547,7 @@ export function InhumacionSearchResults({
       {/* Lista COMPACTA de Fallecidos */}
       <div className="grid gap-4">
         {results.fallecidos.map((resultado, index) => {
-          const { fallecido, inhumaciones, cementerios } = resultado;
+          const { fallecido, inhumaciones } = resultado;
 
           return (
             <Card

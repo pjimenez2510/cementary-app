@@ -4,8 +4,6 @@ import { InhumacionFallecidosModel, SearchFallecidosInhumacionModel } from "../m
 import { InhumacionMapper } from "./inhumacion.mapper";
 import { NichoMapper } from "@/features/nichos/infrastructure/mappers/nicho.mapper";
 import { CementeryMapper } from "@/features/cementery/infrastructure/mappers/cementery.mapper";
-import { SearchFallecidosEntity } from "@/features/nichos/domain/entities/nicho.entity";
-
 
 
 export class InhumacionFallecidoMapper {

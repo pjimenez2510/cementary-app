@@ -14,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { Badge } from "@/shared/components/ui/badge";
 import {
   Eye,
   MapPin,
@@ -22,12 +21,9 @@ import {
   User,
   Users,
   CheckCircle,
-  Pencil,
   Trash2,
   Calendar,
   UserCheck,
-  Shield,
-  Hash,
   Download,
   Clock,
 } from "lucide-react";
@@ -70,15 +66,16 @@ export function RequisitoInhumacionSearchResults({
 }: RequisitoInhumacionSearchResultsProps) {
   const isSingleResult = results.totalEncontrados === 1;
 
+  // Move hooks to top level to avoid conditional calling
+  const { mutate: deleteRequisitoInhumacion, isPending } =
+    useDeleteRequisitoInhumacionMutation();
+
+  const { mutate: downloadRequisitoInhumacionPdf, isPending: isDownloading } =
+    useDownloadRequisitoInhumacionPdfMutation();
+
   // Si hay un fallecido seleccionado, mostrar sus detalles
   if (selectedFallecido) {
-    const { fallecido, nichos, cementerios, requisitos } = selectedFallecido;
-
-    const { mutate: deleteRequisitoInhumacion, isPending } =
-      useDeleteRequisitoInhumacionMutation();
-
-    const { mutate: downloadRequisitoInhumacionPdf, isPending: isDownloading } =
-      useDownloadRequisitoInhumacionPdfMutation();
+    const { fallecido, requisitos } = selectedFallecido;
     return (
       <div className="space-y-6">
         {/* Confirmación de selección */}
@@ -318,11 +315,7 @@ export function RequisitoInhumacionSearchResults({
   if (isSingleResult) {
     // Auto-seleccionar el único resultado
     const unicoResultado = results.fallecidos[0];
-    const { fallecido, nichos, cementerios, requisitos } = unicoResultado;
-    const { mutate: deleteRequisitoInhumacion, isPending } =
-      useDeleteRequisitoInhumacionMutation();
-    const { mutate: downloadRequisitoInhumacionPdf, isPending: isDownloading } =
-      useDownloadRequisitoInhumacionPdfMutation();
+    const { fallecido, requisitos } = unicoResultado;
     return (
       <div className="space-y-6">
         {/* Confirmación de búsqueda exitosa */}
@@ -578,7 +571,7 @@ export function RequisitoInhumacionSearchResults({
       {/* Lista COMPACTA de Fallecidos */}
       <div className="grid gap-4">
         {results.fallecidos.map((resultado, index) => {
-          const { fallecido, requisitos, cementerios } = resultado;
+          const { fallecido, requisitos } = resultado;
 
           return (
             <Card

@@ -10,7 +10,6 @@ import {
   useUpdateNichoMutation,
 } from "./use-nicho-mutations";
 import { useRouter } from "next/navigation";
-import { CementeryEntity } from "@/features/cementery/domain/entities/cementery.entity";
 
 export function useNichoForm(nicho?: NichoEntity) {
   const router = useRouter();
