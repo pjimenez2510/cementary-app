@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Tooltip,
   TooltipContent,
@@ -36,8 +37,13 @@ const getNicheColorByHuecos = (nicho: NichoWithHuecos) => {
 };
 
 export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {
+  const router = useRouter();
   const { niches, loading, error } = useNichesWithHuecos(cemetery.idCementerio);
   const [gridColumns, setGridColumns] = useState<number>(10);
+
+  const handleNicheClick = (nicheId: string) => {
+    router.push(`/nichos/${nicheId}`);
+  };
 
   if (loading) return <div>Cargando nichos...</div>;
   if (error) return <div>{error}</div>;
@@ -79,12 +85,14 @@ export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {
               <Tooltip key={niche.idNicho}>
                 <TooltipTrigger asChild>
                   <button
+                    onClick={() => handleNicheClick(niche.idNicho!)}
                     className={`
-                                            w-8 h-8 rounded border-2 border-white shadow-sm transition-all
-                                            ${colorStatus.color} ${colorStatus.hover}
-                                            text-white text-xs font-medium
-                                            transform hover:scale-110 hover:shadow-lg
-                                        `}
+                      w-8 h-8 rounded border-2 border-white shadow-sm transition-all
+                      ${colorStatus.color} ${colorStatus.hover}
+                      text-white text-xs font-medium
+                      transform hover:scale-110 hover:shadow-lg
+                      cursor-pointer
+                    `}
                   >
                     {niche.numero}
                   </button>
@@ -100,6 +108,9 @@ export const NichesGrid: React.FC<NichesGridProps> = ({ cemetery }) => {
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
                       Sector: {niche.sector} | Fila: {niche.fila}
+                    </p>
+                    <p className="text-xs text-blue-600 mt-2 font-medium">
+                      Haz clic para ver detalles
                     </p>
                   </div>
                   <HuecoTooltip nicho={niche} />
