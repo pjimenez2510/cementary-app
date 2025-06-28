@@ -12,6 +12,7 @@ interface RHFAutocompleteHuecoNichoProps {
     label?: string;
     placeholder?: string;
     disabled?: boolean;
+    isAvailable?: boolean;
 }
 
 export default function RHFAutocompleteHuecoNicho({
@@ -19,6 +20,7 @@ export default function RHFAutocompleteHuecoNicho({
     label,
     placeholder,
     disabled,
+    isAvailable,
 }: RHFAutocompleteHuecoNichoProps) {
     const { control } = useFormContext();
     const [open, setOpen] = useState(false);
@@ -28,11 +30,11 @@ export default function RHFAutocompleteHuecoNicho({
     const { data: huecosNichos, isLoading } = useFindHuecosByCementerioQuery(idCementerio);
 
     // Filtrar por texto de búsqueda
-    const filtered = (huecosNichos ?? []).filter(h =>
+    const filtered = (huecosNichos ?? []).filter(h => isAvailable ? h.estado === "Disponible" : true).filter(h =>
         `${h.idNicho?.sector} ${h.idNicho?.fila} ${h.idNicho?.numero} ${h.numHueco} ${h.idNicho?.tipo}`
             .toLowerCase()
             .includes(search.toLowerCase())
-    );
+    )
 
     return (
         <Controller

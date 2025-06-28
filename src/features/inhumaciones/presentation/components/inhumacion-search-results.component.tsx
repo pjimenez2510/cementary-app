@@ -473,7 +473,7 @@ export function InhumacionSearchResults({
                                 <Pencil className="w-4 h-4" />
                               </Button>
                             </Link>
-                            <AlertDialog>
+                            {/* <AlertDialog>
                               <AlertDialogTrigger asChild>
                                 <Button size="icon" variant="ghost">
                                   <Trash2 className="w-4 h-4" />
@@ -508,7 +508,7 @@ export function InhumacionSearchResults({
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
                               </AlertDialogContent>
-                            </AlertDialog>
+                            </AlertDialog> */}
                           </div>
                         </TableCell>
                       </TableRow>

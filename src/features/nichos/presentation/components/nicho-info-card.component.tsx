@@ -29,7 +29,7 @@ export function NichoInfoCard({ nicho }: NichoInfoCardProps) {
               <p><span className="font-medium">Tipo:</span> {nicho.tipo}</p>
               <p><span className="font-medium">Estado:</span> {nicho.estado}</p>
               <p><span className="font-medium">Número de Huecos:</span> {nicho.numHuecos}</p>
-              <p><span className="font-medium">Fecha de Construcción:</span> {new Date(nicho.fechaConstruccion).toLocaleDateString()}</p>
+              <p><span className="font-medium">Fecha de Adquisición:</span> {new Date(nicho.fechaConstruccion).toLocaleDateString()}</p>
               {nicho.observaciones && (
                 <p><span className="font-medium">Observaciones:</span> {nicho.observaciones}</p>
               )}

@@ -6,7 +6,7 @@ const NichoBaseSchema = z.object({
   fila: z.string().min(1, "La fila es requerida").max(3, "Máximo 3 caracteres"),
   numero: z.string().min(1, "El número es requerido").max(4, "Máximo 4 caracteres"),
   tipo: z.enum(["Nicho", "Mausoleo", "Fosa"], { message: "Tipo inválido" }),
-  fechaConstruccion: z.string().min(1, "La fecha de construcción es requerida"),
+  fechaConstruccion: z.string().min(1, "La fecha de adquisición es requerida"),
   observaciones: z.string().max(500, "Máximo 500 caracteres").optional(),
   numHuecos: z.coerce.number().min(1, "Mínimo 1 hueco"),
 });

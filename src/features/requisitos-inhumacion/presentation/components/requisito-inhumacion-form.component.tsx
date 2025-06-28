@@ -10,7 +10,6 @@ import RHFSelect from "@/shared/components/form/rhf/rhf-select";
 import RHFAutocompletePerson from "@/shared/components/form/rhf/rhf-autocomplete-person";
 import RHFTextarea from "@/shared/components/form/rhf/rhf-text-area";
 import RHFCheckbox from "@/shared/components/form/rhf/rhf-chechbox";
-import RHFHuecoNichoSelect from "@/shared/components/form/rhf/rhf-hueco-nicho-select";
 import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
 import RHFAutocompleteHuecoNicho from "@/shared/components/form/rhf/rhf-autocomplete-hueco-nicho";
 
@@ -280,6 +279,7 @@ export function RequisitoInhumacionForm({
                     name="idHuecoNicho"
                     label="Hueco/Nicho *"
                     placeholder="Selecciona un hueco o nicho"
+                    isAvailable={true}
                   />
                   <RHFInput
                     name="nombreAdministradorNicho"

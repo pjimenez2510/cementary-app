@@ -2,7 +2,6 @@
 import { FormProvider } from "react-hook-form";
 import { InhumacionEntity } from "../../domain/entities/inhumacion.entity";
 import { useInhumacionForm } from "../hooks/use-inhumacion-form";
-import RHFNichoSelect from "@/shared/components/form/rhf/rhf-nicho-select";
 import RHFInput from "@/shared/components/form/rhf/rhf-input";
 import RHFSelect from "@/shared/components/form/rhf/rhf-select";
 import { Button } from "@/shared/components/ui/button";

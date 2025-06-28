@@ -7,9 +7,10 @@ import RHFSelect from "@/shared/components/form/rhf/rhf-select";
 import RHFCementerySelect from "@/shared/components/form/rhf/rhf-cementery-select";
 import { useNichoForm } from "../hooks/use-nicho-form";
 import clsx from "clsx";
-import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
+// import RHFCalendar from "@/shared/components/form/rhf/rhf-calendar";
 import { useEffect } from "react";
 import { useWatch } from "react-hook-form";
+import RHFDatePickerCalendar from "@/shared/components/form/rhf/rhf-datepicker-calendar";
 
 const tipoOptions = [
   { value: "Nicho", label: "Nicho" },
@@ -48,7 +49,7 @@ export function NichoForm({ nicho }: NichoFormProps) {
           <RHFInput name="fila" label="Fila" />
           <RHFInput name="numero" label="Número" />
           <RHFSelect name="tipo" label="Tipo" options={tipoOptions} placeholder="Selecciona el tipo de nicho" />
-          <RHFCalendar name="fechaConstruccion" label="Fecha de adquisición" />
+          <RHFDatePickerCalendar name="fechaConstruccion" label="Fecha de adquisición" />
           <RHFInput
             name="numHuecos"
             label="Número de Huecos"

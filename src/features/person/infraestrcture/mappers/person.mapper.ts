@@ -60,6 +60,9 @@ export class PersonMapper{
             causa_defuncion: entity.causa_defuncion,
             fallecido: entity.fallecido,
             nacionalidad: entity.nacionalidad,
+            direccion: entity.direccion,
+            telefono: entity.telefono,
+            correo: entity.correo,
         };
     }
 }
