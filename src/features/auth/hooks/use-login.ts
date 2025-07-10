@@ -21,10 +21,7 @@ export function useLogin() {
       toast.success("Inicio de sesión exitoso");
       router.replace("/main");
     },
-    onError: (error) => {
-      console.log(error);
-      toast.error("Error al iniciar sesión");
-    },
+    onError: () => toast.error("Error al iniciar sesión")
   });
 
   return { login, isPending };

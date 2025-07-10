@@ -20,7 +20,7 @@ export class AuthRepositoryImp implements AuthRepository {
       API_ROUTES.AUTH.SIGNIN,
       request
     );
-
-    return data;
+    
+    return data.data;
   }
 }

@@ -1,11 +1,9 @@
 "use client";
 
 import { FormProvider } from "react-hook-form";
-import { Button } from "@/shared/components/ui/button";
-import RHFInput from "@/app/components/rhf/RHFInput";
+import { Button } from "@/components/ui/button";
 import { useLoginForm } from "@/features/auth/hooks/use-login-form";
 import Link from "next/link";
-import RHFPasswordInput from "@/app/components/rhf/RHFPasswordInput";
 import {
   Card,
   CardContent,
@@ -15,6 +13,8 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { KeyRound } from "lucide-react";
+import RHFInput from "@/shared/components/form/rhf/rhf-input";
+import RHFPasswordInput from "@/shared/components/form/rhf/rhf-passwordInput";
 
 const LoginForm = () => {
   const { methods, onSubmit, isSubmitting } = useLoginForm();
